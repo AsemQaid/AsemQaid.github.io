@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import { PROFILE, tr, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const ch = [
+  { k: T("Email", "البريد"), v: PROFILE.email, href: `mailto:${PROFILE.email}` },
+  { k: "LinkedIn", v: PROFILE.linkedinShort, href: PROFILE.linkedin },
+  { k: "GitHub", v: PROFILE.githubShort, href: PROFILE.github },
+];
+---
+<Base lang={lang} path="/contact/" section="contact" title={T("Contact", "تواصل")}>
+  <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Contact", "تواصل")}</div><h1 class="h-page">{T("Get in touch", "تواصل معي")}</h1>
+    <p class="lede">{T("For internships, research supervision, collaboration, or questions about a project. Email is the most reliable way to reach me.", "للتدريب أو الإشراف البحثي أو التعاون أو الاستفسار عن مشروع. البريد الإلكتروني هو أفضل وسيلة للتواصل معي.")}</p></header>
+  <div class="contact">
+    <div style="display:grid;gap:24px;align-content:start">
+      <div class="channels">
+        {ch.map((c) => <div class="channel"><span class="k mono">{c.k}</span><a class="v ltr" style="text-align:start" href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener">{c.v}</a><button class="copy" type="button" data-copy={c.v}>{T("Copy", "نسخ")}</button></div>)}
+      </div>
+      <p class="mono" style="color:var(--ink-3);margin:0">{T("Based in Yogyakarta · UTC+7", "مقيم في يوجياكارتا · UTC+7")}</p>
+    </div>
+    <div class="box" style="align-content:start"><h4>{T("A useful first message includes", "رسالة أولى مفيدة تتضمن")}</h4>
+      <ul><li>{T("who you are and your organisation", "من أنت وجهتك")}</li><li>{T("the role, project or question", "الدور أو المشروع أو السؤال")}</li><li>{T("timing, for internships and research positions", "التوقيت، للتدريب والمناصب البحثية")}</li></ul>
+      <p style="margin:0;color:var(--ink-3);font-size:.9rem">{T("I usually reply within a few days.", "أرد عادةً خلال أيام قليلة.")}</p></div>
+  </div></div>
+</Base>

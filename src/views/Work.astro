@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import Status from "../components/Status.astro";
+import Cover from "../components/Cover.astro";
+import { DOMAINS, LEVELS, STATUS, getProjects, tr, url, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const projects = await getProjects(lang);
+const sw: Record<string, string> = { designed: "--st-designed", simulated: "--st-sim", prototyped: "--st-proto", tested: "--st-valid", deployed: "--accent" };
+---
+<Base lang={lang} path="/work/" section="work" title={T("Work", "الأعمال")}>
+  <div class="wrap">
+    <header class="page-head">
+      <div class="eyebrow mono"><span class="dot"></span>{T("Project register", "سجل المشاريع")}</div>
+      <h1 class="h-page">{T("Work", "الأعمال")}</h1>
+      <p class="lede">{T("Every entry carries a validation level, so you can see at a glance what was designed, what was simulated, what was built, and what was tested.", "يحمل كل إدخال مستوى تحقق، لتعرف مباشرة ما الذي صُمِّم وما الذي حوكي وما الذي بُني وما الذي اختُبر.")}</p>
+    </header>
+    <div class="filters" role="group" aria-label={T("Filters", "التصفية")}>
+      <div class="fgroup"><span class="k mono">{T("Domain", "المجال")}</span><div class="chips">
+        <button class="chip" type="button" data-fd="all" aria-pressed="true">{T("All", "الكل")}<span class="n ltr">{projects.length}</span></button>
+        {Object.keys(DOMAINS).map((d) => <button class="chip" type="button" data-fd={d} aria-pressed="false">{DOMAINS[d][lang]}<span class="n ltr">{projects.filter((p) => p.data.domain === d).length}</span></button>)}
+      </div></div>
+      <div class="fgroup"><span class="k mono">{T("Validation level", "مستوى التحقق")}</span><div class="chips">
+        <button class="chip" type="button" data-fs="all" aria-pressed="true">{T("Any", "أي حالة")}</button>
+        {LEVELS.map((s) => <button class="chip" type="button" data-fs={s} aria-pressed="false"><span class="sw" style={`background:var(${sw[s]})`}></span>{STATUS[s][lang]}</button>)}
+      </div></div>
+    </div>
+    <ul class="register" id="register">
+      {projects.map((p) => (
+        <li data-domain={p.data.domain} data-levels={[p.data.status, p.data.hardwareStatus].filter(Boolean).join(" ")}>
+          <a class="reg" href={url(lang, `/work/${p.slug}/`)}>
+            <span class="no mono ltr">{p.data.number}</span>
+            <div style="min-width:0"><h3>{p.data.title}</h3><p>{p.data.summary}</p>
+              <div class="tags">{p.data.inProgress && <span class="prog-tag">{T("In progress", "قيد التنفيذ")}</span>}{p.data.tags.map((x) => <span class="tag code">{x}</span>)}</div></div>
+            <div class="col">
+              <span class="k mono">{p.data.hardwareStatus ? T("Software", "البرمجيات") : T("Validation", "التحقق")}</span><Status s={p.data.status} lang={lang} />
+              {p.data.hardwareStatus && <><span class="k mono" style="margin-top:6px">{T("Hardware", "العتاد")}</span><Status s={p.data.hardwareStatus} lang={lang} /></>}
+              <span class="k mono" style="margin-top:6px">{T("Domain · Year", "المجال · السنة")}</span><span style="font-size:.9rem">{DOMAINS[p.data.domain][lang]} · <span class="ltr">{p.data.year}</span></span>
+            </div>
+            <div class="col thumbcol"><Cover src={p.data.cover} cls="thumb" /></div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="empty" id="registerEmpty" hidden>{T("No projects at this level yet.", "لا توجد مشاريع في هذا المستوى بعد.")}</p>
+    <div class="proto"><b>{T("How levels are assigned", "كيف تُحدد المستويات")}</b>
+      <span>{T("Designed: drawings or code only. Simulated: run in software. Prototyped: physically built and working. Tested: structured tests with recorded results. Deployed: live and publicly usable.",
+        "مُصمَّم: مخططات أو شيفرة فقط. مُحاكى: يعمل برمجيًا. نموذج مبني: بُني فعليًا ويعمل. مُختبَر: اختبارات منظمة بنتائج مسجلة. منشور: يعمل ومتاح للعموم.")}</span></div>
+  </div>
+  <div style="height:48px"></div>
+</Base>

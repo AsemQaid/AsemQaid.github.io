@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { tr, url, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const rows: [string, [string, string][]][] = [
+  [T("Embedded & IoT", "مدمج وإنترنت الأشياء"), [["ESP32", "P04 · P07"], ["Arduino Nano", "P01 · P03 · P05"], ["MQTT · Node-RED", "P04 · P07"], ["SIM800L GSM", "P05"]]],
+  [T("Microprocessors", "المعالجات الدقيقة"), [["Intel 8086 assembly", "P02"], ["8255 PPI · ADC0804", "P02"]]],
+  [T("Programming", "البرمجة"), [["C / C++", "P01–P05"], ["Python", "P01 · P06 · P07"], ["TypeScript · React", "P06"], ["FastAPI · NumPy · SciPy", "P06"]]],
+  [T("Engineering tools", "الأدوات الهندسية"), [["Proteus", "P02"], ["MATLAB · Simulink", T("Coursework", "مقررات")], ["Quartus Prime (FPGA)", T("Coursework", "مقررات")], ["Cirkit Designer", "P07"]]],
+  [T("Measurement", "القياس"), [[T("Sensor calibration", "معايرة الحساسات"), "P01 · P03"], [T("Digital filtering", "الترشيح الرقمي"), "P03"], [T("Error analysis (RMSE)", "تحليل الخطأ (RMSE)"), "P03"]]],
+];
+---
+<Base lang={lang} path="/about/" section="about" title={T("About", "نبذة")}>
+  <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("About", "نبذة")}</div><h1 class="h-page">{T("Engineer first, organiser by practice", "مهندس أولًا، ومنظِّم بالممارسة")}</h1></header>
+  <div class="about-grid">
+    <div class="about-fig"><figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")}></figure>
+      <div class="cap mono"><span>{T("Plate 02", "لوحة 02")}</span><span>{T("Yogyakarta, 2026", "يوجياكارتا، 2026")}</span></div></div>
+    <div style="display:grid;gap:40px;min-width:0">
+      <div class="prose">
+        <p>{T("I am a third-year electrical engineering student at Universitas Islam Indonesia in Yogyakarta, studying on the Future Global Leaders Scholarship. I am originally from Yemen, and I work in Arabic, English and Indonesian.", "أنا طالب في السنة الثالثة في الهندسة الكهربائية بالجامعة الإسلامية الإندونيسية في يوجياكارتا، وأدرس بمنحة Future Global Leaders. أصلي من اليمن، وأعمل بالعربية والإنجليزية والإندونيسية.")}</p>
+        <p>{T("My projects have moved from microprocessor control and sensor measurement to embedded protection systems, energy monitoring and engineering software. Across them I try to do the same thing: measure before claiming, and say clearly what has and has not been tested.", "انتقلت مشاريعي من التحكم بالمعالجات الدقيقة وقياس الحساسات إلى أنظمة الحماية المدمجة ومراقبة الطاقة والبرمجيات الهندسية. وفيها جميعًا أحاول فعل الشيء نفسه: أن أقيس قبل أن أدّعي، وأن أوضح ما الذي اختُبر وما الذي لم يُختبر.")}</p>
+        <p>{T("Power and energy systems is where my interest is growing. My goals are international internship experience, research skills, and a Master's degree in Australia.", "أنظمة القدرة والطاقة هي حيث ينمو اهتمامي. أهدافي خبرة تدريب دولية ومهارات بحثية ودرجة ماجستير في أستراليا.")}</p>
+        <p>{T("Alongside engineering, I lead UII Global, the university's international student organisation.", "إلى جانب الهندسة، أقود UII Global، منظمة الطلاب الدوليين في الجامعة.")} <a href={url(lang, "/leadership/")}>{T("Leadership", "القيادة")}</a></p>
+      </div>
+      <div><h2 class="h-sec" style="margin-bottom:16px">{T("Tools, by where I used them", "الأدوات، حسب مكان استخدامها")}</h2>
+        <div class="skills">{rows.map(([k, items]) => <div class="skill-row"><span class="k">{k}</span><div class="items">{items.map(([n, s]) => <span class="skill"><span>{n}</span><span class="src ltr">{s}</span></span>)}</div></div>)}</div>
+        <p class="mono" style="color:var(--ink-3);margin-top:12px">{T("Codes link each tool to the project where it was used.", "الرموز تربط كل أداة بالمشروع الذي استُخدمت فيه.")}</p>
+      </div>
+      <div><h2 class="h-sec" style="margin-bottom:16px">{T("Languages", "اللغات")}</h2>
+        <div class="skills">{[[T("Arabic", "العربية"), T("Native", "اللغة الأم")], [T("English", "الإنجليزية"), T("Professional working proficiency", "كفاءة مهنية")], [T("Indonesian", "الإندونيسية"), T("Intermediate", "متوسط")]].map(([a, b]) => <div class="skill-row"><span class="k">{a}</span><span>{b}</span></div>)}</div></div>
+    </div>
+  </div></div>
+</Base>

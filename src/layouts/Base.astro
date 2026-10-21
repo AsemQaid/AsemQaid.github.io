@@ -1,0 +1,86 @@
+---
+import "../styles/global.css";
+import { PROFILE, tr, url, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; title?: string; description?: string; section?: string; path: string }
+const { lang, title, description, section = "", path } = Astro.props;
+const T = tr(lang);
+const name = T(PROFILE.nameEn, PROFILE.nameAr);
+const pageTitle = title ? `${title} · ${name}` : T("Asem Ameen Qaid · Electrical Engineering", "عاصم أمين قائد · الهندسة الكهربائية");
+const desc = description ?? T("Portfolio of Asem Ameen Qaid, electrical engineering student at Universitas Islam Indonesia: energy systems, embedded systems and IoT.",
+  "موقع أعمال عاصم أمين قائد، طالب الهندسة الكهربائية في الجامعة الإسلامية الإندونيسية: أنظمة الطاقة والأنظمة المدمجة وإنترنت الأشياء.");
+const NAV = [
+  { r: "work", en: "Work", ar: "الأعمال" },
+  { r: "research", en: "Research", ar: "البحث" },
+  { r: "leadership", en: "Leadership", ar: "القيادة" },
+  { r: "about", en: "About", ar: "نبذة" },
+  { r: "cv", en: "CV", ar: "السيرة الذاتية" },
+];
+const enPath = path, arPath = "/ar" + path;
+const canonical = new URL(lang === "ar" ? arPath : enPath, Astro.site);
+---
+<!doctype html>
+<html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{pageTitle}</title>
+  <meta name="description" content={desc}>
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="en" href={new URL(enPath, Astro.site)}>
+  <link rel="alternate" hreflang="ar" href={new URL(arPath, Astro.site)}>
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={desc}>
+  <meta property="og:image" content={new URL("/img/portrait.jpg", Astro.site)}>
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,400&display=swap">
+</head>
+<body>
+  <a class="skip" href="#main">{T("Skip to content", "تخطَّ إلى المحتوى")}</a>
+  <header class="hdr">
+    <div class="wrap">
+      <a class="brand" href={url(lang, "/")} aria-label={T("Home", "الرئيسية")}>
+        <svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true">
+          <rect x="0.75" y="0.75" width="28.5" height="28.5" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="5" y1="15" x2="25" y2="15" stroke="var(--ink)" stroke-width="2.4"/>
+          <line x1="10" y1="15" x2="10" y2="22" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="20" y1="15" x2="20" y2="22" stroke="var(--ink)" stroke-width="1.5"/>
+          <circle cx="15" cy="9" r="3" fill="var(--signal)"/>
+          <line x1="15" y1="12" x2="15" y2="15" stroke="var(--ink)" stroke-width="1.5"/>
+        </svg>
+        <span><span class="brand-name">{name}</span><span class="brand-sub mono">{T("Electrical Engineering · UII", "الهندسة الكهربائية · UII")}</span></span>
+      </a>
+      <nav class="nav" aria-label={T("Primary", "الرئيسية")}>
+        {NAV.map((n) => <a href={url(lang, `/${n.r}/`)} aria-current={section === n.r ? "page" : undefined}>{n[lang]}</a>)}
+        <a class="nav-contact" href={url(lang, "/contact/")} aria-current={section === "contact" ? "page" : undefined}>{T("Contact", "تواصل")}</a>
+      </nav>
+      <div class="lang" role="group" aria-label={T("Language", "اللغة")}>
+        <a class="en" href={enPath} hreflang="en" lang="en" aria-current={lang === "en" ? "true" : undefined} data-lang="en">EN</a>
+        <a class="ar" href={arPath} hreflang="ar" lang="ar" aria-current={lang === "ar" ? "true" : undefined} data-lang="ar">العربية</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheetMenu" aria-label={T("Menu", "القائمة")}><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="sheet-menu" id="sheetMenu">
+    {[{ r: "", en: "Home", ar: "الرئيسية" }, ...NAV, { r: "contact", en: "Contact", ar: "تواصل" }].map((n, i) => (
+      <a href={url(lang, n.r ? `/${n.r}/` : "/")} aria-current={section === n.r ? "page" : undefined}><span>{n[lang]}</span><span class="mono ltr">0{i}</span></a>
+    ))}
+  </div>
+  <main id="main" tabindex="-1"><div class="page"><slot /></div></main>
+  <footer class="ftr"><div class="wrap">
+    <div class="ftr-grid">
+      <div><span class="k mono">{T("Sheet", "اللوحة")}</span><strong>{name}</strong><span style="color:var(--ink-2);font-size:.9rem">{T("Electrical engineering student, Universitas Islam Indonesia, Yogyakarta", "طالب هندسة كهربائية، الجامعة الإسلامية الإندونيسية، يوجياكارتا")}</span></div>
+      <div><span class="k mono">{T("Work", "الأعمال")}</span><a href={url(lang, "/work/")}>{T("Project register", "سجل المشاريع")}</a><a href={url(lang, "/research/")}>{T("Research", "البحث")}</a></div>
+      <div><span class="k mono">{T("Profile", "الملف")}</span><a href={url(lang, "/about/")}>{T("About", "نبذة")}</a><a href={url(lang, "/leadership/")}>{T("Leadership", "القيادة")}</a><a href={url(lang, "/cv/")}>{T("CV", "السيرة الذاتية")}</a></div>
+      <div><span class="k mono">{T("Contact", "تواصل")}</span><a href={url(lang, "/contact/")} class="ltr" style="text-align:start">{PROFILE.email}</a><a href={PROFILE.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></div>
+    </div>
+    <div class="ftr-note mono"><span class="ltr">{PROFILE.revision}</span><span class="ltr">© {new Date().getFullYear()} Asem Ameen Qaid</span></div>
+  </div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div id="lightbox" hidden role="dialog" aria-modal="true" aria-label={T("Figure", "شكل")}><button type="button">{T("Close ✕", "إغلاق ✕")}</button><figure><img alt=""><p></p></figure></div>
+  <script src="../scripts/site.ts"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+---
+import { STATUS, type Lang } from "../i18n/ui";
+interface Props { s: string; lang: Lang; label?: string }
+const { s, lang, label } = Astro.props;
+---
+<span class="status" data-s={s}>
+  {s !== "note" && <span class="ladder" data-s={s} aria-hidden="true"><i></i><i></i><i></i><i></i></span>}
+  <span class="lbl" style={s === "note" ? "color:var(--ink-2)" : undefined}>{label ?? STATUS[s]?.[lang] ?? s}</span>
+</span>

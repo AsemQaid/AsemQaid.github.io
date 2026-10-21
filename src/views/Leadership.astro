@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { PROFILE, tr, url, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+---
+<Base lang={lang} path="/leadership/" section="leadership" title={T("Leadership", "القيادة")}>
+  <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Leadership", "القيادة")}</div><h1 class="h-page">{T("Leadership", "القيادة")}</h1>
+    <p class="lede">{T("Engineering is the main thread of this portfolio. Leadership runs alongside it and shows how I work with people.", "الهندسة هي المسار الرئيسي لهذا الموقع. وتسير القيادة بجانبها وتُظهر كيف أعمل مع الناس.")}</p></header>
+  <div class="lead-hero">
+    <div class="role-card">
+      <div class="top mono"><span>L01</span><span>{T("Current", "حالي")}</span></div>
+      <div class="mid"><h3>{T("President", "الرئيس")}</h3><span class="org">UII Global · {T("International student organisation, Universitas Islam Indonesia", "منظمة الطلاب الدوليين، الجامعة الإسلامية الإندونيسية")}</span></div>
+      <div class="rows">
+        <div><span class="k mono">{T("Period", "الفترة")}</span><span class="ltr" style="display:block;text-align:start">2026 – {T("present", "الآن")}</span></div>
+        <div><span class="k mono">{T("Before", "قبل ذلك")}</span>{T("Marketing team, 2024–2026", "فريق التسويق، 2024–2026")}</div>
+      </div>
+    </div>
+    <div class="prose">
+      <p>{T("UII Global represents international students from many countries across the university's faculties. As president I:", "تمثل UII Global الطلاب الدوليين من دول عديدة في كليات الجامعة. بصفتي رئيسًا:")}</p>
+      <ul class="plain">
+        <li>{T("lead the executive board and cross-functional teams that run cultural, educational and networking programmes;", "أقود المجلس التنفيذي وفرق العمل المشتركة التي تنظم البرامج الثقافية والتعليمية والتواصلية؛")}</li>
+        <li>{T("coordinate programmes with the university administration, academic departments and external international partners.", "أنسّق البرامج مع إدارة الجامعة والأقسام الأكاديمية والشركاء الدوليين الخارجيين.")}</li>
+      </ul>
+      <p>{T("Before that, on the marketing team, I supported event promotion, digital communication, social media and international student engagement.", "وقبل ذلك، في فريق التسويق، دعمت الترويج للفعاليات والتواصل الرقمي ووسائل التواصل الاجتماعي وإشراك الطلاب الدوليين.")}</p>
+      <p class="ldr-link"><a class="link-arrow" href={PROFILE.linkedin} target="_blank" rel="noopener">{T("Events and programmes I have led are on LinkedIn", "الفعاليات والبرامج التي قدتها موجودة على LinkedIn")} <Arrow /></a></p>
+    </div>
+  </div>
+  <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Leading engineering teams", "قيادة الفرق الهندسية")}</h2></div>
+    <a class="feature-research" href={url(lang, "/work/energy-copilot/")}><img src="/img/en-dashboard.webp" alt="" loading="lazy">
+      <div><span class="mono" style="color:var(--ink-3)"><span class="ltr">AAQ-P07</span> · ANGEL 2026</span>
+      <h3>{T("Team leader, PowerTech", "قائد فريق PowerTech")}</h3>
+      <p>{T("Leading four students from electrical engineering, informatics and business, with a faculty supervisor, through a national deep-tech hackathon programme: weekly progress reviews, a shared task board, Git-based peer review and a risk register.", "أقود أربعة طلاب من الهندسة الكهربائية والمعلوماتية والأعمال، مع مشرف من هيئة التدريس، في برنامج هاكاثون وطني للتقنيات العميقة: مراجعات أسبوعية للتقدم، ولوحة مهام مشتركة، ومراجعة الأقران عبر Git، وسجل للمخاطر.")}</p>
+      <span class="link-arrow">{T("Project", "المشروع")} <Arrow /></span></div></a></section>
+  <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Honours and memberships", "التكريمات والعضويات")}</h2></div>
+    <ul class="log">
+      <li><span class="d mono ltr">2024–</span><span class="e">{T("Future Global Leaders Scholarship (FGLS), Universitas Islam Indonesia: the scholarship funding my degree", "منحة Future Global Leaders، الجامعة الإسلامية الإندونيسية: المنحة التي تموّل دراستي")}</span><span class="tag">{T("Scholarship", "منحة")}</span></li>
+      <li><span class="d mono">{T("High school", "الثانوية")}</span><span class="e">{T("First medal, Faris Al-Ilqaa public speaking competition", "الميدالية الأولى، مسابقة فارس الإلقاء")}</span><span class="tag">{T("Award", "جائزة")}</span></li>
+      <li><span class="d mono">—</span><span class="e">{T("Founding member, Jogja SWUG (SolidWorks User Group)", "عضو مؤسس، مجموعة مستخدمي SolidWorks في جوغجا")}</span><span class="tag">{T("Member", "عضو")}</span></li>
+      <li><span class="d mono">—</span><span class="e">{T("Member, Google Developer Group (GDG)", "عضو، مجموعة مطوري Google")}</span><span class="tag">{T("Member", "عضو")}</span></li>
+      <li><span class="d mono">—</span><span class="e">{T("Student representative, Almawirdy Board", "ممثل الطلاب، مجلس الماوردي")}</span><span class="tag">{T("Member", "عضو")}</span></li>
+    </ul></section>
+  </div>
+</Base>

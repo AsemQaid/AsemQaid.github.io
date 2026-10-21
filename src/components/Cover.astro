@@ -1,0 +1,6 @@
+---
+interface Props { src: string; cls?: string }
+const { src, cls = "" } = Astro.props;
+const contain = src.endsWith(".svg") || src.includes("dr-circuit");
+---
+<div class={`cover ${contain ? "contain" : ""} ${cls}`}><img src={src} alt="" loading="lazy" decoding="async"></div>

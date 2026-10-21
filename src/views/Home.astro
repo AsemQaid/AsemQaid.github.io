@@ -1,0 +1,97 @@
+---
+import Base from "../layouts/Base.astro";
+import Status from "../components/Status.astro";
+import Cover from "../components/Cover.astro";
+import Arrow from "../components/Arrow.astro";
+import { DOMAINS, getProjects, tr, url, type Lang } from "../i18n/ui";
+import { LOGBOOK } from "../data/logbook";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang), u = (p: string) => url(lang, p);
+const projects = await getProjects(lang);
+const featured = projects.filter((p) => p.data.featured);
+const count = (d: string) => projects.filter((p) => p.data.domain === d).length;
+const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 ? "مشروع واحد" : n === 2 ? "مشروعان" : `${n} مشاريع`);
+---
+<Base lang={lang} path="/">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hname">
+      <div class="hero-text">
+        <div class="eyebrow mono"><span class="dot"></span><span>{T("Electrical Engineering", "الهندسة الكهربائية")}</span><span>·</span><span>{T("Universitas Islam Indonesia", "الجامعة الإسلامية الإندونيسية")}</span></div>
+        <h1 class="hero-name" id="hname">{lang === "ar" ? <>عاصم أمين<span class="l2">قائد</span></> : <>Asem Ameen<span class="l2">Qaid</span></>}</h1>
+        <p class="lede">{T("I study electrical engineering and build systems that make energy and hazards visible, from sensors and firmware to the software that reads them. I am working toward a specialisation in power and energy systems.",
+          "أدرس الهندسة الكهربائية وأبني أنظمة تجعل الطاقة والمخاطر مرئية، من الحساسات والبرمجيات الثابتة إلى البرمجيات التي تقرأ بياناتها. أعمل نحو التخصص في أنظمة القدرة والطاقة.")}</p>
+        <div class="bus">
+          <span class="bus-label mono">{T("Areas of work", "مجالات العمل")}</span>
+          <div class="taps">
+            {["energy", "iot", "measure"].map((d) => (
+              <a class="tap" href={u(`/work/?domain=${d}`)}><span class="t">{DOMAINS[d][lang]}</span><span class="s mono">{nProj(count(d))}</span></a>
+            ))}
+          </div>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href={u("/work/")}>{T("See the work", "استعرض الأعمال")} <Arrow /></a>
+          <a class="btn btn-ghost" href={u("/cv/")}>{T("Read the CV", "اقرأ السيرة الذاتية")}</a>
+        </div>
+      </div>
+      <div class="plate">
+        <div class="plate-top mono"><span>{T("Plate 01 · Portrait", "لوحة 01 · صورة شخصية")}</span><span>{T("Yogyakarta, ID", "يوجياكارتا")}</span></div>
+        <figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")} width="720" height="900" fetchpriority="high"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></figure>
+        <div class="tblock">
+          <div><span class="k mono">{T("Discipline", "التخصص")}</span><span class="v">{T("Electrical Engineering", "الهندسة الكهربائية")}</span></div>
+          <div class="hide-sm"><span class="k mono">{T("Institution", "الجامعة")}</span><span class="v">UII</span></div>
+          <div><span class="k mono">{T("Developing focus", "التركيز الناشئ")}</span><span class="v">{T("Power & energy systems", "أنظمة القدرة والطاقة")}</span></div>
+          <div><span class="k mono">{T("Leadership", "القيادة")}</span><span class="v">{T("President, UII Global", "رئيس UII Global")}</span></div>
+          <div class="full hide-sm"><span class="k mono">{T("Status", "الحالة")}</span><span class="v">{T("3rd-year undergraduate · graduating 2028", "طالب في السنة الثالثة · التخرج 2028")}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="now" aria-label={T("Current position", "الوضع الحالي")}>
+      <div><span class="k mono">{T("In progress", "قيد التنفيذ")}</span><p>{T("Leading team PowerTech at ANGEL Innovation Hackathon 2026, building an industrial energy monitoring platform.", "أقود فريق PowerTech في هاكاثون ANGEL للابتكار 2026 لبناء منصة لمراقبة الطاقة الصناعية.")} <a class="link-arrow" href={u("/work/energy-copilot/")}>{T("Project", "المشروع")} <Arrow /></a></p></div>
+      <div><span class="k mono">{T("Latest release", "أحدث إصدار")}</span><p>{T("EE Studio, a live virtual laboratory with 37 labs, including power systems and renewable energy.", "EE Studio، مختبر افتراضي منشور يضم 37 مختبرًا، منها أنظمة القدرة والطاقة المتجددة.")} <a class="link-arrow" href={u("/work/ee-studio/")}>{T("Project", "المشروع")} <Arrow /></a></p></div>
+      <div><span class="k mono">{T("Looking for", "أبحث عن")}</span><p>{T("International internships and research experience in power and energy systems.", "تدريب دولي وخبرة بحثية في أنظمة القدرة والطاقة.")} <a class="link-arrow" href={u("/contact/")}>{T("Contact", "تواصل")} <Arrow /></a></p></div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="sec">
+      <div class="sec-head"><h2 class="h-sec">{T("Selected work", "أعمال مختارة")}</h2><a class="link-arrow" href={u("/work/")}>{T(`All ${projects.length} projects`, `كل المشاريع (${projects.length})`)} <Arrow /></a></div>
+      <div class="plates">
+        {featured.map((p) => (
+          <a class="wplate" href={u(`/work/${p.slug}/`)}>
+            <Cover src={p.data.cover} />
+            <div class="body">
+              <div class="meta mono"><span class="ltr">{p.data.number}</span><span>{DOMAINS[p.data.domain][lang]}</span></div>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.summary}</p>
+              <div class="foot"><Status s={p.data.status} lang={lang} />{p.data.inProgress && <span class="prog-tag">{T("In progress", "قيد التنفيذ")}</span>}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h2 class="h-sec">{T("Three threads, one direction", "ثلاثة مسارات واتجاه واحد")}</h2></div>
+      <div class="threads">
+        <a class="thread primary" href={u("/work/")}><span class="mono weight">{T("Primary · Engineering", "أساسي · الهندسة")}</span><h3>{T("Building working systems", "بناء أنظمة تعمل")}</h3>
+          <p>{T(`${projects.length} projects across energy monitoring, embedded protection, IoT, measurement and engineering software. Each one states how far it has been tested.`, `${projects.length} مشاريع في مراقبة الطاقة والحماية المدمجة وإنترنت الأشياء والقياس والبرمجيات الهندسية. كل مشروع يوضح إلى أي مدى اختُبر.`)}</p><span class="link-arrow">{T("Work", "الأعمال")} <Arrow /></span></a>
+        <a class="thread" href={u("/research/")}><span class="mono" style="color:var(--ink-3)">{T("Research", "البحث")}</span><h3>{T("Measuring before claiming", "القياس قبل الادعاء")}</h3>
+          <p>{T("Benchmarks against reference measurements, numerical verification, and clear limits. Papers will be listed once they exist.", "مقارنات بقياسات مرجعية، وتحقق عددي، وحدود واضحة. ستُدرج الأوراق عند نشرها.")}</p><span class="link-arrow">{T("Research", "البحث")} <Arrow /></span></a>
+        <a class="thread" href={u("/leadership/")}><span class="mono" style="color:var(--ink-3)">{T("Leadership", "القيادة")}</span><h3>{T("Leading people across cultures", "قيادة فرق متعددة الثقافات")}</h3>
+          <p>{T("President of UII Global, the university's international student organisation, and team leader at ANGEL 2026.", "رئيس UII Global، منظمة الطلاب الدوليين في الجامعة، وقائد فريق في هاكاثون ANGEL 2026.")}</p><span class="link-arrow">{T("Leadership", "القيادة")} <Arrow /></span></a>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h2 class="h-sec">{T("Logbook", "السجل")}</h2><span class="mono" style="color:var(--ink-3)">{T("Latest entries", "أحدث الإدخالات")}</span></div>
+      <ul class="log">
+        {LOGBOOK.slice(0, 6).map((e) => (
+          <li><span class="d mono ltr">{e.date}</span><span class="e">{e.link ? <a href={u(e.link)}>{e[lang]}</a> : e[lang]}</span><span class="tag">{e.tag[lang]}</span></li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import { PROFILE, getProjects, tr, url, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const projects = await getProjects(lang);
+const P = (id: string) => projects.find((p) => p.slug === id)!;
+const PROJ: [string, string][] = [
+  ["energy-copilot", T("Team leader of five; system integration, dashboard and MQTT data pipeline. Software tested on simulated data; hardware designed, validation in progress.", "قائد فريق من خمسة؛ تكامل النظام ولوحة المتابعة ومسار بيانات MQTT. البرمجيات مختبرة على بيانات محاكاة؛ العتاد مصمم والتحقق جارٍ.")],
+  ["ee-studio", T("7 modules, 37 labs, 485 automated backend tests; deployed on Vercel and Railway.", "7 وحدات و37 مختبرًا و485 اختبارًا آليًا؛ منشور على Vercel وRailway.")],
+  ["panel-protection", T("Arduino Nano, three-state machine, load cut-off within 2 s, SMS alerts via SIM800L; soldered PCB, six test scenarios passed.", "Arduino Nano، آلة حالات ثلاثية، فصل الحمل خلال ثانيتين، تنبيهات SMS عبر SIM800L؛ لوحة PCB ملحومة ونجاح ستة سيناريوهات اختبار.")],
+  ["flood-warning", T("ESP32 with rain and water-level sensing; three alert levels; MQTT to Mosquitto and a Node-RED dashboard; breadboard prototype.", "ESP32 مع استشعار الأمطار ومستوى المياه؛ ثلاثة مستويات تنبيه؛ MQTT إلى Mosquitto ولوحة Node-RED؛ نموذج على لوحة تجارب.")],
+  ["mpu6050-speed", T("Step counting RMSE 0.161 m/s vs integration 1.106 m/s over 15 trials each.", "عدّ الخطوات 0.161 م/ث مقابل التكامل 1.106 م/ث في 15 تجربة لكل منهما.")],
+  ["dryer-8086", T("8086 assembly, 8255 PPI, ADC0804, LM35, MPX4115A; verified in Proteus across 15 cases.", "لغة تجميع 8086، 8255، ADC0804، LM35، MPX4115A؛ متحقق منه في Proteus عبر 15 حالة.")],
+  ["mq135-gas", T("Calibrated MQ135; CO₂ survey of 15 campus locations; Python live interface.", "MQ135 معاير؛ مسح ثاني أكسيد الكربون في 15 موقعًا؛ واجهة Python حية.")],
+];
+---
+<Base lang={lang} path="/cv/" section="cv" title={T("CV", "السيرة الذاتية")}>
+  <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Curriculum vitae", "السيرة الذاتية")}</div><h1 class="h-page">CV</h1>
+    <p class="lede">{T("Electrical engineering student focused on power and energy systems, embedded systems and IoT.", "طالب هندسة كهربائية يركز على أنظمة القدرة والطاقة والأنظمة المدمجة وإنترنت الأشياء.")}</p></header>
+  <div class="cv"><div style="min-width:0">
+    <section class="cv-sec"><h2>{T("Education", "التعليم")}</h2><div>
+      <div class="cv-entry"><div class="top"><span class="t">{T("B.Sc. Electrical Engineering", "بكالوريوس الهندسة الكهربائية")}</span><span class="d mono">{T("Expected 2028", "متوقع 2028")}</span></div><span class="w">{T("Universitas Islam Indonesia, Yogyakarta", "الجامعة الإسلامية الإندونيسية، يوجياكارتا")}</span>
+        <ul><li>{T("CGPA 3.75 / 4.00", "المعدل التراكمي 3.75 من 4.00")}</li><li>{T("Future Global Leaders Scholarship (2024–present)", "منحة Future Global Leaders (2024 – الآن)")}</li></ul></div></div></section>
+    <section class="cv-sec"><h2>{T("Projects", "المشاريع")}</h2><div>
+      {PROJ.map(([id, line]) => (
+        <div class="cv-entry"><div class="top"><span class="t"><a href={url(lang, `/work/${id}/`)}>{P(id).data.title}</a></span><span class="d mono ltr">{P(id).data.year}</span></div><span class="w">{P(id).data.facts[0].value}</span><ul><li>{line}</li></ul></div>
+      ))}
+    </div></section>
+    <section class="cv-sec"><h2>{T("Leadership", "القيادة")}</h2><div>
+      <div class="cv-entry"><div class="top"><span class="t">{T("President", "الرئيس")}</span><span class="d mono ltr">2026 –</span></div><span class="w">UII Global</span>
+        <ul><li>{T("Lead the executive board and cross-functional teams for cultural, educational and networking programmes", "قيادة المجلس التنفيذي وفرق العمل للبرامج الثقافية والتعليمية والتواصلية")}</li><li>{T("Coordinate with university administration, departments and international partners", "التنسيق مع إدارة الجامعة والأقسام والشركاء الدوليين")}</li></ul></div>
+      <div class="cv-entry"><div class="top"><span class="t">{T("Marketing team member", "عضو فريق التسويق")}</span><span class="d mono ltr">2024 – 2026</span></div><span class="w">UII Global</span>
+        <ul><li>{T("Event promotion, digital communication and international student engagement", "الترويج للفعاليات والتواصل الرقمي وإشراك الطلاب الدوليين")}</li></ul></div>
+    </div></section>
+    <section class="cv-sec"><h2>{T("Skills", "المهارات")}</h2><div class="cv-entry"><ul>
+      <li><strong>{T("Programming", "البرمجة")}:</strong> <span class="ltr">C, C++, Python, TypeScript, 8086 assembly</span></li>
+      <li><strong>{T("Software", "البرمجيات")}:</strong> <span class="ltr">MATLAB, Simulink, Proteus, Quartus Prime, Arduino IDE, Node-RED</span></li>
+      <li><strong>{T("Hardware", "العتاد")}:</strong> <span class="ltr">ESP32, Arduino, Intel 8086, sensors, GSM</span></li>
+      <li><strong>{T("Research interests", "الاهتمامات البحثية")}:</strong> {T("power systems, renewable energy integration, smart grid, energy management", "أنظمة القدرة، دمج الطاقة المتجددة، الشبكات الذكية، إدارة الطاقة")}</li>
+    </ul></div></section>
+    <section class="cv-sec"><h2>{T("Honours & memberships", "التكريمات والعضويات")}</h2><div class="cv-entry"><ul>
+      <li>{T("First medal, Faris Al-Ilqaa public speaking competition (high school)", "الميدالية الأولى، مسابقة فارس الإلقاء (الثانوية)")}</li>
+      <li>{T("Founding member, Jogja SWUG (SolidWorks User Group)", "عضو مؤسس، مجموعة مستخدمي SolidWorks في جوغجا")}</li>
+      <li>{T("Member, Google Developer Group", "عضو، مجموعة مطوري Google")}</li>
+      <li>{T("Student representative, Almawirdy Board", "ممثل الطلاب، مجلس الماوردي")}</li></ul></div></section>
+    <section class="cv-sec"><h2>{T("Languages", "اللغات")}</h2><div class="cv-entry"><ul>
+      <li>{T("Arabic: native", "العربية: اللغة الأم")}</li><li>{T("English: professional working proficiency", "الإنجليزية: كفاءة مهنية")}</li><li>{T("Indonesian: intermediate", "الإندونيسية: متوسط")}</li></ul></div></section>
+  </div>
+  <aside class="cv-side">
+    <div class="box"><h4>{T("PDF version", "نسخة PDF")}</h4><p style="margin:0;color:var(--ink-2);font-size:.92rem">{T("Two-page CV for applications.", "سيرة ذاتية من صفحتين للتقديم.")}</p>
+      <a class="btn btn-primary" href={PROFILE.cv} target="_blank" rel="noopener" style="justify-self:start">{T("Download CV (PDF)", "تنزيل السيرة الذاتية (PDF)")}</a></div>
+    <div class="box"><h4>{T("Quick facts", "معلومات سريعة")}</h4><div class="res-meta">
+      <span class="k mono">{T("Based in", "المقر")}</span><span>{T("Yogyakarta, Indonesia", "يوجياكارتا، إندونيسيا")}</span>
+      <span class="k mono">{T("Nationality", "الجنسية")}</span><span>{T("Yemeni", "يمني")}</span>
+      <span class="k mono">{T("Open to", "متاح لـ")}</span><span>{T("Internships, research", "التدريب، البحث")}</span>
+      <span class="k mono">{T("Focus", "التركيز")}</span><span>{T("Power & energy systems", "أنظمة القدرة والطاقة")}</span></div>
+      <a class="btn btn-ghost" href={url(lang, "/contact/")} style="justify-self:start">{T("Contact", "تواصل")}</a></div>
+  </aside></div></div>
+</Base>

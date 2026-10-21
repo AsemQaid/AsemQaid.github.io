@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrow from "../components/Arrow.astro";
+import { getProjects, tr, url, type Lang } from "../i18n/ui";
+import { PUBLICATIONS } from "../data/publications";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const projects = await getProjects(lang);
+const P = (slug: string) => projects.find((p) => p.slug === slug)!;
+const areas = [
+  [T("Power & energy systems", "أنظمة القدرة والطاقة"), T("Main direction and likely focus for graduate study. Power flow, faults, protection and renewables modelled and tested in EE Studio.", "الاتجاه الرئيسي والتركيز المرجح للدراسات العليا. سريان القدرة والأعطال والحماية والطاقة المتجددة منمذجة ومختبرة في EE Studio."), T("Main direction", "الاتجاه الرئيسي"), ["ee-studio", "energy-copilot"]],
+  [T("Intelligent energy monitoring", "المراقبة الذكية للطاقة"), T("Baselines, energy intensity and anomaly detection for industrial sites.", "خطوط الأساس وكثافة الطاقة وكشف الشذوذ للمواقع الصناعية."), T("Active project", "مشروع جارٍ"), ["energy-copilot"]],
+  [T("Measurement & sensing", "القياس والاستشعار"), T("Calibration, filtering and benchmarking low-cost sensors against reference measurements.", "المعايرة والترشيح ومقارنة الحساسات منخفضة التكلفة بقياسات مرجعية."), T("Two projects", "مشروعان"), ["mpu6050-speed", "mq135-gas"]],
+  [T("Embedded protection & IoT", "الحماية المدمجة وإنترنت الأشياء"), T("State machines, isolated power design, GSM and MQTT alerting.", "آلات الحالات، وتصميم طاقة معزولة، والتنبيه عبر GSM وMQTT."), T("Two projects", "مشروعان"), ["panel-protection", "flood-warning"]],
+  [T("Control & microprocessors", "التحكم والمعالجات الدقيقة"), T("On–off control in 8086 assembly; control-system labs in EE Studio.", "تحكم تشغيل/إيقاف بلغة تجميع 8086؛ ومختبرات أنظمة التحكم في EE Studio."), T("Coursework and software", "مقرر وبرمجيات"), ["dryer-8086"]],
+] as const;
+---
+<Base lang={lang} path="/research/" section="research" title={T("Research", "البحث")}>
+  <div class="wrap">
+    <header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Research", "البحث")}</div>
+      <h1 class="h-page">{T("Research directions", "الاتجاهات البحثية")}</h1>
+      <p class="lede">{PUBLICATIONS.length ? T("What I am studying, the evidence behind each interest, and my publications.", "ما أدرسه والأدلة وراء كل اهتمام، ومنشوراتي.") : T("I have not published yet. This page shows what I am studying, the evidence behind each interest, and where I want to go.", "لم أنشر أبحاثًا بعد. توضح هذه الصفحة ما أدرسه والأدلة وراء كل اهتمام وإلى أين أريد أن أتجه.")}</p></header>
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Interests and evidence", "الاهتمامات والأدلة")}</h2></div>
+      <div class="rmap">
+        {areas.map(([t, d, l, ids], i) => (
+          <div><span class="lv mono">{i === 0 ? <b>{l}</b> : l}</span><h3>{t}</h3><p>{d}</p>
+            <div class="plinks">{ids.map((id) => <a href={url(lang, `/work/${id}/`)} class="plink"><span class="ltr">{P(id).data.number}</span> {P(id).data.title}</a>)}</div></div>
+        ))}
+        <div><span class="lv mono">{T("Next", "التالي")}</span><h3>{T("A first research question", "أول سؤال بحثي")}</h3><p>{T("Bench validation of the energy acquisition unit, and measured detection accuracy on real industrial data, are the next steps toward research-grade results.", "التحقق المخبري من وحدة اقتناء الطاقة، وقياس دقة الكشف على بيانات صناعية حقيقية، هما الخطوتان التاليتان نحو نتائج بمستوى بحثي.")}</p></div>
+      </div></section>
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Closest to research so far", "الأقرب إلى البحث حتى الآن")}</h2></div>
+      <a class="feature-research" href={url(lang, "/work/mpu6050-speed/")}>
+        <img src="/diagrams/mpu-rmse.svg" alt="" loading="lazy">
+        <div><span class="mono" style="color:var(--ink-3)"><span class="ltr">AAQ-P03</span> · {T("Measurement & Instrumentation", "القياس والأجهزة")}</span>
+          <h3>{T("Why step counting beat integration by a factor of seven", "لماذا تفوّق عدّ الخطوات على التكامل بسبعة أضعاف")}</h3>
+          <p>{T("A benchmark of two speed-estimation methods against 15 reference trials each, with a physical explanation of the error: integration drift grows with time, while event counting does not.", "مقارنة طريقتين لتقدير السرعة مقابل 15 تجربة مرجعية لكل منهما، مع تفسير فيزيائي للخطأ: انجراف التكامل يكبر مع الزمن، بينما لا يكبر عدّ الأحداث.")}</p>
+          <span class="link-arrow">{T("Read the project", "اقرأ المشروع")} <Arrow /></span></div></a></section>
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Publications", "المنشورات")}</h2><span class="mono" style="color:var(--ink-3)">{PUBLICATIONS.length} {T("entries", "إدخالات")}</span></div>
+      {PUBLICATIONS.length === 0 ? (
+        <div class="pub-empty"><p style="margin:0;font-size:1.02rem">{T("No publications yet. Papers, posters and conference reports will be listed here.", "لا توجد منشورات بعد. ستُدرج هنا الأوراق والملصقات وتقارير المؤتمرات.")}</p></div>
+      ) : (
+        <div style="display:grid;gap:12px">{PUBLICATIONS.map((p) => (
+          <div class="pub" style="border-style:solid;background:var(--sheet)"><span class="yr ltr">{p.year}</span><div style="display:grid;gap:4px;min-width:0" dir="ltr">
+            <span class="ti">{p.title}</span><span class="au" set:html={p.authors.replace("A. A. Qaid", "<strong>A. A. Qaid</strong>")}></span><span class="ve">{p.venue}</span>
+            <div class="acts">{p.links.map((l) => <a class="tag" href={l.url} target="_blank" rel="noopener">{l.label}</a>)}</div></div></div>
+        ))}</div>
+      )}</section>
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Working toward", "أعمل نحو")}</h2></div>
+      <div class="split">
+        <div class="box"><h4>{T("Next", "التالي")}</h4><ul><li>{T("Bench validation of the energy acquisition unit (ANGEL 2026, December)", "التحقق المخبري من وحدة اقتناء الطاقة (ANGEL 2026، ديسمبر)")}</li><li>{T("Research experience or supervision in energy systems", "خبرة بحثية أو إشراف في أنظمة الطاقة")}</li><li>{T("A first paper, poster or conference report", "أول ورقة أو ملصق أو تقرير مؤتمر")}</li></ul></div>
+        <div class="box"><h4>{T("Long-term", "على المدى البعيد")}</h4><ul><li>{T("Master's degree in Australia, in power and energy systems", "درجة الماجستير في أستراليا في أنظمة القدرة والطاقة")}</li><li>{T("International internship experience", "خبرة تدريب دولية")}</li></ul></div>
+      </div></section>
+  </div>
+</Base>
