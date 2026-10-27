@@ -10,11 +10,12 @@ const T = tr(lang);
 const projects = await getProjects(lang);
 const P = (slug: string) => projects.find((p) => p.slug === slug)!;
 const areas = [
-  [T("Power & energy systems", "أنظمة القدرة والطاقة"), T("Main direction and likely focus for graduate study. Power flow, faults, protection and renewables modelled and tested in EE Studio.", "الاتجاه الرئيسي والتركيز المرجح للدراسات العليا. سريان القدرة والأعطال والحماية والطاقة المتجددة منمذجة ومختبرة في EE Studio."), T("Main direction", "الاتجاه الرئيسي"), ["ee-studio", "energy-copilot"]],
-  [T("Intelligent energy monitoring", "المراقبة الذكية للطاقة"), T("Baselines, energy intensity and anomaly detection for industrial sites.", "خطوط الأساس وكثافة الطاقة وكشف الشذوذ للمواقع الصناعية."), T("Active project", "مشروع جارٍ"), ["energy-copilot"]],
-  [T("Measurement & sensing", "القياس والاستشعار"), T("Calibration, filtering and benchmarking low-cost sensors against reference measurements.", "المعايرة والترشيح ومقارنة الحساسات منخفضة التكلفة بقياسات مرجعية."), T("Two projects", "مشروعان"), ["mpu6050-speed", "mq135-gas"]],
-  [T("Embedded protection & IoT", "الحماية المدمجة وإنترنت الأشياء"), T("State machines, isolated power design, GSM and MQTT alerting.", "آلات الحالات، وتصميم طاقة معزولة، والتنبيه عبر GSM وMQTT."), T("Two projects", "مشروعان"), ["panel-protection", "flood-warning"]],
-  [T("Control & microprocessors", "التحكم والمعالجات الدقيقة"), T("On–off control in 8086 assembly; control-system labs in EE Studio.", "تحكم تشغيل/إيقاف بلغة تجميع 8086؛ ومختبرات أنظمة التحكم في EE Studio."), T("Coursework and software", "مقرر وبرمجيات"), ["dryer-8086"]],
+  [T("Semiconductor devices & microelectronics", "أجهزة أشباه الموصلات والإلكترونيات الدقيقة"), T("A developing interest, building on microprocessor interfacing and digital logic coursework. No semiconductor project yet; this is where I want to grow.", "اهتمام ناشئ ينطلق من ربط المعالجات الدقيقة ومقررات المنطق الرقمي. لا يوجد مشروع في أشباه الموصلات بعد؛ وهذا هو المجال الذي أريد أن أنمو فيه."), T("Developing interest", "اهتمام ناشئ"), []],
+  [T("Digital electronics & hardware systems", "الإلكترونيات الرقمية وأنظمة العتاد"), T("8086 assembly with an 8255 PPI and ADC0804, verified in Proteus; digital logic design in Quartus Prime (coursework).", "لغة تجميع 8086 مع 8255 وADC0804 متحقق منها في Proteus؛ وتصميم منطق رقمي في Quartus Prime (مقرر)."), T("Project and coursework", "مشروع ومقرر"), ["dryer-8086"]],
+  [T("Embedded systems & electronics", "الأنظمة المدمجة والإلكترونيات"), T("State machines, isolated power design, PCB assembly, GSM and MQTT alerting.", "آلات الحالات، وتصميم طاقة معزولة، وتجميع PCB، والتنبيه عبر GSM وMQTT."), T("Two projects", "مشروعان"), ["panel-protection", "flood-warning"]],
+  [T("Instrumentation & measurement", "القياس والأجهزة"), T("Calibration, filtering and benchmarking low-cost sensors against reference measurements.", "المعايرة والترشيح ومقارنة الحساسات منخفضة التكلفة بقياسات مرجعية."), T("Two projects", "مشروعان"), ["mpu6050-speed", "mq135-gas"]],
+  [T("Power electronics", "إلكترونيات القدرة"), T("Rectifiers, regulators and the grid-tied inverter modelled and tested in EE Studio.", "المقوّمات والمنظمات والعاكس الشبكي منمذجة ومختبرة في EE Studio."), T("Software models", "نماذج برمجية"), ["ee-studio"]],
+  [T("Power systems & renewable energy", "أنظمة القدرة والطاقة المتجددة"), T("Industrial energy monitoring with anomaly detection; power flow, faults and renewables in EE Studio.", "مراقبة الطاقة الصناعية مع كشف الشذوذ؛ وسريان القدرة والأعطال والطاقة المتجددة في EE Studio."), T("Active project", "مشروع جارٍ"), ["energy-copilot", "ee-studio"]],
 ] as const;
 ---
 <Base lang={lang} path="/research/" section="research" title={T("Research", "البحث")}>
@@ -26,9 +27,9 @@ const areas = [
       <div class="rmap">
         {areas.map(([t, d, l, ids], i) => (
           <div><span class="lv mono">{i === 0 ? <b>{l}</b> : l}</span><h3>{t}</h3><p>{d}</p>
-            <div class="plinks">{ids.map((id) => <a href={url(lang, `/work/${id}/`)} class="plink"><span class="ltr">{P(id).data.number}</span> {P(id).data.title}</a>)}</div></div>
+            {ids.length > 0 && <div class="plinks">{ids.map((id) => <a href={url(lang, `/work/${id}/`)} class="plink"><span class="ltr">{P(id).data.number}</span> {P(id).data.title}</a>)}</div>}</div>
         ))}
-        <div><span class="lv mono">{T("Next", "التالي")}</span><h3>{T("A first research question", "أول سؤال بحثي")}</h3><p>{T("Bench validation of the energy acquisition unit, and measured detection accuracy on real industrial data, are the next steps toward research-grade results.", "التحقق المخبري من وحدة اقتناء الطاقة، وقياس دقة الكشف على بيانات صناعية حقيقية، هما الخطوتان التاليتان نحو نتائج بمستوى بحثي.")}</p></div>
+        
       </div></section>
     <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Closest to research so far", "الأقرب إلى البحث حتى الآن")}</h2></div>
       <a class="feature-research" href={url(lang, "/work/mpu6050-speed/")}>
@@ -49,8 +50,8 @@ const areas = [
       )}</section>
     <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Working toward", "أعمل نحو")}</h2></div>
       <div class="split">
-        <div class="box"><h4>{T("Next", "التالي")}</h4><ul><li>{T("Bench validation of the energy acquisition unit (ANGEL 2026, December)", "التحقق المخبري من وحدة اقتناء الطاقة (ANGEL 2026، ديسمبر)")}</li><li>{T("Research experience or supervision in energy systems", "خبرة بحثية أو إشراف في أنظمة الطاقة")}</li><li>{T("A first paper, poster or conference report", "أول ورقة أو ملصق أو تقرير مؤتمر")}</li></ul></div>
-        <div class="box"><h4>{T("Long-term", "على المدى البعيد")}</h4><ul><li>{T("Master's degree in Australia, in power and energy systems", "درجة الماجستير في أستراليا في أنظمة القدرة والطاقة")}</li><li>{T("International internship experience", "خبرة تدريب دولية")}</li></ul></div>
+        <div class="box"><h4>{T("Next", "التالي")}</h4><ul><li>{T("Bench validation of the energy acquisition unit (ANGEL 2026, December)", "التحقق المخبري من وحدة اقتناء الطاقة (ANGEL 2026، ديسمبر)")}</li><li>{T("An internship, research or technical development role in electronics, semiconductors or energy systems", "تدريب أو دور بحثي أو تطوير تقني في الإلكترونيات أو أشباه الموصلات أو أنظمة الطاقة")}</li><li>{T("A first paper, poster or conference report", "أول ورقة أو ملصق أو تقرير مؤتمر")}</li></ul></div>
+        <div class="box"><h4>{T("Long-term", "على المدى البعيد")}</h4><ul><li>{T("Develop skills in semiconductor devices, microelectronics and digital hardware", "تطوير مهارات في أجهزة أشباه الموصلات والإلكترونيات الدقيقة والعتاد الرقمي")}</li><li>{T("Apply electronics to power electronics, power systems and renewable energy", "تطبيق الإلكترونيات في إلكترونيات القدرة وأنظمة القدرة والطاقة المتجددة")}</li></ul></div>
       </div></section>
   </div>
 </Base>

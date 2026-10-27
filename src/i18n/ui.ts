@@ -10,7 +10,7 @@ export const PROFILE = {
   github: "https://github.com/AsemQaid",
   githubShort: "github.com/AsemQaid",
   cv: "/cv/Asem-Ameen-Qaid_CV.pdf",
-  revision: "Rev 1.0 · 2026-10-21",
+  revision: "Rev 1.1 · 2026-10-27",
 };
 
 /** Pick the English or Arabic string. */
@@ -33,8 +33,8 @@ export const LEVELS = ["designed", "simulated", "prototyped", "tested", "deploye
 export const DOMAINS: Record<string, { en: string; ar: string }> = {
   energy: { en: "Energy systems", ar: "أنظمة الطاقة" },
   iot: { en: "Embedded & IoT", ar: "الأنظمة المدمجة وإنترنت الأشياء" },
-  control: { en: "Microprocessors & control", ar: "المعالجات الدقيقة والتحكم" },
-  measure: { en: "Measurement & sensing", ar: "القياس والاستشعار" },
+  control: { en: "Digital hardware & microprocessors", ar: "العتاد الرقمي والمعالجات الدقيقة" },
+  measure: { en: "Instrumentation & sensing", ar: "القياس والاستشعار" },
   software: { en: "Engineering software", ar: "البرمجيات الهندسية" },
 };
 

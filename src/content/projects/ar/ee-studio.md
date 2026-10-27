@@ -4,7 +4,7 @@ number: AAQ-P06
 domain: software
 year: 2026
 status: deployed
-featured: true
+featured: false
 cover: /img/ees-landing.webp
 summary: منصة ويب منشورة تضم 37 مختبرًا تفاعليًا في سبعة مجالات للهندسة الكهربائية، مدعومة بـ 485 اختبارًا آليًا.
 lede: >-

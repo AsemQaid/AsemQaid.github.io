@@ -4,7 +4,7 @@ number: AAQ-P02
 domain: control
 year: 2026
 status: simulated
-featured: false
+featured: true
 cover: /img/dr-circuit.webp
 summary: >-
   تحكم في الحرارة وإنذار للضغط في مجفف، مكتوب بلغة تجميع 8086 مع واجهة 8255 ومحوّل ADC0804، ومتحقق منه في

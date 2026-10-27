@@ -6,40 +6,77 @@ const { lang } = Astro.props;
 const T = tr(lang);
 const projects = await getProjects(lang);
 const P = (id: string) => projects.find((p) => p.slug === id)!;
-const PROJ: [string, string][] = [
-  ["energy-copilot", T("Team leader of five; system integration, dashboard and MQTT data pipeline. Software tested on simulated data; hardware designed, validation in progress.", "قائد فريق من خمسة؛ تكامل النظام ولوحة المتابعة ومسار بيانات MQTT. البرمجيات مختبرة على بيانات محاكاة؛ العتاد مصمم والتحقق جارٍ.")],
-  ["ee-studio", T("7 modules, 37 labs, 485 automated backend tests; deployed on Vercel and Railway.", "7 وحدات و37 مختبرًا و485 اختبارًا آليًا؛ منشور على Vercel وRailway.")],
-  ["panel-protection", T("Arduino Nano, three-state machine, load cut-off within 2 s, SMS alerts via SIM800L; soldered PCB, six test scenarios passed.", "Arduino Nano، آلة حالات ثلاثية، فصل الحمل خلال ثانيتين، تنبيهات SMS عبر SIM800L؛ لوحة PCB ملحومة ونجاح ستة سيناريوهات اختبار.")],
-  ["flood-warning", T("ESP32 with rain and water-level sensing; three alert levels; MQTT to Mosquitto and a Node-RED dashboard; breadboard prototype.", "ESP32 مع استشعار الأمطار ومستوى المياه؛ ثلاثة مستويات تنبيه؛ MQTT إلى Mosquitto ولوحة Node-RED؛ نموذج على لوحة تجارب.")],
-  ["mpu6050-speed", T("Step counting RMSE 0.161 m/s vs integration 1.106 m/s over 15 trials each.", "عدّ الخطوات 0.161 م/ث مقابل التكامل 1.106 م/ث في 15 تجربة لكل منهما.")],
-  ["dryer-8086", T("8086 assembly, 8255 PPI, ADC0804, LM35, MPX4115A; verified in Proteus across 15 cases.", "لغة تجميع 8086، 8255، ADC0804، LM35، MPX4115A؛ متحقق منه في Proteus عبر 15 حالة.")],
-  ["mq135-gas", T("Calibrated MQ135; CO₂ survey of 15 campus locations; Python live interface.", "MQ135 معاير؛ مسح ثاني أكسيد الكربون في 15 موقعًا؛ واجهة Python حية.")],
+
+// Projects grouped as in the CV, most relevant to electronics first.
+const GROUPS: [string, [string, string][]][] = [
+  [T("Digital hardware and microprocessor systems", "العتاد الرقمي وأنظمة المعالجات الدقيقة"), [
+    ["dryer-8086", T("8086 assembly controller with an 8255 PPI (Mode 0, control word 8AH) and ADC0804; bit-masked Port C writes; behaved as specified in all 15 Proteus test cases at 30 °C and 100 kPa.", "متحكم بلغة تجميع 8086 مع 8255 (الوضع 0، كلمة التحكم 8AH) وADC0804؛ كتابة مقنّعة على المنفذ C؛ عمل كما هو محدد في كل حالات Proteus الخمس عشرة عند 30 °م و100 كيلوباسكال.")],
+  ]],
+  [T("Embedded systems, instrumentation and hardware testing", "الأنظمة المدمجة والقياس واختبار العتاد"), [
+    ["panel-protection", T("Three-state Arduino Nano protection system on a soldered PCB; load cut-off within one 2 s cycle and SMS alerts via SIM800L; passed all six test scenarios; noise and brown-outs fixed with separate power domains.", "نظام حماية بثلاث حالات على Arduino Nano ولوحة PCB ملحومة؛ فصل الحمل خلال دورة 2 ثانية وتنبيهات SMS عبر SIM800L؛ نجح في سيناريوهات الاختبار الستة؛ وعولج الضجيج وهبوط الجهد بفصل مجالات الطاقة.")],
+    ["mpu6050-speed", T("MPU6050 over I2C with on-chip and complementary filtering; step counting RMSE 0.161 m/s vs integration 1.106 m/s over 15 reference trials each.", "MPU6050 عبر I2C مع ترشيح داخلي وتكميلي؛ عدّ الخطوات 0.161 م/ث مقابل التكامل 1.106 م/ث في 15 تجربة مرجعية لكل منهما.")],
+    ["mq135-gas", T("Calibrated MQ135 (24 h preheat, 20 kΩ load, averaged R₀); CO₂ at 15 campus locations, about 376 to 2,172 ppm.", "MQ135 معاير (تسخين 24 ساعة، حمل 20 كيلو أوم، متوسط R₀)؛ ثاني أكسيد الكربون في 15 موقعًا، من نحو 376 إلى 2,172 جزءًا في المليون.")],
+    ["flood-warning", T("ESP32 breadboard prototype with three alert levels; MQTT to Mosquitto and a Node-RED dashboard.", "نموذج ESP32 على لوحة تجارب بثلاثة مستويات تنبيه؛ MQTT إلى Mosquitto ولوحة Node-RED.")],
+  ]],
+  [T("Energy systems and engineering software", "أنظمة الطاقة والبرمجيات الهندسية"), [
+    ["energy-copilot", T("Team leader; system integration, dashboard and MQTT pipeline. 3 of 3 inserted anomalies detected with no false alarms on a synthetic 30-day dataset; ESP32 + RS485 acquisition unit designed, validation planned for December 2026.", "قائد الفريق؛ تكامل النظام ولوحة المتابعة ومسار MQTT. اكتُشفت 3 من 3 حالات شاذة دون إنذارات كاذبة على بيانات اصطناعية لـ 30 يومًا؛ وحدة اقتناء ESP32 وRS485 مصممة والتحقق مخطط في ديسمبر 2026.")],
+    ["ee-studio", T("37 labs across 7 modules, including power systems, electronic system design and renewable energy; 485 automated backend tests; AI-assisted development under my direction and review.", "37 مختبرًا في 7 وحدات، منها أنظمة القدرة وتصميم الأنظمة الإلكترونية والطاقة المتجددة؛ 485 اختبارًا آليًا؛ تطوير بمساعدة الذكاء الاصطناعي بتوجيهي ومراجعتي.")],
+  ]],
+];
+
+const SKILLS: [string, string][] = [
+  [T("Programming and firmware", "البرمجة والبرمجيات الثابتة"), "C, C++, Python, Intel 8086 assembly, Arduino IDE"],
+  [T("Microcontrollers and digital hardware", "المتحكمات الدقيقة والعتاد الرقمي"), T("ESP32, Arduino (Nano), Intel 8086, 8255 PPI, ADC0804, digital logic design in Quartus Prime (FPGA tools), PCB assembly and soldering", "ESP32، Arduino (Nano)، Intel 8086، 8255 PPI، ADC0804، تصميم المنطق الرقمي في Quartus Prime (أدوات FPGA)، تجميع ولحام PCB")],
+  [T("Electronics, instrumentation and interfaces", "الإلكترونيات والقياس والواجهات"), T("Sensor interfacing, analog-to-digital conversion, I2C, UART, RS485/Modbus, MQTT, GSM (AT commands), relay and transistor switching, isolated power-domain design", "ربط الحساسات، التحويل التماثلي الرقمي، I2C، UART، RS485/Modbus، MQTT، GSM (أوامر AT)، التبديل بالمرحّل والترانزستور، تصميم مجالات طاقة معزولة")],
+  [T("Engineering software and simulation", "البرمجيات الهندسية والمحاكاة"), "MATLAB, Simulink, Proteus, Quartus Prime, Node-RED"],
+  [T("Testing and engineering analysis", "الاختبار والتحليل الهندسي"), T("Structured test scenarios, sensor calibration, digital filtering, error analysis (RMSE), simulation-based verification, numerical verification of models", "سيناريوهات اختبار منظمة، معايرة الحساسات، الترشيح الرقمي، تحليل الخطأ (RMSE)، التحقق بالمحاكاة، التحقق العددي من النماذج")],
+];
+const INTERESTS = [
+  T("Semiconductor devices and microelectronics", "أجهزة أشباه الموصلات والإلكترونيات الدقيقة"),
+  T("Digital electronics and hardware systems", "الإلكترونيات الرقمية وأنظمة العتاد"),
+  T("Embedded systems and electronics", "الأنظمة المدمجة والإلكترونيات"),
+  T("Power electronics", "إلكترونيات القدرة"),
+  T("Power systems and renewable energy integration", "أنظمة القدرة ودمج الطاقة المتجددة"),
 ];
 ---
 <Base lang={lang} path="/cv/" section="cv" title={T("CV", "السيرة الذاتية")}>
   <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Curriculum vitae", "السيرة الذاتية")}</div><h1 class="h-page">CV</h1>
-    <p class="lede">{T("Electrical engineering student focused on power and energy systems, embedded systems and IoT.", "طالب هندسة كهربائية يركز على أنظمة القدرة والطاقة والأنظمة المدمجة وإنترنت الأشياء.")}</p></header>
+    <p class="lede">{T("Electrical engineering student · electronics and embedded systems · developing interests in semiconductors and power and energy systems.", "طالب هندسة كهربائية · الإلكترونيات والأنظمة المدمجة · اهتمامات ناشئة بأشباه الموصلات وأنظمة القدرة والطاقة.")}</p></header>
   <div class="cv"><div style="min-width:0">
+    <section class="cv-sec"><h2>{T("Profile", "نبذة")}</h2><div class="cv-entry"><span class="w" style="font-size:1rem;line-height:1.65">{T(
+      "Third-year Electrical Engineering undergraduate at Universitas Islam Indonesia (CGPA 3.75/4.00) with hands-on project work in microprocessor interfacing (Intel 8086, 8255 PPI, ADC0804), digital logic design in Quartus Prime, and microcontroller systems built and tested on ESP32 and Arduino. Project experience covers sensor interfacing, calibration and measurement analysis, including benchmarking a motion sensor against 15 reference trials and bench-testing a PCB-based electrical protection system. Developing interest in semiconductor devices, microelectronics and digital hardware, alongside power electronics, power systems and renewable energy. Seeking an internship, research or technical development opportunity to strengthen hardware and electronics skills while contributing to real engineering projects.",
+      "طالب في السنة الثالثة في الهندسة الكهربائية بالجامعة الإسلامية الإندونيسية (المعدل 3.75 من 4.00)، لديه خبرة عملية في ربط المعالجات الدقيقة (Intel 8086 و8255 وADC0804)، وتصميم المنطق الرقمي في Quartus Prime، وأنظمة متحكمات دقيقة مبنية ومختبرة على ESP32 وArduino. تشمل مشاريعه ربط الحساسات والمعايرة وتحليل القياسات، ومنها مقارنة حساس حركة بـ 15 تجربة مرجعية، واختبار نظام حماية كهربائية على لوحة PCB. لديه اهتمام ناشئ بأجهزة أشباه الموصلات والإلكترونيات الدقيقة والعتاد الرقمي، إلى جانب إلكترونيات القدرة وأنظمة القدرة والطاقة المتجددة. يبحث عن تدريب أو فرصة بحثية أو تطوير تقني يعزز فيها مهاراته في العتاد والإلكترونيات ويساهم في مشاريع هندسية حقيقية.")}</span></div></section>
     <section class="cv-sec"><h2>{T("Education", "التعليم")}</h2><div>
       <div class="cv-entry"><div class="top"><span class="t">{T("B.Sc. Electrical Engineering", "بكالوريوس الهندسة الكهربائية")}</span><span class="d mono">{T("Expected 2028", "متوقع 2028")}</span></div><span class="w">{T("Universitas Islam Indonesia, Yogyakarta", "الجامعة الإسلامية الإندونيسية، يوجياكارتا")}</span>
-        <ul><li>{T("CGPA 3.75 / 4.00", "المعدل التراكمي 3.75 من 4.00")}</li><li>{T("Future Global Leaders Scholarship (2024–present)", "منحة Future Global Leaders (2024 – الآن)")}</li></ul></div></div></section>
+        <ul><li>{T("CGPA 3.75 / 4.00", "المعدل التراكمي 3.75 من 4.00")}</li><li>{T("Future Global Leaders Scholarship (2024–present)", "منحة Future Global Leaders (2024 – الآن)")}</li>
+        <li>{T("Relevant laboratory coursework: Computer Systems and Microprocessors, Digital Logic Circuits (FPGA), Embedded Systems, Measurement and Instrumentation", "مقررات مخبرية ذات صلة: أنظمة الحاسوب والمعالجات الدقيقة، الدوائر المنطقية الرقمية (FPGA)، الأنظمة المدمجة، القياس والأجهزة")}</li></ul></div></div></section>
     <section class="cv-sec"><h2>{T("Projects", "المشاريع")}</h2><div>
-      {PROJ.map(([id, line]) => (
-        <div class="cv-entry"><div class="top"><span class="t"><a href={url(lang, `/work/${id}/`)}>{P(id).data.title}</a></span><span class="d mono ltr">{P(id).data.year}</span></div><span class="w">{P(id).data.facts[0].value}</span><ul><li>{line}</li></ul></div>
+      {GROUPS.map(([g, items]) => (
+        <>
+          <p class="mono" style="color:var(--accent);margin:8px 0 10px">{g}</p>
+          {g === GROUPS[0][0] && (
+            <div class="cv-entry"><div class="top"><span class="t">{T("Digital Logic Circuit and FPGA Design", "تصميم الدوائر المنطقية الرقمية وFPGA")}</span><span class="d mono">{T("Coursework", "مقرر")}</span></div><ul><li>{T("Designed and simulated digital logic circuits using FPGA development tools (Quartus Prime).", "تصميم ومحاكاة دوائر منطقية رقمية باستخدام أدوات تطوير FPGA (Quartus Prime).")}</li></ul></div>
+          )}
+          {items.map(([id, line]) => (
+            <div class="cv-entry"><div class="top"><span class="t"><a href={url(lang, `/work/${id}/`)}>{P(id).data.title}</a></span><span class="d mono ltr">{P(id).data.year}</span></div><span class="w">{P(id).data.facts[0].value}</span><ul><li>{line}</li></ul></div>
+          ))}
+        </>
       ))}
     </div></section>
     <section class="cv-sec"><h2>{T("Leadership", "القيادة")}</h2><div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("President", "الرئيس")}</span><span class="d mono ltr">2026 –</span></div><span class="w">UII Global</span>
+      <div class="cv-entry"><div class="top"><span class="t">{T("President, UII Global", "الرئيس، UII Global")}</span><span class="d mono ltr">2026 –</span></div>
         <ul><li>{T("Lead the executive board and cross-functional teams for cultural, educational and networking programmes", "قيادة المجلس التنفيذي وفرق العمل للبرامج الثقافية والتعليمية والتواصلية")}</li><li>{T("Coordinate with university administration, departments and international partners", "التنسيق مع إدارة الجامعة والأقسام والشركاء الدوليين")}</li></ul></div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("Marketing team member", "عضو فريق التسويق")}</span><span class="d mono ltr">2024 – 2026</span></div><span class="w">UII Global</span>
+      <div class="cv-entry"><div class="top"><span class="t">{T("Team Leader, Team PowerTech", "قائد فريق PowerTech")}</span><span class="d mono ltr">Oct 2026 –</span></div><span class="w">ANGEL Innovation Hackathon 2026</span>
+        <ul><li>{T("Weekly progress reviews, a shared task board, Git-based peer review and a risk register for a multidisciplinary team", "مراجعات أسبوعية للتقدم، ولوحة مهام مشتركة، ومراجعة الأقران عبر Git، وسجل مخاطر لفريق متعدد التخصصات")}</li></ul></div>
+      <div class="cv-entry"><div class="top"><span class="t">{T("Marketing team member, UII Global", "عضو فريق التسويق، UII Global")}</span><span class="d mono ltr">2024 – 2026</span></div>
         <ul><li>{T("Event promotion, digital communication and international student engagement", "الترويج للفعاليات والتواصل الرقمي وإشراك الطلاب الدوليين")}</li></ul></div>
     </div></section>
-    <section class="cv-sec"><h2>{T("Skills", "المهارات")}</h2><div class="cv-entry"><ul>
-      <li><strong>{T("Programming", "البرمجة")}:</strong> <span class="ltr">C, C++, Python, TypeScript, 8086 assembly</span></li>
-      <li><strong>{T("Software", "البرمجيات")}:</strong> <span class="ltr">MATLAB, Simulink, Proteus, Quartus Prime, Arduino IDE, Node-RED</span></li>
-      <li><strong>{T("Hardware", "العتاد")}:</strong> <span class="ltr">ESP32, Arduino, Intel 8086, sensors, GSM</span></li>
-      <li><strong>{T("Research interests", "الاهتمامات البحثية")}:</strong> {T("power systems, renewable energy integration, smart grid, energy management", "أنظمة القدرة، دمج الطاقة المتجددة، الشبكات الذكية، إدارة الطاقة")}</li>
+    <section class="cv-sec"><h2>{T("Technical skills", "المهارات التقنية")}</h2><div class="cv-entry"><ul>
+      {SKILLS.map(([k, v]) => <li><strong>{k}:</strong> {v}</li>)}
     </ul></div></section>
+    <section class="cv-sec"><h2>{T("Research interests (developing)", "الاهتمامات البحثية (ناشئة)")}</h2><div class="cv-entry"><ol style="margin:0;padding-inline-start:20px;display:grid;gap:4px">
+      {INTERESTS.map((x) => <li>{x}</li>)}
+    </ol></div></section>
     <section class="cv-sec"><h2>{T("Honours & memberships", "التكريمات والعضويات")}</h2><div class="cv-entry"><ul>
       <li>{T("First medal, Faris Al-Ilqaa public speaking competition (high school)", "الميدالية الأولى، مسابقة فارس الإلقاء (الثانوية)")}</li>
       <li>{T("Founding member, Jogja SWUG (SolidWorks User Group)", "عضو مؤسس، مجموعة مستخدمي SolidWorks في جوغجا")}</li>
@@ -54,8 +91,8 @@ const PROJ: [string, string][] = [
     <div class="box"><h4>{T("Quick facts", "معلومات سريعة")}</h4><div class="res-meta">
       <span class="k mono">{T("Based in", "المقر")}</span><span>{T("Yogyakarta, Indonesia", "يوجياكارتا، إندونيسيا")}</span>
       <span class="k mono">{T("Nationality", "الجنسية")}</span><span>{T("Yemeni", "يمني")}</span>
-      <span class="k mono">{T("Open to", "متاح لـ")}</span><span>{T("Internships, research", "التدريب، البحث")}</span>
-      <span class="k mono">{T("Focus", "التركيز")}</span><span>{T("Power & energy systems", "أنظمة القدرة والطاقة")}</span></div>
+      <span class="k mono">{T("Open to", "متاح لـ")}</span><span>{T("Internships, research, technical development", "التدريب، البحث، التطوير التقني")}</span>
+      <span class="k mono">{T("Interests", "الاهتمامات")}</span><span>{T("Electronics, semiconductors, power & energy", "الإلكترونيات، أشباه الموصلات، القدرة والطاقة")}</span></div>
       <a class="btn btn-ghost" href={url(lang, "/contact/")} style="justify-self:start">{T("Contact", "تواصل")}</a></div>
   </aside></div></div>
 </Base>

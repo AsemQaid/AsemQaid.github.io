@@ -5,11 +5,11 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const T = tr(lang);
 const rows: [string, [string, string][]][] = [
-  [T("Embedded & IoT", "مدمج وإنترنت الأشياء"), [["ESP32", "P04 · P07"], ["Arduino Nano", "P01 · P03 · P05"], ["MQTT · Node-RED", "P04 · P07"], ["SIM800L GSM", "P05"]]],
-  [T("Microprocessors", "المعالجات الدقيقة"), [["Intel 8086 assembly", "P02"], ["8255 PPI · ADC0804", "P02"]]],
-  [T("Programming", "البرمجة"), [["C / C++", "P01–P05"], ["Python", "P01 · P06 · P07"], ["TypeScript · React", "P06"], ["FastAPI · NumPy · SciPy", "P06"]]],
-  [T("Engineering tools", "الأدوات الهندسية"), [["Proteus", "P02"], ["MATLAB · Simulink", T("Coursework", "مقررات")], ["Quartus Prime (FPGA)", T("Coursework", "مقررات")], ["Cirkit Designer", "P07"]]],
-  [T("Measurement", "القياس"), [[T("Sensor calibration", "معايرة الحساسات"), "P01 · P03"], [T("Digital filtering", "الترشيح الرقمي"), "P03"], [T("Error analysis (RMSE)", "تحليل الخطأ (RMSE)"), "P03"]]],
+  [T("Programming and firmware", "البرمجة والبرمجيات الثابتة"), [["C / C++", "P01–P05"], ["Python", "P01 · P06 · P07"], ["Intel 8086 assembly", "P02"], ["Arduino IDE", "P01 · P03–P05"]]],
+  [T("Microcontrollers and digital hardware", "المتحكمات الدقيقة والعتاد الرقمي"), [["ESP32", "P04 · P07"], ["Arduino Nano", "P01 · P03 · P05"], ["Intel 8086 · 8255 PPI · ADC0804", "P02"], [T("Digital logic in Quartus Prime (FPGA)", "المنطق الرقمي في Quartus Prime (FPGA)"), T("Coursework", "مقرر")], [T("PCB assembly and soldering", "تجميع ولحام PCB"), "P05"]]],
+  [T("Electronics, instrumentation and interfaces", "الإلكترونيات والقياس والواجهات"), [[T("Sensor interfacing", "ربط الحساسات"), "P01–P05"], [T("Analog-to-digital conversion", "التحويل التماثلي الرقمي"), "P01 · P02"], ["I2C · UART", "P03 · P05"], ["RS485 / Modbus", "P07"], ["MQTT", "P04 · P07"], ["GSM (AT commands)", "P05"], [T("Isolated power-domain design", "تصميم مجالات طاقة معزولة"), "P05"]]],
+  [T("Engineering software and simulation", "البرمجيات الهندسية والمحاكاة"), [["Proteus", "P02"], ["MATLAB · Simulink", T("Coursework", "مقررات")], ["Quartus Prime", T("Coursework", "مقرر")], ["Node-RED", "P04"]]],
+  [T("Testing and engineering analysis", "الاختبار والتحليل الهندسي"), [[T("Structured test scenarios", "سيناريوهات اختبار منظمة"), "P05"], [T("Sensor calibration", "معايرة الحساسات"), "P01 · P03"], [T("Digital filtering", "الترشيح الرقمي"), "P03"], [T("Error analysis (RMSE)", "تحليل الخطأ (RMSE)"), "P03"], [T("Simulation-based verification", "التحقق بالمحاكاة"), "P02"], [T("Numerical model verification", "التحقق العددي من النماذج"), "P06"]]],
 ];
 ---
 <Base lang={lang} path="/about/" section="about" title={T("About", "نبذة")}>
@@ -21,7 +21,7 @@ const rows: [string, [string, string][]][] = [
       <div class="prose">
         <p>{T("I am a third-year electrical engineering student at Universitas Islam Indonesia in Yogyakarta, studying on the Future Global Leaders Scholarship. I am originally from Yemen, and I work in Arabic, English and Indonesian.", "أنا طالب في السنة الثالثة في الهندسة الكهربائية بالجامعة الإسلامية الإندونيسية في يوجياكارتا، وأدرس بمنحة Future Global Leaders. أصلي من اليمن، وأعمل بالعربية والإنجليزية والإندونيسية.")}</p>
         <p>{T("My projects have moved from microprocessor control and sensor measurement to embedded protection systems, energy monitoring and engineering software. Across them I try to do the same thing: measure before claiming, and say clearly what has and has not been tested.", "انتقلت مشاريعي من التحكم بالمعالجات الدقيقة وقياس الحساسات إلى أنظمة الحماية المدمجة ومراقبة الطاقة والبرمجيات الهندسية. وفيها جميعًا أحاول فعل الشيء نفسه: أن أقيس قبل أن أدّعي، وأن أوضح ما الذي اختُبر وما الذي لم يُختبر.")}</p>
-        <p>{T("Power and energy systems is where my interest is growing. My goals are international internship experience, research skills, and a Master's degree in Australia.", "أنظمة القدرة والطاقة هي حيث ينمو اهتمامي. أهدافي خبرة تدريب دولية ومهارات بحثية ودرجة ماجستير في أستراليا.")}</p>
+        <p>{T("I am now exploring semiconductor devices, microelectronics and digital hardware, building on my microprocessor and FPGA coursework, while keeping power electronics, power systems and renewable energy as complementary interests. I am looking for an internship, research or technical development opportunity where I can strengthen these skills on real engineering projects.", "أستكشف الآن أجهزة أشباه الموصلات والإلكترونيات الدقيقة والعتاد الرقمي، انطلاقًا من مقررات المعالجات الدقيقة وFPGA، مع إبقاء إلكترونيات القدرة وأنظمة القدرة والطاقة المتجددة اهتمامات مكمّلة. أبحث عن تدريب أو فرصة بحثية أو تطوير تقني أطوّر فيها هذه المهارات في مشاريع هندسية حقيقية.")}</p>
         <p>{T("Alongside engineering, I lead UII Global, the university's international student organisation.", "إلى جانب الهندسة، أقود UII Global، منظمة الطلاب الدوليين في الجامعة.")} <a href={url(lang, "/leadership/")}>{T("Leadership", "القيادة")}</a></p>
       </div>
       <div><h2 class="h-sec" style="margin-bottom:16px">{T("Tools, by where I used them", "الأدوات، حسب مكان استخدامها")}</h2>
