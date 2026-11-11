@@ -73,17 +73,17 @@ The ESP32 reads both sensors continuously and compares them with set thresholds.
 | DANGER | Red LED, continuous buzzer |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/flood-arch.svg" alt="Block diagram: sensors, ESP32, local alerts and remote monitoring." loading="lazy" decoding="async"><figcaption>Block diagram: sensors, ESP32, local alerts and remote monitoring.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/flood-levels.svg" alt="Risk levels and their local alerts." loading="lazy" decoding="async"><figcaption>Risk levels and their local alerts.</figcaption></figure>
-<figure class="pfig"><img src="/diagrams/flood-flow.svg" alt="Operating flowchart of the ESP32 firmware." loading="lazy" decoding="async"><figcaption>Operating flowchart of the ESP32 firmware.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/flood-arch.svg" width="680" height="340" alt="Block diagram: sensors, ESP32, local alerts and remote monitoring." loading="lazy" decoding="async"><figcaption>Block diagram: sensors, ESP32, local alerts and remote monitoring.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/flood-levels.svg" width="680" height="210" alt="Risk levels and their local alerts." loading="lazy" decoding="async"><figcaption>Risk levels and their local alerts.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/flood-flow.svg" width="600" height="560" alt="Operating flowchart of the ESP32 firmware." loading="lazy" decoding="async"><figcaption>Operating flowchart of the ESP32 firmware.</figcaption></figure>
 </div>
 
 
 ## Prototype and dashboard
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/fl-photo.webp" alt="Breadboard prototype with the ESP32, rain and water-level sensors, LEDs and buzzer." loading="lazy" decoding="async"><figcaption>Breadboard prototype with the ESP32, rain and water-level sensors, LEDs and buzzer.</figcaption></figure>
-<figure class="pfig"><img src="/img/fl-nodered.webp" alt="Node-RED dashboard: flood status, rain status and water-level history." loading="lazy" decoding="async"><figcaption>Node-RED dashboard: flood status, rain status and water-level history.</figcaption></figure>
+<figure class="pfig"><img src="/img/fl-photo.webp" width="574" height="480" alt="Breadboard prototype with the ESP32, rain and water-level sensors, LEDs and buzzer." loading="lazy" decoding="async"><figcaption>Breadboard prototype with the ESP32, rain and water-level sensors, LEDs and buzzer.</figcaption></figure>
+<figure class="pfig"><img src="/img/fl-nodered.webp" width="374" height="590" alt="Node-RED dashboard: flood status, rain status and water-level history." loading="lazy" decoding="async"><figcaption>Node-RED dashboard: flood status, rain status and water-level history.</figcaption></figure>
 </div>
 
 

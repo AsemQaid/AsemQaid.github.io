@@ -74,8 +74,8 @@ Three sensors feed the Arduino Nano, which evaluates them every two seconds and 
 | Emergency | Smoke or gas high, or flame | Red light; buzzer; fan; load disconnected; emergency SMS |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/panel-arch.svg" alt="System block diagram: sensors, controller, outputs and communication paths." loading="lazy" decoding="async"><figcaption>System block diagram: sensors, controller, outputs and communication paths.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/panel-states.svg" alt="State transitions of the protection logic." loading="lazy" decoding="async"><figcaption>State transitions of the protection logic.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-arch.svg" width="680" height="360" alt="System block diagram: sensors, controller, outputs and communication paths." loading="lazy" decoding="async"><figcaption>System block diagram: sensors, controller, outputs and communication paths.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-states.svg" width="680" height="250" alt="State transitions of the protection logic." loading="lazy" decoding="async"><figcaption>State transitions of the protection logic.</figcaption></figure>
 </div>
 
 
@@ -84,8 +84,8 @@ Three sensors feed the Arduino Nano, which evaluates them every two seconds and 
 Two isolated power domains keep actuator switching from corrupting sensor readings. The Nano's regulated 5 V rail powers the sensors, buzzer and lights; a separate 5 V / 2 A supply powers the relay, fan and SIM800L, whose transmit bursts draw about 2 A. A 1000 µF capacitor near the SIM800L absorbs those spikes.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/panel-power.svg" alt="Two isolated power domains with a shared ground." loading="lazy" decoding="async"><figcaption>Two isolated power domains with a shared ground.</figcaption></figure>
-<figure class="pfig"><img src="/img/pn-photo.webp" alt="The final build on a soldered PCB." loading="lazy" decoding="async"><figcaption>The final build on a soldered PCB.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-power.svg" width="680" height="290" alt="Two isolated power domains with a shared ground." loading="lazy" decoding="async"><figcaption>Two isolated power domains with a shared ground.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-photo.webp" width="1059" height="1099" alt="The final build on a soldered PCB." loading="lazy" decoding="async"><figcaption>The final build on a soldered PCB.</figcaption></figure>
 </div>
 
 
@@ -94,7 +94,7 @@ Two isolated power domains keep actuator switching from corrupting sensor readin
 All outputs are driven from one sensor snapshot per cycle, and the relay and fan return to a safe default on every reset, so a reset never leaves the panel unprotected. Two bugs were found and fixed: the AVR snprintf() cannot format floats, so temperatures are converted with dtostrf(); and the SMS cooldown blocked any alert in the first 60 seconds after boot until the timer was initialised to a time in the past.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/diagrams/panel-flow.svg" alt="Firmware flowchart of the main control loop." loading="lazy" decoding="async"><figcaption>Firmware flowchart of the main control loop.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/panel-flow.svg" width="620" height="620" alt="Firmware flowchart of the main control loop." loading="lazy" decoding="async"><figcaption>Firmware flowchart of the main control loop.</figcaption></figure>
 </div>
 
 
@@ -103,8 +103,8 @@ All outputs are driven from one sensor snapshot per cycle, and the relay and fan
 Six scenarios were tested: power-on self-check, GSM registration, temperature warning, gas/smoke emergency, flame emergency and automatic recovery. A browser dashboard using the Web Serial API showed live readings and the state log during the tests.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/pn-dash.webp" alt="Live dashboard over Web Serial, with the state and SMS log." loading="lazy" decoding="async"><figcaption>Live dashboard over Web Serial, with the state and SMS log.</figcaption></figure>
-<figure class="pfig"><img src="/img/pn-sms.webp" alt="SMS alerts received during flame and gas tests." loading="lazy" decoding="async"><figcaption>SMS alerts received during flame and gas tests.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-dash.webp" width="1008" height="1028" alt="Live dashboard over Web Serial, with the state and SMS log." loading="lazy" decoding="async"><figcaption>Live dashboard over Web Serial, with the state and SMS log.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-sms.webp" width="677" height="551" alt="SMS alerts received during flame and gas tests." loading="lazy" decoding="async"><figcaption>SMS alerts received during flame and gas tests.</figcaption></figure>
 </div>
 
 

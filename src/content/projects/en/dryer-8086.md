@@ -63,9 +63,9 @@ resources:
 An LM35 temperature sensor and an MPX4115A pressure sensor produce analog voltages that an ADC0804 converts to 8-bit values. The 8255 PPI, configured in Mode 0, handles all I/O: Port A drives the seven-segment display, Port B reads the ADC, and Port C reads the push buttons and drives the heater relay and buzzer.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/dryer-block.svg" alt="Block diagram: 8086, 8255 ports, ADC, sensors and outputs." loading="lazy" decoding="async"><figcaption>Block diagram: 8086, 8255 ports, ADC, sensors and outputs.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/dryer-cw.svg" alt="8255 control word 8AH, bit by bit." loading="lazy" decoding="async"><figcaption>8255 control word 8AH, bit by bit.</figcaption></figure>
-<figure class="pfig wide"><img src="/img/dr-circuit.webp" alt="Proteus simulation circuit." loading="lazy" decoding="async"><figcaption>Proteus simulation circuit.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/dryer-block.svg" width="680" height="372" alt="Block diagram: 8086, 8255 ports, ADC, sensors and outputs." loading="lazy" decoding="async"><figcaption>Block diagram: 8086, 8255 ports, ADC, sensors and outputs.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/dryer-cw.svg" width="680" height="150" alt="8255 control word 8AH, bit by bit." loading="lazy" decoding="async"><figcaption>8255 control word 8AH, bit by bit.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/dr-circuit.webp" width="592" height="452" alt="Proteus simulation circuit." loading="lazy" decoding="async"><figcaption>Proteus simulation circuit.</figcaption></figure>
 </div>
 
 
@@ -74,7 +74,7 @@ An LM35 temperature sensor and an MPX4115A pressure sensor produce analog voltag
 The main loop reads the buttons, samples both sensors and compares them with the setpoints. The heater turns on while temperature is below the setpoint (CMP and JB) and the buzzer sounds while pressure is above its limit (CMP and JA). Inputs and outputs share Port C, so outputs are written through a masked copy (OUT_IMAGE) to avoid disturbing button reads.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/diagrams/dryer-flow.svg" alt="Program flowchart." loading="lazy" decoding="async"><figcaption>Program flowchart.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/dryer-flow.svg" width="640" height="760" alt="Program flowchart." loading="lazy" decoding="async"><figcaption>Program flowchart.</figcaption></figure>
 </div>
 
 

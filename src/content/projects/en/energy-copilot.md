@@ -69,14 +69,14 @@ The challenge was set by PT Indmira Global Energi as industry problem owner, and
 One platform covers five steps. Each finding is shown with its evidence, and the platform does not claim savings it cannot verify.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-pipeline.svg" alt="The five-step evidence-based pipeline of the platform." loading="lazy" decoding="async"><figcaption>The five-step evidence-based pipeline of the platform.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-pipeline.svg" width="680" height="150" alt="The five-step evidence-based pipeline of the platform." loading="lazy" decoding="async"><figcaption>The five-step evidence-based pipeline of the platform.</figcaption></figure>
 </div>
 
 
 ## System
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-arch.svg" alt="System architecture: hardware, data and analytics, and application layers." loading="lazy" decoding="async"><figcaption>System architecture: hardware, data and analytics, and application layers.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-arch.svg" width="680" height="470" alt="System architecture: hardware, data and analytics, and application layers." loading="lazy" decoding="async"><figcaption>System architecture: hardware, data and analytics, and application layers.</figcaption></figure>
 </div>
 
 
@@ -85,14 +85,14 @@ One platform covers five steps. Each finding is shown with its evidence, and the
 The acquisition unit combines an AC inlet and fuse, an HLK-5M05 5 V supply, a PZEM-series energy meter, a MAX485 RS485 interface, an ESP32-WROOM-32D, an OLED display and a microSD module.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/img/en-schematic.webp" alt="Electrical schematic of the acquisition unit (Cirkit Designer). Design only, not yet bench-validated." loading="lazy" decoding="async"><figcaption>Electrical schematic of the acquisition unit (Cirkit Designer). Design only, not yet bench-validated.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/en-schematic.webp" width="1600" height="1522" alt="Electrical schematic of the acquisition unit (Cirkit Designer). Design only, not yet bench-validated." loading="lazy" decoding="async"><figcaption>Electrical schematic of the acquisition unit (Cirkit Designer). Design only, not yet bench-validated.</figcaption></figure>
 </div>
 
 
 ## Software prototype
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/img/en-dashboard.webp" alt="Energy Command Center, shown with a simulated demonstration organisation, not data from physical meters." loading="lazy" decoding="async"><figcaption>Energy Command Center, shown with a simulated demonstration organisation, not data from physical meters.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/en-dashboard.webp" width="1600" height="911" alt="Energy Command Center, shown with a simulated demonstration organisation, not data from physical meters." loading="lazy" decoding="async"><figcaption>Energy Command Center, shown with a simulated demonstration organisation, not data from physical meters.</figcaption></figure>
 </div>
 
 
@@ -112,5 +112,5 @@ I led the team and was responsible for system integration: the dashboard, the da
 ## Results and limits
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" alt="Readiness of each part of the system." loading="lazy" decoding="async"><figcaption>Readiness of each part of the system.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" width="680" height="188" alt="Readiness of each part of the system." loading="lazy" decoding="async"><figcaption>Readiness of each part of the system.</figcaption></figure>
 </div>

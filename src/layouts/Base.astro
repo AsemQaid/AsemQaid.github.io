@@ -1,4 +1,13 @@
 ---
+import "@fontsource-variable/archivo/wdth.css";
+import "@fontsource-variable/source-serif-4/opsz.css";
+import "@fontsource-variable/source-serif-4/opsz-italic.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-sans-arabic/400.css";
+import "@fontsource/ibm-plex-sans-arabic/500.css";
+import "@fontsource/ibm-plex-sans-arabic/600.css";
+import "@fontsource/ibm-plex-sans-arabic/700.css";
 import "../styles/global.css";
 import { PROFILE, tr, url, type Lang } from "../i18n/ui";
 
@@ -23,7 +32,7 @@ const canonical = new URL(lang === "ar" ? arPath : enPath, Astro.site);
 <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
 <head>
   <meta charset="utf-8">
-  <script is:inline>document.documentElement.classList.add("js")</script>
+  <script is:inline>document.documentElement.classList.add("js");try{var t=localStorage.getItem("aaq-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{pageTitle}</title>
   <meta name="description" content={desc}>
@@ -32,12 +41,14 @@ const canonical = new URL(lang === "ar" ? arPath : enPath, Astro.site);
   <link rel="alternate" hreflang="ar" href={new URL(arPath, Astro.site)}>
   <meta property="og:title" content={pageTitle}>
   <meta property="og:description" content={desc}>
-  <meta property="og:image" content={new URL("/img/portrait.jpg", Astro.site)}>
+  <meta property="og:image" content={new URL("/img/share-card.png", Astro.site)}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F2F4F3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1416" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,400&display=swap">
 </head>
 <body>
   <a class="skip" href="#main">{T("Skip to content", "تخطَّ إلى المحتوى")}</a>
@@ -62,6 +73,7 @@ const canonical = new URL(lang === "ar" ? arPath : enPath, Astro.site);
         <a class="en" href={enPath} hreflang="en" lang="en" aria-current={lang === "en" ? "true" : undefined} data-lang="en">EN</a>
         <a class="ar" href={arPath} hreflang="ar" lang="ar" aria-current={lang === "ar" ? "true" : undefined} data-lang="ar">العربية</a>
       </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label={T("Switch between light and dark", "التبديل بين الفاتح والداكن")}><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.75a7.25 7.25 0 0 1 0 14.5z" fill="currentColor"/></svg></button>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheetMenu" aria-label={T("Menu", "القائمة")}><span></span><span></span><span></span></button>
     </div>
   </header>

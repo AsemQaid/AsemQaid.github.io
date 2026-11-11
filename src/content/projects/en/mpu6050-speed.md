@@ -66,10 +66,10 @@ Can a low-cost accelerometer and gyroscope measure speed well enough to be usefu
 The MPU6050 connects over I2C to an Arduino Nano, which streams data to a web dashboard over Web Serial. The sensor's internal low-pass filter is set to 21 Hz; a complementary filter (α = 0.98) estimates roll and pitch to remove gravity from the acceleration axes; and a 0.20 m/s² dead zone suppresses residual noise. On every start-up the system averages about 600 samples over 3 seconds to self-calibrate all six axes.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/mpu-arch.svg" alt="System block diagram: sensors, Arduino Nano and PC dashboard." loading="lazy" decoding="async"><figcaption>System block diagram: sensors, Arduino Nano and PC dashboard.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mpu-dsp.svg" alt="Signal-processing chain from raw data to the two speed estimates." loading="lazy" decoding="async"><figcaption>Signal-processing chain from raw data to the two speed estimates.</figcaption></figure>
-<figure class="pfig"><img src="/img/mp-hw.webp" alt="Assembled measurement system: MPU6050 and Arduino Nano." loading="lazy" decoding="async"><figcaption>Assembled measurement system: MPU6050 and Arduino Nano.</figcaption></figure>
-<figure class="pfig"><img src="/img/mp-dash.webp" alt="Dashboard, motion and orientation tab." loading="lazy" decoding="async"><figcaption>Dashboard, motion and orientation tab.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-arch.svg" width="680" height="230" alt="System block diagram: sensors, Arduino Nano and PC dashboard." loading="lazy" decoding="async"><figcaption>System block diagram: sensors, Arduino Nano and PC dashboard.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-dsp.svg" width="680" height="250" alt="Signal-processing chain from raw data to the two speed estimates." loading="lazy" decoding="async"><figcaption>Signal-processing chain from raw data to the two speed estimates.</figcaption></figure>
+<figure class="pfig"><img src="/img/mp-hw.webp" width="1076" height="717" alt="Assembled measurement system: MPU6050 and Arduino Nano." loading="lazy" decoding="async"><figcaption>Assembled measurement system: MPU6050 and Arduino Nano.</figcaption></figure>
+<figure class="pfig"><img src="/img/mp-dash.webp" width="1192" height="900" alt="Dashboard, motion and orientation tab." loading="lazy" decoding="async"><figcaption>Dashboard, motion and orientation tab.</figcaption></figure>
 </div>
 
 
@@ -78,8 +78,8 @@ The MPU6050 connects over I2C to an Arduino Nano, which streams data to a web da
 Method 1 (integration) was tested with the sensor mounted on a campus cleaning cart over 5–20 m runs. Method 2 (step counting × stride length ÷ time) was tested by walking a corridor over the same distances.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/mp-cart.webp" alt="Vehicle experiment on a campus cleaning cart." loading="lazy" decoding="async"><figcaption>Vehicle experiment on a campus cleaning cart.</figcaption></figure>
-<figure class="pfig"><img src="/img/mp-walk.webp" alt="Walking experiment along a corridor." loading="lazy" decoding="async"><figcaption>Walking experiment along a corridor.</figcaption></figure>
+<figure class="pfig"><img src="/img/mp-cart.webp" width="481" height="642" alt="Vehicle experiment on a campus cleaning cart." loading="lazy" decoding="async"><figcaption>Vehicle experiment on a campus cleaning cart.</figcaption></figure>
+<figure class="pfig"><img src="/img/mp-walk.webp" width="481" height="642" alt="Walking experiment along a corridor." loading="lazy" decoding="async"><figcaption>Walking experiment along a corridor.</figcaption></figure>
 </div>
 
 
@@ -88,10 +88,10 @@ Method 1 (integration) was tested with the sensor mounted on a campus cleaning c
 Step counting was about seven times more accurate. Integration turns any small leftover bias into a velocity error that grows with time, and vehicle vibration and tilt add to it. Counting discrete footsteps does not accumulate error over time; its limit is how consistent the stride length is.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/mpu-vehicle.svg" alt="Vehicle experiment: measured (method 1) vs calculated speed." loading="lazy" decoding="async"><figcaption>Vehicle experiment: measured (method 1) vs calculated speed.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mpu-walking.svg" alt="Walking experiment: measured (method 2) vs calculated speed." loading="lazy" decoding="async"><figcaption>Walking experiment: measured (method 2) vs calculated speed.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mpu-rmse.svg" alt="RMS error of the two methods." loading="lazy" decoding="async"><figcaption>RMS error of the two methods.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mpu-trials.svg" alt="Per-trial absolute error, method 1 vs method 2." loading="lazy" decoding="async"><figcaption>Per-trial absolute error, method 1 vs method 2.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-vehicle.svg" width="680" height="280" alt="Vehicle experiment: measured (method 1) vs calculated speed." loading="lazy" decoding="async"><figcaption>Vehicle experiment: measured (method 1) vs calculated speed.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-walking.svg" width="680" height="280" alt="Walking experiment: measured (method 2) vs calculated speed." loading="lazy" decoding="async"><figcaption>Walking experiment: measured (method 2) vs calculated speed.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-rmse.svg" width="680" height="230" alt="RMS error of the two methods." loading="lazy" decoding="async"><figcaption>RMS error of the two methods.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mpu-trials.svg" width="680" height="260" alt="Per-trial absolute error, method 1 vs method 2." loading="lazy" decoding="async"><figcaption>Per-trial absolute error, method 1 vs method 2.</figcaption></figure>
 </div>
 
 

@@ -67,14 +67,14 @@ resources:
 منصة واحدة تغطي خمس خطوات. تُعرض كل نتيجة مع دليلها، ولا تدّعي المنصة وفورات لا يمكن التحقق منها.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-pipeline.svg" alt="مسار المنصة المبني على الأدلة في خمس خطوات." loading="lazy" decoding="async"><figcaption>مسار المنصة المبني على الأدلة في خمس خطوات.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-pipeline.svg" width="680" height="150" alt="مسار المنصة المبني على الأدلة في خمس خطوات." loading="lazy" decoding="async"><figcaption>مسار المنصة المبني على الأدلة في خمس خطوات.</figcaption></figure>
 </div>
 
 
 ## النظام
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-arch.svg" alt="بنية النظام: طبقات العتاد والبيانات والتحليلات والتطبيق." loading="lazy" decoding="async"><figcaption>بنية النظام: طبقات العتاد والبيانات والتحليلات والتطبيق.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-arch.svg" width="680" height="470" alt="بنية النظام: طبقات العتاد والبيانات والتحليلات والتطبيق." loading="lazy" decoding="async"><figcaption>بنية النظام: طبقات العتاد والبيانات والتحليلات والتطبيق.</figcaption></figure>
 </div>
 
 
@@ -83,14 +83,14 @@ resources:
 تضم وحدة الاقتناء مدخل تيار متردد ومصهرًا، ومزود طاقة HLK-5M05 بجهد 5 فولت، وعدّاد طاقة من سلسلة PZEM، وواجهة RS485 من نوع MAX485، ومتحكم ESP32-WROOM-32D، وشاشة OLED، ووحدة microSD.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/img/en-schematic.webp" alt="المخطط الكهربائي لوحدة الاقتناء (Cirkit Designer). تصميم فقط، لم يُتحقق منه مخبريًا بعد." loading="lazy" decoding="async"><figcaption>المخطط الكهربائي لوحدة الاقتناء (Cirkit Designer). تصميم فقط، لم يُتحقق منه مخبريًا بعد.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/en-schematic.webp" width="1600" height="1522" alt="المخطط الكهربائي لوحدة الاقتناء (Cirkit Designer). تصميم فقط، لم يُتحقق منه مخبريًا بعد." loading="lazy" decoding="async"><figcaption>المخطط الكهربائي لوحدة الاقتناء (Cirkit Designer). تصميم فقط، لم يُتحقق منه مخبريًا بعد.</figcaption></figure>
 </div>
 
 
 ## النموذج البرمجي
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/img/en-dashboard.webp" alt="مركز قيادة الطاقة، معروض ببيانات منظمة تجريبية محاكاة وليس ببيانات عدادات فعلية." loading="lazy" decoding="async"><figcaption>مركز قيادة الطاقة، معروض ببيانات منظمة تجريبية محاكاة وليس ببيانات عدادات فعلية.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/en-dashboard.webp" width="1600" height="911" alt="مركز قيادة الطاقة، معروض ببيانات منظمة تجريبية محاكاة وليس ببيانات عدادات فعلية." loading="lazy" decoding="async"><figcaption>مركز قيادة الطاقة، معروض ببيانات منظمة تجريبية محاكاة وليس ببيانات عدادات فعلية.</figcaption></figure>
 </div>
 
 
@@ -110,5 +110,5 @@ resources:
 ## النتائج والحدود
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" alt="جاهزية كل جزء من النظام." loading="lazy" decoding="async"><figcaption>جاهزية كل جزء من النظام.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" width="680" height="188" alt="جاهزية كل جزء من النظام." loading="lazy" decoding="async"><figcaption>جاهزية كل جزء من النظام.</figcaption></figure>
 </div>

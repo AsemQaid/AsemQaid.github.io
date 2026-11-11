@@ -79,7 +79,7 @@ $$<HTMLAnchorElement>(".lang a[data-lang]").forEach((a) => a.addEventListener("c
 
 // Reveal content as it scrolls into view (only below the fold, so nothing visible ever flickers)
 if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const els = $$<HTMLElement>(".sec-head, .wplate, .thread, .log li, .reg li, .pfig, .feature-research, .cv-entry, .role-card, .rmap > *, .box, .facts, .verif");
+  const els = $$<HTMLElement>(".sec-head, .wplate, .thread, .log li, #register li, .pfig, .feature-research, .cv-entry, .role-card, .rmap > *, .box, .facts, .verif");
   const ro = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return;
     const el = e.target as HTMLElement; ro.unobserve(el);
@@ -89,3 +89,14 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
   }), { rootMargin: "0px 0px -8% 0px" });
   els.forEach((el) => { if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.classList.add("rv"); ro.observe(el); } });
 }
+
+// Light / dark switch. Follows the system until the visitor chooses.
+$<HTMLButtonElement>("#themeBtn")?.addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const next = dark ? "light" : "dark";
+  const set = () => { root.dataset.theme = next; };
+  const d = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+  if (d.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) d.startViewTransition(set); else set();
+  try { localStorage.setItem("aaq-theme", next); } catch { /* storage unavailable */ }
+});

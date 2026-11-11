@@ -62,7 +62,7 @@ resources:
 يقع EE Studio بين الخيارين: بلا تثبيت، وكل تجربة مختصرة إلى المعاملات المهمة، والنتيجة تظهر فورًا.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/ees-landing.webp" alt="المنصة المنشورة، وتظهر الوحدات السبع." loading="lazy" decoding="async"><figcaption>المنصة المنشورة، وتظهر الوحدات السبع.</figcaption></figure>
+<figure class="pfig"><img src="/img/ees-landing.webp" width="1348" height="1572" alt="المنصة المنشورة، وتظهر الوحدات السبع." loading="lazy" decoding="async"><figcaption>المنصة المنشورة، وتظهر الوحدات السبع.</figcaption></figure>
 </div>
 
 
@@ -79,7 +79,7 @@ resources:
 | الأنظمة الطبية الحيوية | تخطيط القلب، تخطيط الدماغ، ضغط الدم، قياس الأكسجين، الحرائك الدوائية | 72 |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-tests.svg" alt="الاختبارات الناجحة لكل وحدة." loading="lazy" decoding="async"><figcaption>الاختبارات الناجحة لكل وحدة.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-tests.svg" width="680" height="240" alt="الاختبارات الناجحة لكل وحدة." loading="lazy" decoding="async"><figcaption>الاختبارات الناجحة لكل وحدة.</figcaption></figure>
 </div>
 
 
@@ -88,8 +88,8 @@ resources:
 تقع كل الرياضيات الهندسية في دوال Python مستقلة عن الويب، لذا يمكن اختبار كل نموذج وحده. مسار FastAPI بسيط يتحقق من كل طلب ويستدعي المحرك، وتعرض صفحة المختبر في React النتيجة في رسوم بيانية وتمثيل فيزيائي.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-arch.svg" alt="الواجهة والخادم والمستودع." loading="lazy" decoding="async"><figcaption>الواجهة والخادم والمستودع.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/ees-labpage.svg" alt="التخطيط ذو الخانات الست المشترك بين صفحات المختبرات." loading="lazy" decoding="async"><figcaption>التخطيط ذو الخانات الست المشترك بين صفحات المختبرات.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-arch.svg" width="680" height="330" alt="الواجهة والخادم والمستودع." loading="lazy" decoding="async"><figcaption>الواجهة والخادم والمستودع.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-labpage.svg" width="680" height="250" alt="التخطيط ذو الخانات الست المشترك بين صفحات المختبرات." loading="lazy" decoding="async"><figcaption>التخطيط ذو الخانات الست المشترك بين صفحات المختبرات.</figcaption></figure>
 </div>
 
 
@@ -98,7 +98,7 @@ resources:
 يتبع كل مختبر المسار نفسه من سبع خطوات، وأولى بواباته رياضية: يُتحقق من النموذج عدديًا قبل كتابة أي محرك. وتختبر الاختبارات السلوك الفيزيائي إلى جانب الأرقام، مثل أن جهد قضيب الحمل ينخفض كلما زاد الحمل، وأن الحمل الكبير يجعل حساب سريان القدرة يعلن عدم التقارب بدل إعطاء قيمة خاطئة.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-pipeline.svg" alt="مسار تطوير المختبر: سبع خطوات وبوابة قرار واحدة." loading="lazy" decoding="async"><figcaption>مسار تطوير المختبر: سبع خطوات وبوابة قرار واحدة.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-pipeline.svg" width="680" height="190" alt="مسار تطوير المختبر: سبع خطوات وبوابة قرار واحدة." loading="lazy" decoding="async"><figcaption>مسار تطوير المختبر: سبع خطوات وبوابة قرار واحدة.</figcaption></figure>
 </div>
 
 
@@ -107,6 +107,6 @@ resources:
 جاءت أهم الدروس من نتائج بدت معقولة لكنها كانت خاطئة. أظهر مختبر سريان القدرة في البداية ارتفاع الجهد مع زيادة الحمل بسبب خطأ في الإشارة في معادلات موسّعة يدويًا؛ فأُعيد بناؤه على مصفوفة السماحية، ويتحقق اختبار انحدار الآن من الاتجاه.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-deploy.svg" alt="النشر: GitHub وVercel وRailway والمتصفح." loading="lazy" decoding="async"><figcaption>النشر: GitHub وVercel وRailway والمتصفح.</figcaption></figure>
-<figure class="pfig"><img src="/img/ees-api.webp" alt="توثيق واجهة البرمجة التفاعلي من الخادم المنشور." loading="lazy" decoding="async"><figcaption>توثيق واجهة البرمجة التفاعلي من الخادم المنشور.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-deploy.svg" width="680" height="200" alt="النشر: GitHub وVercel وRailway والمتصفح." loading="lazy" decoding="async"><figcaption>النشر: GitHub وVercel وRailway والمتصفح.</figcaption></figure>
+<figure class="pfig"><img src="/img/ees-api.webp" width="1469" height="1131" alt="توثيق واجهة البرمجة التفاعلي من الخادم المنشور." loading="lazy" decoding="async"><figcaption>توثيق واجهة البرمجة التفاعلي من الخادم المنشور.</figcaption></figure>
 </div>

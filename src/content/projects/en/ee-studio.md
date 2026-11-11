@@ -66,7 +66,7 @@ Electrical engineering is usually taught as equations and static plots. A studen
 EE Studio sits between the two: no installation, each experiment reduced to the parameters that matter, and the result shown immediately.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/ees-landing.webp" alt="The live platform, showing the seven modules." loading="lazy" decoding="async"><figcaption>The live platform, showing the seven modules.</figcaption></figure>
+<figure class="pfig"><img src="/img/ees-landing.webp" width="1348" height="1572" alt="The live platform, showing the seven modules." loading="lazy" decoding="async"><figcaption>The live platform, showing the seven modules.</figcaption></figure>
 </div>
 
 
@@ -83,7 +83,7 @@ EE Studio sits between the two: no installation, each experiment reduced to the 
 | Biomedical Systems | ECG, EEG, blood pressure, pulse oximetry, pharmacokinetics | 72 |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-tests.svg" alt="Passing backend tests per module." loading="lazy" decoding="async"><figcaption>Passing backend tests per module.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-tests.svg" width="680" height="240" alt="Passing backend tests per module." loading="lazy" decoding="async"><figcaption>Passing backend tests per module.</figcaption></figure>
 </div>
 
 
@@ -92,8 +92,8 @@ EE Studio sits between the two: no installation, each experiment reduced to the 
 All engineering mathematics lives in pure Python functions with no web code, so each model can be tested on its own. A thin FastAPI route validates each request and calls the engine; the React lab page renders the result in charts and in a physical visualisation.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-arch.svg" alt="Frontend, backend and repository." loading="lazy" decoding="async"><figcaption>Frontend, backend and repository.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/ees-labpage.svg" alt="The six-slot layout shared by every lab page." loading="lazy" decoding="async"><figcaption>The six-slot layout shared by every lab page.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-arch.svg" width="680" height="330" alt="Frontend, backend and repository." loading="lazy" decoding="async"><figcaption>Frontend, backend and repository.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-labpage.svg" width="680" height="250" alt="The six-slot layout shared by every lab page." loading="lazy" decoding="async"><figcaption>The six-slot layout shared by every lab page.</figcaption></figure>
 </div>
 
 
@@ -102,7 +102,7 @@ All engineering mathematics lives in pure Python functions with no web code, so 
 Every lab follows the same seven-step pipeline, and its first gate is mathematical: the model is checked numerically before any engine is written. Tests encode physical behaviour as well as numbers, for example that load-bus voltage falls as load rises, and that a heavy enough load makes power flow report non-convergence instead of a false value.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-pipeline.svg" alt="Lab development pipeline: seven steps, one decision gate." loading="lazy" decoding="async"><figcaption>Lab development pipeline: seven steps, one decision gate.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-pipeline.svg" width="680" height="190" alt="Lab development pipeline: seven steps, one decision gate." loading="lazy" decoding="async"><figcaption>Lab development pipeline: seven steps, one decision gate.</figcaption></figure>
 </div>
 
 
@@ -111,6 +111,6 @@ Every lab follows the same seven-step pipeline, and its first gate is mathematic
 The most useful lessons came from results that looked plausible but were wrong. The power-flow lab first showed voltage rising as load increased, caused by a sign error in hand-expanded equations; it was rebuilt on the admittance matrix and a regression test now checks the direction.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/ees-deploy.svg" alt="Deployment: GitHub, Vercel, Railway and the browser." loading="lazy" decoding="async"><figcaption>Deployment: GitHub, Vercel, Railway and the browser.</figcaption></figure>
-<figure class="pfig"><img src="/img/ees-api.webp" alt="Interactive API documentation served by the deployed backend." loading="lazy" decoding="async"><figcaption>Interactive API documentation served by the deployed backend.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/ees-deploy.svg" width="680" height="200" alt="Deployment: GitHub, Vercel, Railway and the browser." loading="lazy" decoding="async"><figcaption>Deployment: GitHub, Vercel, Railway and the browser.</figcaption></figure>
+<figure class="pfig"><img src="/img/ees-api.webp" width="1469" height="1131" alt="Interactive API documentation served by the deployed backend." loading="lazy" decoding="async"><figcaption>Interactive API documentation served by the deployed backend.</figcaption></figure>
 </div>

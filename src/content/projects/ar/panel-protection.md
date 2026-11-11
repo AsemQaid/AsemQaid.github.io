@@ -70,8 +70,8 @@ resources:
 | طوارئ | دخان أو غاز مرتفع، أو لهب | ضوء أحمر؛ جرس؛ مروحة؛ فصل الحمل؛ رسالة طوارئ |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/panel-arch.svg" alt="المخطط الكتلي: الحساسات والمتحكم والمخارج ومسارات الاتصال." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: الحساسات والمتحكم والمخارج ومسارات الاتصال.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/panel-states.svg" alt="انتقالات الحالة في منطق الحماية." loading="lazy" decoding="async"><figcaption>انتقالات الحالة في منطق الحماية.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-arch.svg" width="680" height="360" alt="المخطط الكتلي: الحساسات والمتحكم والمخارج ومسارات الاتصال." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: الحساسات والمتحكم والمخارج ومسارات الاتصال.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-states.svg" width="680" height="250" alt="انتقالات الحالة في منطق الحماية." loading="lazy" decoding="async"><figcaption>انتقالات الحالة في منطق الحماية.</figcaption></figure>
 </div>
 
 
@@ -80,8 +80,8 @@ resources:
 مجالا طاقة معزولان يمنعان تشغيل المشغلات من إفساد قراءات الحساسات. يغذي خط 5 فولت المنظم في Nano الحساسات والجرس والأضواء، ويغذي مزود منفصل 5 فولت / 2 أمبير المرحّل والمروحة ووحدة SIM800L التي تسحب نحو 2 أمبير عند الإرسال. ويمتص مكثف 1000 ميكروفاراد قرب SIM800L هذه القمم.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/panel-power.svg" alt="مجالا طاقة معزولان بأرضي مشترك." loading="lazy" decoding="async"><figcaption>مجالا طاقة معزولان بأرضي مشترك.</figcaption></figure>
-<figure class="pfig"><img src="/img/pn-photo.webp" alt="النسخة النهائية على لوحة PCB ملحومة." loading="lazy" decoding="async"><figcaption>النسخة النهائية على لوحة PCB ملحومة.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/panel-power.svg" width="680" height="290" alt="مجالا طاقة معزولان بأرضي مشترك." loading="lazy" decoding="async"><figcaption>مجالا طاقة معزولان بأرضي مشترك.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-photo.webp" width="1059" height="1099" alt="النسخة النهائية على لوحة PCB ملحومة." loading="lazy" decoding="async"><figcaption>النسخة النهائية على لوحة PCB ملحومة.</figcaption></figure>
 </div>
 
 
@@ -90,7 +90,7 @@ resources:
 تُشغَّل كل المخرجات من لقطة واحدة للحساسات في كل دورة، ويعود المرحّل والمروحة إلى وضع آمن عند كل إعادة تشغيل، فلا تبقى اللوحة دون حماية. اكتُشف خطآن وأُصلحا: الدالة snprintf() في AVR لا تنسّق الأعداد العشرية فاستُخدمت dtostrf()؛ ومؤقت رسائل SMS كان يمنع أي تنبيه في أول 60 ثانية بعد التشغيل حتى ضُبط على وقت سابق.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/diagrams/panel-flow.svg" alt="مخطط سير البرمجيات الثابتة للحلقة الرئيسية." loading="lazy" decoding="async"><figcaption>مخطط سير البرمجيات الثابتة للحلقة الرئيسية.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/panel-flow.svg" width="620" height="620" alt="مخطط سير البرمجيات الثابتة للحلقة الرئيسية." loading="lazy" decoding="async"><figcaption>مخطط سير البرمجيات الثابتة للحلقة الرئيسية.</figcaption></figure>
 </div>
 
 
@@ -99,8 +99,8 @@ resources:
 اختُبرت ستة سيناريوهات: الفحص الذاتي عند التشغيل، وتسجيل GSM، وتحذير الحرارة، وطوارئ الغاز/الدخان، وطوارئ اللهب، والعودة التلقائية. وعرضت لوحة متصفح تستخدم Web Serial API القراءات الحية وسجل الحالات أثناء الاختبارات.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/pn-dash.webp" alt="لوحة متابعة حية عبر Web Serial مع سجل الحالات والرسائل." loading="lazy" decoding="async"><figcaption>لوحة متابعة حية عبر Web Serial مع سجل الحالات والرسائل.</figcaption></figure>
-<figure class="pfig"><img src="/img/pn-sms.webp" alt="تنبيهات SMS المستلمة أثناء اختبارات اللهب والغاز." loading="lazy" decoding="async"><figcaption>تنبيهات SMS المستلمة أثناء اختبارات اللهب والغاز.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-dash.webp" width="1008" height="1028" alt="لوحة متابعة حية عبر Web Serial مع سجل الحالات والرسائل." loading="lazy" decoding="async"><figcaption>لوحة متابعة حية عبر Web Serial مع سجل الحالات والرسائل.</figcaption></figure>
+<figure class="pfig"><img src="/img/pn-sms.webp" width="677" height="551" alt="تنبيهات SMS المستلمة أثناء اختبارات اللهب والغاز." loading="lazy" decoding="async"><figcaption>تنبيهات SMS المستلمة أثناء اختبارات اللهب والغاز.</figcaption></figure>
 </div>
 
 

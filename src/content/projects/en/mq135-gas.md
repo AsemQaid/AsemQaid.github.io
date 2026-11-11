@@ -59,10 +59,10 @@ resources:
 The MQ135 output is read on the Arduino Nano's analog input. The sensor was preheated for 24 hours, used with a 20 kΩ load resistor, and its clean-air resistance R₀ was measured and averaged (221.3 for CO₂, 144.46 for ethanol) before measurements. A Python application replaced the serial monitor with live values and graphs.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/mq-block.svg" alt="System block diagram." loading="lazy" decoding="async"><figcaption>System block diagram.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mq-conv.svg" alt="Conversion chain from the ADC reading to gas concentration." loading="lazy" decoding="async"><figcaption>Conversion chain from the ADC reading to gas concentration.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mq-cal.svg" alt="Calibration procedure." loading="lazy" decoding="async"><figcaption>Calibration procedure.</figcaption></figure>
-<figure class="pfig wide"><img src="/img/mq-circuit.webp" alt="Hardware connections." loading="lazy" decoding="async"><figcaption>Hardware connections.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mq-block.svg" width="680" height="220" alt="System block diagram." loading="lazy" decoding="async"><figcaption>System block diagram.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mq-conv.svg" width="680" height="170" alt="Conversion chain from the ADC reading to gas concentration." loading="lazy" decoding="async"><figcaption>Conversion chain from the ADC reading to gas concentration.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mq-cal.svg" width="680" height="170" alt="Calibration procedure." loading="lazy" decoding="async"><figcaption>Calibration procedure.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/mq-circuit.webp" width="1536" height="1024" alt="Hardware connections." loading="lazy" decoding="async"><figcaption>Hardware connections.</figcaption></figure>
 </div>
 
 
@@ -71,8 +71,8 @@ The MQ135 output is read on the Arduino Nano's analog input. The sensor was preh
 Readings were taken at 15 locations with different ventilation and occupancy. Well-ventilated outdoor spots read close to normal atmospheric levels (about 376 ppm); a mechanical lab with several people and limited ventilation read about 2,172 ppm.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/mq-co2.svg" alt="CO₂ by location, highest first. Orange bars exceed 1,000 ppm." loading="lazy" decoding="async"><figcaption>CO₂ by location, highest first. Orange bars exceed 1,000 ppm.</figcaption></figure>
-<figure class="pfig wide"><img src="/img/mq-ui.webp" alt="Python live monitoring interface." loading="lazy" decoding="async"><figcaption>Python live monitoring interface.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mq-co2.svg" width="680" height="470" alt="CO₂ by location, highest first. Orange bars exceed 1,000 ppm." loading="lazy" decoding="async"><figcaption>CO₂ by location, highest first. Orange bars exceed 1,000 ppm.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/mq-ui.webp" width="1600" height="1137" alt="Python live monitoring interface." loading="lazy" decoding="async"><figcaption>Python live monitoring interface.</figcaption></figure>
 </div>
 
 
@@ -81,9 +81,9 @@ Readings were taken at 15 locations with different ventilation and occupancy. We
 Exposed to hand sanitiser and perfume, the sensor responded immediately and recovered when the source was removed. Two readings exceeded 1,000,000 ppm, which is physically impossible, because the sensor's conversion curve was being used far outside its specified range of roughly 10–1,000 ppm. The ethanol results are therefore treated as a relative indicator of exposure, not as concentrations.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/mq-eth1.webp" alt="Hand sanitiser on tissue near the sensor." loading="lazy" decoding="async"><figcaption>Hand sanitiser on tissue near the sensor.</figcaption></figure>
-<figure class="pfig"><img src="/img/mq-eth2.webp" alt="Perfume cap placed over the sensor." loading="lazy" decoding="async"><figcaption>Perfume cap placed over the sensor.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/mq-eth.svg" alt="Ethanol test outputs on a logarithmic scale. Values above 100 % are physically impossible." loading="lazy" decoding="async"><figcaption>Ethanol test outputs on a logarithmic scale. Values above 100 % are physically impossible.</figcaption></figure>
+<figure class="pfig"><img src="/img/mq-eth1.webp" width="1536" height="1400" alt="Hand sanitiser on tissue near the sensor." loading="lazy" decoding="async"><figcaption>Hand sanitiser on tissue near the sensor.</figcaption></figure>
+<figure class="pfig"><img src="/img/mq-eth2.webp" width="1536" height="1400" alt="Perfume cap placed over the sensor." loading="lazy" decoding="async"><figcaption>Perfume cap placed over the sensor.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/mq-eth.svg" width="680" height="330" alt="Ethanol test outputs on a logarithmic scale. Values above 100 % are physically impossible." loading="lazy" decoding="async"><figcaption>Ethanol test outputs on a logarithmic scale. Values above 100 % are physically impossible.</figcaption></figure>
 </div>
 
 

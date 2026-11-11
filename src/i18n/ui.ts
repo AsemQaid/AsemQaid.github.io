@@ -10,7 +10,7 @@ export const PROFILE = {
   github: "https://github.com/AsemQaid",
   githubShort: "github.com/AsemQaid",
   cv: "/cv/Asem-Ameen-Qaid_CV.pdf",
-  revision: "Rev 1.3 · 2026-11-11",
+  revision: "Rev 1.4 · 2026-11-12",
 };
 
 /** Pick the English or Arabic string. */

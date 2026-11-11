@@ -59,9 +59,9 @@ resources:
 ينتج حساس الحرارة LM35 وحساس الضغط MPX4115A جهودًا تماثلية يحوّلها ADC0804 إلى قيم من 8 بتات. وتتولى واجهة 8255 في الوضع 0 كل المداخل والمخارج: المنفذ A يشغّل شاشة السبع قطع، والمنفذ B يقرأ المحوّل، والمنفذ C يقرأ الأزرار ويشغّل مرحّل السخان والجرس.
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/dryer-block.svg" alt="المخطط الكتلي: 8086 ومنافذ 8255 والمحوّل والحساسات والمخارج." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: 8086 ومنافذ 8255 والمحوّل والحساسات والمخارج.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/dryer-cw.svg" alt="كلمة التحكم 8AH للواجهة 8255 بتًا بتًا." loading="lazy" decoding="async"><figcaption>كلمة التحكم 8AH للواجهة 8255 بتًا بتًا.</figcaption></figure>
-<figure class="pfig wide"><img src="/img/dr-circuit.webp" alt="دائرة المحاكاة في Proteus." loading="lazy" decoding="async"><figcaption>دائرة المحاكاة في Proteus.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/dryer-block.svg" width="680" height="372" alt="المخطط الكتلي: 8086 ومنافذ 8255 والمحوّل والحساسات والمخارج." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: 8086 ومنافذ 8255 والمحوّل والحساسات والمخارج.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/dryer-cw.svg" width="680" height="150" alt="كلمة التحكم 8AH للواجهة 8255 بتًا بتًا." loading="lazy" decoding="async"><figcaption>كلمة التحكم 8AH للواجهة 8255 بتًا بتًا.</figcaption></figure>
+<figure class="pfig wide"><img src="/img/dr-circuit.webp" width="592" height="452" alt="دائرة المحاكاة في Proteus." loading="lazy" decoding="async"><figcaption>دائرة المحاكاة في Proteus.</figcaption></figure>
 </div>
 
 
@@ -70,7 +70,7 @@ resources:
 تقرأ الحلقة الرئيسية الأزرار، وتأخذ عينات من الحساسين وتقارنهما بالقيم المحددة. يعمل السخان ما دامت الحرارة أقل من القيمة المحددة (CMP وJB)، ويعمل الجرس ما دام الضغط أعلى من حده (CMP وJA). وبما أن المداخل والمخارج تتشارك المنفذ C، تُكتب المخرجات عبر نسخة مقنّعة (OUT_IMAGE) لتجنب التأثير على قراءة الأزرار.
 
 <div class="pfigs">
-<figure class="pfig"><img src="/diagrams/dryer-flow.svg" alt="مخطط سير البرنامج." loading="lazy" decoding="async"><figcaption>مخطط سير البرنامج.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/dryer-flow.svg" width="640" height="760" alt="مخطط سير البرنامج." loading="lazy" decoding="async"><figcaption>مخطط سير البرنامج.</figcaption></figure>
 </div>
 
 

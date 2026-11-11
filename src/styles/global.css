@@ -12,9 +12,9 @@ img{max-width:100%}
   --signal:#C98A00;
   --st-designed:#6B7480; --st-sim:#3554B8; --st-proto:#B8740C; --st-valid:#2D7A4C; --st-tbc:#8A5A9E;
   --ph:#B0B9BB;
-  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --f-body:"Source Serif 4","Iowan Old Style",Georgia,serif;
-  --f-ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-display:"Archivo Variable","Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Serif 4 Variable","Source Serif 4","Iowan Old Style",Georgia,serif;
+  --f-ui:"Archivo Variable","Archivo","Helvetica Neue",Arial,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   --f-ar:"IBM Plex Sans Arabic","Noto Sans Arabic","Segoe UI",Tahoma,sans-serif;
   --maxw:1240px;
@@ -708,3 +708,54 @@ html[lang="ar"] .bench-title h2{letter-spacing:0;line-height:1.25}
 @keyframes nameIn{from{opacity:0;translate:0 .35em;clip-path:inset(0 0 100% 0)}to{opacity:1;translate:0 0;clip-path:inset(0 0 -10% 0)}}
 @keyframes fadeUp{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
 @keyframes plateIn{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+
+/* ===== Design pass: theme switch, mobile thumbnails, motion ===== */
+.theme-btn{flex-shrink:0;width:32px;height:32px;display:grid;place-items:center;background:none;border:1px solid var(--rule);border-radius:2px;color:var(--ink-2);cursor:pointer;transition:color .15s,border-color .15s}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink)}
+.theme-btn svg{width:16px;height:16px;transition:rotate .5s cubic-bezier(.2,.7,.2,1)}
+:root[data-theme="dark"] .theme-btn svg{rotate:180deg}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn svg{rotate:180deg}}
+@media (max-width:540px){.theme-btn{width:30px;height:30px}}
+
+/* Work register: keep the picture on small screens, as a banner above each entry */
+@media (max-width:1060px){.reg .thumbcol{display:block;grid-column:1/-1;order:-1}.reg .thumbcol .thumb{aspect-ratio:21/9}}
+@media (min-width:721px) and (max-width:1060px){.reg .thumbcol{display:none}}
+.reg .thumb img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.reg:hover .thumb img{transform:scale(1.04)}
+.reg h3{transition:color .2s}
+.reg:hover h3{color:var(--accent)}
+
+/* Smooth page-to-page transitions (browsers without support just navigate normally) */
+@view-transition{navigation:auto}
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){animation:vtOut .22s ease both}
+  ::view-transition-new(root){animation:vtIn .38s cubic-bezier(.2,.7,.2,1) both}
+  .hdr{view-transition-name:site-header}
+  /* validation ladders fill step by step when they come into view */
+  html.js .rv .ladder i,html.js .ladder.rv i{scale:0 1;transform-origin:left center;transition:scale .45s cubic-bezier(.2,.7,.2,1)}
+  html[dir="rtl"].js .rv .ladder i,html[dir="rtl"].js .ladder.rv i{transform-origin:right center}
+  html.js .rv.in .ladder i,html.js .ladder.rv.in i{scale:1 1}
+  .ladder i:nth-child(1){transition-delay:.15s!important}.ladder i:nth-child(2){transition-delay:.3s!important}
+  .ladder i:nth-child(3){transition-delay:.45s!important}.ladder i:nth-child(4){transition-delay:.6s!important}
+  /* figures rise into place; buttons and links respond */
+  .btn,.link-arrow svg,.tap{transition:transform .25s cubic-bezier(.2,.7,.2,1),background-color .2s,color .2s,border-color .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .link-arrow:hover svg{transform:translateX(4px)}
+  html[dir="rtl"] .link-arrow:hover svg{transform:scaleX(-1) translateX(4px)}
+  .pfig .zoom img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .pfig .zoom:hover img{transform:scale(1.015)}
+}
+@keyframes vtOut{to{opacity:0}}
+@keyframes vtIn{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@media (prefers-reduced-motion:reduce){.reg:hover .thumb img{transform:none}}
+
+/* Name always fits its column on two lines, at any width */
+.hero > :first-child{container-type:inline-size}
+html[lang="en"] .hero-name{font-size:min(6.1rem,12.6cqw);white-space:nowrap}
+/* Very narrow phones: the header has no room for the switch; the site still follows the system theme */
+@media (max-width:379px){.theme-btn{display:none}.hdr .wrap{gap:8px}.brand-name{font-size:.88rem}}
+/* Footer columns may shrink; long addresses wrap instead of pushing the page wider */
+.ftr-grid{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}
+.ftr-grid a{overflow-wrap:anywhere}
+@media (max-width:760px){.ftr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:379px){.brand-name{font-size:.8rem}.lang a{padding:6px 6px}.brand{gap:8px}}

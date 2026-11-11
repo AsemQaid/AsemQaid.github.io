@@ -67,17 +67,17 @@ resources:
 | خطر | ضوء أحمر، جرس مستمر |
 
 <div class="pfigs">
-<figure class="pfig wide"><img src="/diagrams/flood-arch.svg" alt="المخطط الكتلي: الحساسات وESP32 والتنبيهات المحلية والمراقبة عن بُعد." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: الحساسات وESP32 والتنبيهات المحلية والمراقبة عن بُعد.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/flood-levels.svg" alt="مستويات الخطر وتنبيهاتها المحلية." loading="lazy" decoding="async"><figcaption>مستويات الخطر وتنبيهاتها المحلية.</figcaption></figure>
-<figure class="pfig"><img src="/diagrams/flood-flow.svg" alt="مخطط تشغيل البرمجيات الثابتة لـ ESP32." loading="lazy" decoding="async"><figcaption>مخطط تشغيل البرمجيات الثابتة لـ ESP32.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/flood-arch.svg" width="680" height="340" alt="المخطط الكتلي: الحساسات وESP32 والتنبيهات المحلية والمراقبة عن بُعد." loading="lazy" decoding="async"><figcaption>المخطط الكتلي: الحساسات وESP32 والتنبيهات المحلية والمراقبة عن بُعد.</figcaption></figure>
+<figure class="pfig wide"><img src="/diagrams/flood-levels.svg" width="680" height="210" alt="مستويات الخطر وتنبيهاتها المحلية." loading="lazy" decoding="async"><figcaption>مستويات الخطر وتنبيهاتها المحلية.</figcaption></figure>
+<figure class="pfig"><img src="/diagrams/flood-flow.svg" width="600" height="560" alt="مخطط تشغيل البرمجيات الثابتة لـ ESP32." loading="lazy" decoding="async"><figcaption>مخطط تشغيل البرمجيات الثابتة لـ ESP32.</figcaption></figure>
 </div>
 
 
 ## النموذج ولوحة المتابعة
 
 <div class="pfigs">
-<figure class="pfig"><img src="/img/fl-photo.webp" alt="نموذج لوحة التجارب مع ESP32 وحساسي المطر ومستوى المياه والأضواء والجرس." loading="lazy" decoding="async"><figcaption>نموذج لوحة التجارب مع ESP32 وحساسي المطر ومستوى المياه والأضواء والجرس.</figcaption></figure>
-<figure class="pfig"><img src="/img/fl-nodered.webp" alt="لوحة Node-RED: حالة الفيضان وحالة المطر وسجل مستوى المياه." loading="lazy" decoding="async"><figcaption>لوحة Node-RED: حالة الفيضان وحالة المطر وسجل مستوى المياه.</figcaption></figure>
+<figure class="pfig"><img src="/img/fl-photo.webp" width="574" height="480" alt="نموذج لوحة التجارب مع ESP32 وحساسي المطر ومستوى المياه والأضواء والجرس." loading="lazy" decoding="async"><figcaption>نموذج لوحة التجارب مع ESP32 وحساسي المطر ومستوى المياه والأضواء والجرس.</figcaption></figure>
+<figure class="pfig"><img src="/img/fl-nodered.webp" width="374" height="590" alt="لوحة Node-RED: حالة الفيضان وحالة المطر وسجل مستوى المياه." loading="lazy" decoding="async"><figcaption>لوحة Node-RED: حالة الفيضان وحالة المطر وسجل مستوى المياه.</figcaption></figure>
 </div>
 
 
