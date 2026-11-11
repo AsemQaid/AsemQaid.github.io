@@ -7,8 +7,8 @@ const { lang, title, description, section = "", path } = Astro.props;
 const T = tr(lang);
 const name = T(PROFILE.nameEn, PROFILE.nameAr);
 const pageTitle = title ? `${title} · ${name}` : T("Asem Ameen Qaid · Electrical Engineering", "عاصم أمين قائد · الهندسة الكهربائية");
-const desc = description ?? T("Portfolio of Asem Ameen Qaid, electrical engineering student at Universitas Islam Indonesia: electronics, embedded systems and digital hardware, with interests in semiconductors and power and energy systems.",
-  "موقع أعمال عاصم أمين قائد، طالب الهندسة الكهربائية في الجامعة الإسلامية الإندونيسية: الإلكترونيات والأنظمة المدمجة والعتاد الرقمي، مع اهتمام بأشباه الموصلات وأنظمة القدرة والطاقة.");
+const desc = description ?? T("Asem Ameen Qaid, Electrical Engineering Student | Embedded Hardware for Control & Energy Systems. I build electronic hardware and test it properly.",
+  "عاصم أمين قائد، طالب هندسة كهربائية | عتاد مدمج لأنظمة التحكم والطاقة. أبني عتادًا إلكترونيًا وأختبره كما ينبغي.");
 const NAV = [
   { r: "work", en: "Work", ar: "الأعمال" },
   { r: "research", en: "Research", ar: "البحث" },

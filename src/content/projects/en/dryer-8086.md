@@ -1,7 +1,9 @@
 ---
-title: Dryer Control System on the 8086 Microprocessor
+title: "Dryer Control System Using the 8086 Microprocessor"
 number: AAQ-P02
 domain: control
+alsoIn:
+  - hardware
 year: 2026
 status: simulated
 featured: true

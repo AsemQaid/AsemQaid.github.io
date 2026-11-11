@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Arrow from "../components/Arrow.astro";
-import { getProjects, tr, url, type Lang } from "../i18n/ui";
+import { DOMAINS, areasOf, getProjects, tr, url, type Lang } from "../i18n/ui";
 import { PUBLICATIONS } from "../data/publications";
 
 interface Props { lang: Lang }
@@ -9,49 +9,63 @@ const { lang } = Astro.props;
 const T = tr(lang);
 const projects = await getProjects(lang);
 const P = (slug: string) => projects.find((p) => p.slug === slug)!;
-const areas = [
-  [T("Semiconductor devices & microelectronics", "أجهزة أشباه الموصلات والإلكترونيات الدقيقة"), T("A developing interest, building on microprocessor interfacing and digital logic coursework. No semiconductor project yet; this is where I want to grow.", "اهتمام ناشئ ينطلق من ربط المعالجات الدقيقة ومقررات المنطق الرقمي. لا يوجد مشروع في أشباه الموصلات بعد؛ وهذا هو المجال الذي أريد أن أنمو فيه."), T("Developing interest", "اهتمام ناشئ"), []],
-  [T("Digital electronics & hardware systems", "الإلكترونيات الرقمية وأنظمة العتاد"), T("8086 assembly with an 8255 PPI and ADC0804, verified in Proteus; digital logic design in Quartus Prime (coursework).", "لغة تجميع 8086 مع 8255 وADC0804 متحقق منها في Proteus؛ وتصميم منطق رقمي في Quartus Prime (مقرر)."), T("Project and coursework", "مشروع ومقرر"), ["dryer-8086"]],
-  [T("Embedded systems & electronics", "الأنظمة المدمجة والإلكترونيات"), T("State machines, isolated power design, PCB assembly, GSM and MQTT alerting.", "آلات الحالات، وتصميم طاقة معزولة، وتجميع PCB، والتنبيه عبر GSM وMQTT."), T("Two projects", "مشروعان"), ["panel-protection", "flood-warning"]],
-  [T("Instrumentation & measurement", "القياس والأجهزة"), T("Calibration, filtering and benchmarking low-cost sensors against reference measurements.", "المعايرة والترشيح ومقارنة الحساسات منخفضة التكلفة بقياسات مرجعية."), T("Two projects", "مشروعان"), ["mpu6050-speed", "mq135-gas"]],
-  [T("Power electronics", "إلكترونيات القدرة"), T("Rectifiers, regulators and the grid-tied inverter modelled and tested in EE Studio.", "المقوّمات والمنظمات والعاكس الشبكي منمذجة ومختبرة في EE Studio."), T("Software models", "نماذج برمجية"), ["ee-studio"]],
-  [T("Power systems & renewable energy", "أنظمة القدرة والطاقة المتجددة"), T("Industrial energy monitoring with anomaly detection; power flow, faults and renewables in EE Studio.", "مراقبة الطاقة الصناعية مع كشف الشذوذ؛ وسريان القدرة والأعطال والطاقة المتجددة في EE Studio."), T("Active project", "مشروع جارٍ"), ["energy-copilot", "ee-studio"]],
-] as const;
+const inArea = (d: string) => projects.filter((p) => areasOf(p).includes(d));
+const areas: [string, string][] = [
+  ["hardware", T("Microprocessor interfacing in 8086 assembly with an 8255 PPI and ADC0804, verified in simulation; digital logic design in Quartus Prime (coursework).", "ربط المعالجات الدقيقة بلغة تجميع 8086 مع 8255 وADC0804 والتحقق منه بالمحاكاة؛ وتصميم المنطق الرقمي في Quartus Prime (مقرر).")],
+  ["control", T("Embedded controllers and protection logic, isolated power domains, PCB assembly, sensor calibration and filtering.", "متحكمات مدمجة ومنطق حماية، ومجالات طاقة معزولة، وتجميع على PCB، ومعايرة الحساسات وترشيح إشاراتها.")],
+  ["energy", T("Industrial energy monitoring with anomaly detection; power flow, faults and renewables modelled and tested in EE Studio.", "مراقبة الطاقة الصناعية مع كشف الشذوذ؛ وسريان القدرة والأعطال والطاقة المتجددة منمذجة ومختبرة في EE Studio.")],
+];
+// How I test: each method with an example that already exists in a project
+const methods: [string, string, string][] = [
+  [T("Benchmark against reference trials", "المقارنة بتجارب مرجعية"),
+   T("Two speed-estimation methods were each run against 15 reference trials, with the reference speed taken from a measured distance and a stopwatch time.", "شُغّلت طريقتان لتقدير السرعة مقابل 15 تجربة مرجعية لكل منهما، مع حساب السرعة المرجعية من مسافة مقاسة وزمن بساعة إيقاف."),
+   "mpu6050-speed"],
+  [T("Quantify the error (RMSE)", "قياس الخطأ (RMSE)"),
+   T("Step counting reached an RMSE of 0.161 m/s against 1.106 m/s for acceleration integration, and the gap was explained physically: integration drift grows with time.", "بلغ جذر متوسط مربع الخطأ لعدّ الخطوات 0.161 م/ث مقابل 1.106 م/ث لتكامل التسارع، وفُسّر الفرق فيزيائيًا: انجراف التكامل يكبر مع الزمن."),
+   "mpu6050-speed"],
+  [T("Run structured test scenarios", "سيناريوهات اختبار منظمة"),
+   T("The panel protection system passed six defined scenarios, from power-on self-check to automatic recovery; the 8086 controller behaved as specified in all 15 simulated test cases.", "اجتاز نظام حماية اللوحة ستة سيناريوهات محددة، من الفحص الذاتي عند التشغيل إلى العودة التلقائية؛ وعمل متحكم 8086 كما هو محدد في حالات المحاكاة الخمس عشرة كلها."),
+   "panel-protection"],
+  [T("Verify models numerically", "التحقق العددي من النماذج"),
+   T("Every EE Studio model was checked against hand or SciPy calculations before it was coded, and is covered by 485 automated tests.", "تحقّقتُ من كل نموذج في EE Studio بحسابات يدوية أو بـ SciPy قبل برمجته، وتغطيه 485 اختبارًا آليًا."),
+   "ee-studio"],
+];
 ---
 <Base lang={lang} path="/research/" section="research" title={T("Research", "البحث")}>
   <div class="wrap">
     <header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Research", "البحث")}</div>
-      <h1 class="h-page">{T("Research directions", "الاتجاهات البحثية")}</h1>
-      <p class="lede">{PUBLICATIONS.length ? T("What I am studying, the evidence behind each interest, and my publications.", "ما أدرسه والأدلة وراء كل اهتمام، ومنشوراتي.") : T("I have not published yet. This page shows what I am studying, the evidence behind each interest, and where I want to go.", "لم أنشر أبحاثًا بعد. توضح هذه الصفحة ما أدرسه والأدلة وراء كل اهتمام وإلى أين أريد أن أتجه.")}</p></header>
-    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Interests and evidence", "الاهتمامات والأدلة")}</h2></div>
-      <div class="rmap">
-        {areas.map(([t, d, l, ids], i) => (
-          <div><span class="lv mono">{i === 0 ? <b>{l}</b> : l}</span><h3>{t}</h3><p>{d}</p>
-            {ids.length > 0 && <div class="plinks">{ids.map((id) => <a href={url(lang, `/work/${id}/`)} class="plink"><span class="ltr">{P(id).data.number}</span> {P(id).data.title}</a>)}</div>}</div>
+      <h1 class="h-page">{T("Research and testing", "البحث والاختبار")}</h1>
+      <p class="lede">{T("How I test my work, and the evidence behind each area. I have not published yet.", "كيف أختبر أعمالي، والأدلة وراء كل مجال. لم أنشر أبحاثًا بعد.")}</p></header>
+    <section class="sec" id="how-i-test"><div class="sec-head"><h2 class="h-sec">{T("How I test", "كيف أختبر")}</h2></div>
+      <div class="rmap two">
+        {methods.map(([t, d, id], i) => (
+          <div><span class="lv mono ltr">{String(i + 1).padStart(2, "0")}</span><h3>{t}</h3><p>{d}</p>
+            <div class="plinks"><a href={url(lang, `/work/${id}/`)} class="plink"><span class="ltr">{P(id).data.number}</span> {P(id).data.title}</a></div></div>
         ))}
-        
+      </div></section>
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Areas of work and evidence", "مجالات العمل والأدلة")}</h2></div>
+      <div class="rmap">
+        {areas.map(([d, text]) => (
+          <div><span class="lv mono">{T(`${inArea(d).length} project${inArea(d).length === 1 ? "" : "s"}`, inArea(d).length === 1 ? "مشروع واحد" : inArea(d).length === 2 ? "مشروعان" : `${inArea(d).length} مشاريع`)}</span><h3>{DOMAINS[d][lang]}</h3><p>{text}</p>
+            <div class="plinks">{inArea(d).map((p) => <a href={url(lang, `/work/${p.slug}/`)} class="plink"><span class="ltr">{p.data.number}</span> {p.data.title}</a>)}</div></div>
+        ))}
       </div></section>
     <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Closest to research so far", "الأقرب إلى البحث حتى الآن")}</h2></div>
       <a class="feature-research" href={url(lang, "/work/mpu6050-speed/")}>
         <img src="/diagrams/mpu-rmse.svg" alt="" loading="lazy">
-        <div><span class="mono" style="color:var(--ink-3)"><span class="ltr">AAQ-P03</span> · {T("Measurement & Instrumentation", "القياس والأجهزة")}</span>
+        <div><span class="mono" style="color:var(--ink-3)"><span class="ltr">AAQ-P03</span> · {DOMAINS[P("mpu6050-speed").data.domain][lang]}</span>
           <h3>{T("Why step counting beat integration by a factor of seven", "لماذا تفوّق عدّ الخطوات على التكامل بسبعة أضعاف")}</h3>
           <p>{T("A benchmark of two speed-estimation methods against 15 reference trials each, with a physical explanation of the error: integration drift grows with time, while event counting does not.", "مقارنة طريقتين لتقدير السرعة مقابل 15 تجربة مرجعية لكل منهما، مع تفسير فيزيائي للخطأ: انجراف التكامل يكبر مع الزمن، بينما لا يكبر عدّ الأحداث.")}</p>
           <span class="link-arrow">{T("Read the project", "اقرأ المشروع")} <Arrow /></span></div></a></section>
+    {PUBLICATIONS.length > 0 && (
     <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Publications", "المنشورات")}</h2><span class="mono" style="color:var(--ink-3)">{PUBLICATIONS.length} {T("entries", "إدخالات")}</span></div>
-      {PUBLICATIONS.length === 0 ? (
-        <div class="pub-empty"><p style="margin:0;font-size:1.02rem">{T("No publications yet. Papers, posters and conference reports will be listed here.", "لا توجد منشورات بعد. ستُدرج هنا الأوراق والملصقات وتقارير المؤتمرات.")}</p></div>
-      ) : (
         <div style="display:grid;gap:12px">{PUBLICATIONS.map((p) => (
           <div class="pub" style="border-style:solid;background:var(--sheet)"><span class="yr ltr">{p.year}</span><div style="display:grid;gap:4px;min-width:0" dir="ltr">
             <span class="ti">{p.title}</span><span class="au" set:html={p.authors.replace("A. A. Qaid", "<strong>A. A. Qaid</strong>")}></span><span class="ve">{p.venue}</span>
             <div class="acts">{p.links.map((l) => <a class="tag" href={l.url} target="_blank" rel="noopener">{l.label}</a>)}</div></div></div>
-        ))}</div>
-      )}</section>
-    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Working toward", "أعمل نحو")}</h2></div>
-      <div class="split">
-        <div class="box"><h4>{T("Next", "التالي")}</h4><ul><li>{T("Bench validation of the energy acquisition unit (ANGEL 2026, December)", "التحقق المخبري من وحدة اقتناء الطاقة (ANGEL 2026، ديسمبر)")}</li><li>{T("An internship, research or technical development role in electronics, semiconductors or energy systems", "تدريب أو دور بحثي أو تطوير تقني في الإلكترونيات أو أشباه الموصلات أو أنظمة الطاقة")}</li><li>{T("A first paper, poster or conference report", "أول ورقة أو ملصق أو تقرير مؤتمر")}</li></ul></div>
-        <div class="box"><h4>{T("Long-term", "على المدى البعيد")}</h4><ul><li>{T("Develop skills in semiconductor devices, microelectronics and digital hardware", "تطوير مهارات في أجهزة أشباه الموصلات والإلكترونيات الدقيقة والعتاد الرقمي")}</li><li>{T("Apply electronics to power electronics, power systems and renewable energy", "تطبيق الإلكترونيات في إلكترونيات القدرة وأنظمة القدرة والطاقة المتجددة")}</li></ul></div>
-      </div></section>
+        ))}</div></section>
+    )}
+    <section class="sec"><div class="sec-head"><h2 class="h-sec">{T("Next", "التالي")}</h2></div>
+      <div class="box"><ul><li>{T("Bench validation of the energy acquisition unit (ANGEL 2026, December)", "التحقق المخبري من وحدة اقتناء الطاقة (ANGEL 2026، ديسمبر)")}</li><li>{T("A first paper, poster or conference report", "أول ورقة أو ملصق أو تقرير مؤتمر")}</li></ul></div></section>
   </div>
 </Base>

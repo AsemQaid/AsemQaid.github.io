@@ -1,7 +1,7 @@
 ---
-title: Gas Concentration Measurement with the MQ135 Sensor
+title: "MQ135 Gas Sensor for CO₂ and Ethanol Concentration Measurement"
 number: AAQ-P01
-domain: measure
+domain: control
 year: 2025
 status: prototyped
 featured: false

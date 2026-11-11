@@ -1,10 +1,10 @@
 ---
-title: Speed Estimation with an MPU6050 Motion Sensor
+title: "Speed Estimation Using the MPU6050 Accelerometer and Gyroscope"
 number: AAQ-P03
-domain: measure
+domain: control
 year: 2026
 status: tested
-featured: false
+featured: true
 cover: /diagrams/mpu-rmse.svg
 summary: >-
   Two speed-estimation methods benchmarked against measured ground truth: step counting reached an RMSE of

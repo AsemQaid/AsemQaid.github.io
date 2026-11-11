@@ -1,10 +1,10 @@
 ---
 title: نظام ذكي لحماية اللوحات الكهربائية والإنذار في حالات الطوارئ
 number: AAQ-P05
-domain: iot
+domain: control
 year: 2026
 status: tested
-featured: true
+featured: false
 cover: /img/pn-photo.webp
 summary: >-
   نظام Arduino Nano يكشف الحرارة والدخان والغاز واللهب في اللوحة الكهربائية، ويفصل الحمل ويرسل تنبيهات SMS.

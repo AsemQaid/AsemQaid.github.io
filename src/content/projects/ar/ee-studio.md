@@ -1,7 +1,7 @@
 ---
 title: 'EE Studio: مختبر هندسي افتراضي تفاعلي'
 number: AAQ-P06
-domain: software
+domain: energy
 year: 2026
 status: deployed
 featured: false

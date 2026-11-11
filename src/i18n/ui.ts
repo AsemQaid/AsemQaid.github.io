@@ -10,7 +10,7 @@ export const PROFILE = {
   github: "https://github.com/AsemQaid",
   githubShort: "github.com/AsemQaid",
   cv: "/cv/Asem-Ameen-Qaid_CV.pdf",
-  revision: "Rev 1.1 · 2026-10-27",
+  revision: "Rev 1.2 · 2026-11-11",
 };
 
 /** Pick the English or Arabic string. */
@@ -31,12 +31,13 @@ export const STATUS: Record<string, { en: string; ar: string }> = {
 export const LEVELS = ["designed", "simulated", "prototyped", "tested", "deployed"] as const;
 
 export const DOMAINS: Record<string, { en: string; ar: string }> = {
+  hardware: { en: "Digital hardware & microprocessors", ar: "العتاد الرقمي والمعالجات الدقيقة" },
+  control: { en: "Embedded & control", ar: "الأنظمة المدمجة والتحكم" },
   energy: { en: "Energy systems", ar: "أنظمة الطاقة" },
-  iot: { en: "Embedded & IoT", ar: "الأنظمة المدمجة وإنترنت الأشياء" },
-  control: { en: "Digital hardware & microprocessors", ar: "العتاد الرقمي والمعالجات الدقيقة" },
-  measure: { en: "Instrumentation & sensing", ar: "القياس والاستشعار" },
-  software: { en: "Engineering software", ar: "البرمجيات الهندسية" },
 };
+
+/** Area keys a project belongs to: its main area first, then any others. */
+export const areasOf = (p: { data: { domain: string; alsoIn?: string[] } }) => [p.data.domain, ...(p.data.alsoIn ?? [])];
 
 export type Project = CollectionEntry<"projects"> & { slug: string; lang: Lang; fallback: boolean };
 

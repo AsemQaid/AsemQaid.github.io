@@ -10,7 +10,8 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     number: z.string(),                       // e.g. AAQ-P08 — sets the order (newest first)
-    domain: z.enum(["energy", "iot", "control", "measure", "software"]),
+    domain: z.enum(["hardware", "control", "energy"]),   // main area of work
+    alsoIn: z.array(z.enum(["hardware", "control", "energy"])).default([]),  // other areas it also counts toward
     year: z.number(),
     status: level,                            // overall validation level (software, if hardware is listed separately)
     hardwareStatus: level.optional(),

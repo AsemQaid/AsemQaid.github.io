@@ -59,7 +59,7 @@ if (register) {
   const apply = () => {
     let shown = 0;
     $$<HTMLElement>("li[data-domain]", register).forEach((li) => {
-      const ok = (state.domain === "all" || li.dataset.domain === state.domain) &&
+      const ok = (state.domain === "all" || (li.dataset.domain || "").split(" ").includes(state.domain)) &&
         (state.status === "all" || (li.dataset.levels || "").split(" ").includes(state.status));
       li.hidden = !ok; if (ok) shown++;
     });

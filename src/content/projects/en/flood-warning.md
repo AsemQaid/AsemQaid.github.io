@@ -1,7 +1,7 @@
 ---
-title: Smart Flood Detection and Early Warning System
+title: "IoT-Based Flood Early Warning System"
 number: AAQ-P04
-domain: iot
+domain: control
 year: 2026
 status: prototyped
 featured: false

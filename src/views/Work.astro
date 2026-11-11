@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Status from "../components/Status.astro";
 import Cover from "../components/Cover.astro";
-import { DOMAINS, LEVELS, STATUS, getProjects, tr, url, type Lang } from "../i18n/ui";
+import { DOMAINS, LEVELS, STATUS, areasOf, getProjects, tr, url, type Lang } from "../i18n/ui";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -20,7 +20,7 @@ const sw: Record<string, string> = { designed: "--st-designed", simulated: "--st
     <div class="filters" role="group" aria-label={T("Filters", "التصفية")}>
       <div class="fgroup"><span class="k mono">{T("Domain", "المجال")}</span><div class="chips">
         <button class="chip" type="button" data-fd="all" aria-pressed="true">{T("All", "الكل")}<span class="n ltr">{projects.length}</span></button>
-        {Object.keys(DOMAINS).map((d) => <button class="chip" type="button" data-fd={d} aria-pressed="false">{DOMAINS[d][lang]}<span class="n ltr">{projects.filter((p) => p.data.domain === d).length}</span></button>)}
+        {Object.keys(DOMAINS).map((d) => <button class="chip" type="button" data-fd={d} aria-pressed="false">{DOMAINS[d][lang]}<span class="n ltr">{projects.filter((p) => areasOf(p).includes(d)).length}</span></button>)}
       </div></div>
       <div class="fgroup"><span class="k mono">{T("Validation level", "مستوى التحقق")}</span><div class="chips">
         <button class="chip" type="button" data-fs="all" aria-pressed="true">{T("Any", "أي حالة")}</button>
@@ -29,7 +29,7 @@ const sw: Record<string, string> = { designed: "--st-designed", simulated: "--st
     </div>
     <ul class="register" id="register">
       {projects.map((p) => (
-        <li data-domain={p.data.domain} data-levels={[p.data.status, p.data.hardwareStatus].filter(Boolean).join(" ")}>
+        <li data-domain={areasOf(p).join(" ")} data-levels={[p.data.status, p.data.hardwareStatus].filter(Boolean).join(" ")}>
           <a class="reg" href={url(lang, `/work/${p.slug}/`)}>
             <span class="no mono ltr">{p.data.number}</span>
             <div style="min-width:0"><h3>{p.data.title}</h3><p>{p.data.summary}</p>

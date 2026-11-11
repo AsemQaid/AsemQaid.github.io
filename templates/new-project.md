@@ -3,7 +3,8 @@
 # <short-name> becomes the web address: asemqaid.github.io/work/<short-name>/
 title: Project title
 number: AAQ-P08            # next free number; the highest number is listed first
-domain: energy             # energy | iot | control | measure | software
+domain: energy             # hardware | control | energy  (main area of work)
+# alsoIn: [hardware]       # optional: other areas this project also counts toward
 year: 2027
 status: prototyped         # designed | simulated | prototyped | tested | deployed
 # hardwareStatus: designed # only if hardware and software are at different levels

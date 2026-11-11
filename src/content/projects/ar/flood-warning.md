@@ -1,7 +1,7 @@
 ---
-title: نظام ذكي لكشف الفيضانات والإنذار المبكر
+title: "نظام إنذار مبكر للفيضانات قائم على إنترنت الأشياء"
 number: AAQ-P04
-domain: iot
+domain: control
 year: 2026
 status: prototyped
 featured: false

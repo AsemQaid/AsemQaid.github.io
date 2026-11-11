@@ -1,10 +1,10 @@
 ---
-title: تقدير السرعة باستخدام حساس الحركة MPU6050
+title: "تقدير السرعة باستخدام مقياس التسارع والجيروسكوب MPU6050"
 number: AAQ-P03
-domain: measure
+domain: control
 year: 2026
 status: tested
-featured: false
+featured: true
 cover: /diagrams/mpu-rmse.svg
 summary: >-
   مقارنة طريقتين لتقدير السرعة بقياسات مرجعية: بلغ جذر متوسط مربع الخطأ 0.161 م/ث لعدّ الخطوات و1.106 م/ث

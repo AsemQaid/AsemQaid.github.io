@@ -2,6 +2,8 @@
 title: نظام تحكم في مجفف باستخدام المعالج 8086
 number: AAQ-P02
 domain: control
+alsoIn:
+  - hardware
 year: 2026
 status: simulated
 featured: true

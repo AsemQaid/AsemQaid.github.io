@@ -1,7 +1,7 @@
 ---
-title: قياس تركيز الغازات باستخدام الحساس MQ135
+title: "حساس الغاز MQ135 لقياس تركيز ثاني أكسيد الكربون والإيثانول"
 number: AAQ-P01
-domain: measure
+domain: control
 year: 2025
 status: prototyped
 featured: false
