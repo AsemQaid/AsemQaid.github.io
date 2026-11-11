@@ -1,0 +1,77 @@
+---
+// Full-width interactive "bench" on the homepage: a 3D model of the panel protection build (AAQ-P05)
+// that acts out its documented state machine and comes apart as you scroll.
+import { tr, url, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = tr(lang);
+const LABELS = [
+  ["nano", "Arduino Nano · controller", "Arduino Nano · المتحكم"],
+  ["sim", "SIM800L · SMS alerts", "SIM800L · تنبيهات SMS"],
+  ["cap", "1000 µF buffer", "مكثف 1000 µF"],
+  ["relay", "Relay · load disconnect", "مرحّل · فصل الحمل"],
+  ["buzzer", "Buzzer", "جرس الإنذار"],
+  ["dht", "DHT11 · temperature", "DHT11 · الحرارة"],
+  ["mq2", "MQ-2 · smoke and gas", "MQ-2 · الدخان والغاز"],
+  ["flame", "IR flame sensor", "حساس اللهب"],
+  ["lights", "State lights", "أضواء الحالة"],
+  ["fan", "Cooling fan", "مروحة التبريد"],
+];
+const STATES = [
+  ["normal", T("Normal", "طبيعي"), T("All readings in range → green light, load connected", "كل القراءات ضمن الحدود ← ضوء أخضر، والحمل موصول")],
+  ["warning", T("Warning", "تحذير"), T("Temperature above threshold → yellow light, fan on, warning SMS", "الحرارة فوق الحد ← ضوء أصفر، المروحة تعمل، رسالة تحذير")],
+  ["emergency", T("Emergency", "طوارئ"), T("Smoke, gas or flame → red light, buzzer, fan, load disconnected, emergency SMS", "دخان أو غاز أو لهب ← ضوء أحمر، جرس، مروحة، فصل الحمل، رسالة طوارئ")],
+];
+---
+<section class="bench" id="bench" aria-labelledby="bench-title">
+  <div class="bench-stick">
+    <div class="bench-stage" id="benchStage">
+      <canvas id="benchCanvas" aria-hidden="true"></canvas>
+      <img class="bench-fallback" src="/img/pn-photo.webp" alt={T("The panel protection build on its soldered PCB", "نظام حماية اللوحة الكهربائية على لوحته الملحومة")} loading="lazy">
+      <div class="bench-labels" aria-hidden="true">
+        {LABELS.map(([k, en, ar]) => <span class="bench-label mono" data-k={k}><i></i>{lang === "ar" ? ar : en}</span>)}
+      </div>
+    </div>
+    <div class="bench-hud">
+      <div class="wrap bench-hud-in">
+        <div class="bench-title">
+          <span class="mono bench-plate"><span class="ltr">Plate 02</span> · {T("Bench", "منضدة العمل")}</span>
+          <h2 id="bench-title">{T("Built, soldered and tested", "بُني ولُحم واختُبر")}</h2>
+          <p>{T("My panel protection system, modelled from the real board. It runs the same three-state logic: sensors are polled every 2 s and the controller decides. Scroll to take it apart; drag to turn it.",
+            "نظام حماية اللوحة الكهربائية، منمذج من اللوحة الحقيقية. يعمل بنفس منطق الحالات الثلاث: تُقرأ الحساسات كل ثانيتين ويقرر المتحكم. مرّر لتفكيكه، واسحب لتدويره.")}</p>
+          <a class="link-arrow" href={url(lang, "/work/panel-protection/")}><span class="ltr">AAQ-P05</span> · {T("Open the project", "افتح المشروع")} →</a>
+        </div>
+        <div class="bench-state" role="status" aria-live="off">
+          <div class="bench-pills">
+            {STATES.map(([k, name]) => <span class="bench-pill mono" data-s={k}><i></i>{name}</span>)}
+          </div>
+          {STATES.map(([k, , desc]) => <p class="bench-desc" data-s={k}>{desc}</p>)}
+          <span class="mono bench-note">{T("Animation of the documented logic, not live data", "محاكاة متحركة للمنطق الموثّق، وليست بيانات حية")}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.getElementById("bench")!;
+  const stage = document.getElementById("benchStage")!;
+  const canvas = document.getElementById("benchCanvas") as HTMLCanvasElement;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasGL = (() => { try { const c = document.createElement("canvas"); return !!(c.getContext("webgl2") || c.getContext("webgl")); } catch { return false; } })();
+  const setState = (s: string) => section.querySelectorAll<HTMLElement>("[data-s]").forEach((el) => el.classList.toggle("on", el.dataset.s === s));
+  setState("normal");
+  if (!hasGL) section.classList.add("no-gl");
+  else {
+    // load three.js only when the bench is about to be seen
+    const io = new IntersectionObserver(async ([e]) => {
+      if (!e.isIntersecting) return; io.disconnect();
+      try {
+        const { initBench } = await import("../scripts/bench3d");
+        initBench({ root: stage, section, canvas, labels: section.querySelector(".bench-labels")!, onState: setState as never, reduced });
+        section.classList.add("ready");
+      } catch { section.classList.add("no-gl"); }
+    }, { rootMargin: "600px" });
+    io.observe(section);
+  }
+</script>

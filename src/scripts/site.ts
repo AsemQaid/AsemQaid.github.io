@@ -76,3 +76,16 @@ if (register) {
 $$<HTMLAnchorElement>(".lang a[data-lang]").forEach((a) => a.addEventListener("click", () => {
   try { localStorage.setItem("aaq-lang", a.dataset.lang!); } catch { /* storage unavailable */ }
 }));
+
+// Reveal content as it scrolls into view (only below the fold, so nothing visible ever flickers)
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const els = $$<HTMLElement>(".sec-head, .wplate, .thread, .log li, .reg li, .pfig, .feature-research, .cv-entry, .role-card, .rmap > *, .box, .facts, .verif");
+  const ro = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    const el = e.target as HTMLElement; ro.unobserve(el);
+    const sibs = el.parentElement ? [...el.parentElement.children].filter((c) => c.classList.contains("rv") && !c.classList.contains("in")) : [];
+    el.style.transitionDelay = `${Math.min(sibs.indexOf(el), 4) * 70}ms`;
+    el.classList.add("in");
+  }), { rootMargin: "0px 0px -8% 0px" });
+  els.forEach((el) => { if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.classList.add("rv"); ro.observe(el); } });
+}

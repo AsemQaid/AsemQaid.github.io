@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Status from "../components/Status.astro";
 import Cover from "../components/Cover.astro";
 import Arrow from "../components/Arrow.astro";
+import Bench3D from "../components/Bench3D.astro";
 import { DOMAINS, areasOf, getProjects, tr, url, type Lang } from "../i18n/ui";
 import { LOGBOOK } from "../data/logbook";
 
@@ -55,6 +56,8 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
       <div><span class="k mono">{T("Looking for", "أبحث عن")}</span><p>{T("An internship or research role where I can design, build and test electronic hardware.", "تدريب أو دور بحثي أصمّم فيه عتادًا إلكترونيًا وأبنيه وأختبره.")} <a class="link-arrow" href={u("/contact/")}>{T("Contact", "تواصل")} <Arrow /></a></p></div>
     </section>
   </div>
+
+  <Bench3D lang={lang} />
 
   <div class="wrap">
     <section class="sec">

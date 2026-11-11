@@ -23,6 +23,7 @@ const canonical = new URL(lang === "ar" ? arPath : enPath, Astro.site);
 <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
 <head>
   <meta charset="utf-8">
+  <script is:inline>document.documentElement.classList.add("js")</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{pageTitle}</title>
   <meta name="description" content={desc}>
