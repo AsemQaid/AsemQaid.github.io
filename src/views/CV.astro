@@ -1,81 +1,44 @@
 ---
 import Base from "../layouts/Base.astro";
 import { PROFILE, getProjects, tr, url, type Lang } from "../i18n/ui";
+import CV from "../data/cv.json";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const T = tr(lang);
 const projects = await getProjects(lang);
 const P = (id: string) => projects.find((p) => p.slug === id)!;
 
-// Same order and wording as the CV PDF (ordered by strength).
-const PROJ: [string, string[]][] = [
-  ["energy-copilot", [
-    T("Lead Team PowerTech (four students, with a faculty supervisor); responsible for system integration, the dashboard and the MQTT data pipeline of a multi-site industrial energy monitoring platform.", "أقود فريق PowerTech (أربعة طلاب مع مشرف من هيئة التدريس)، وأتولى تكامل النظام ولوحة المتابعة ومسار بيانات MQTT لمنصة تراقب الطاقة الصناعية في عدة مواقع."),
-    T("Baseline-based anomaly detection, energy-intensity (IKE) analysis and forecasting; detected 3 of 3 inserted anomalies with no false alarms on a synthetic 30-day dataset.", "كشف الشذوذ بالمقارنة مع خط الأساس، وتحليل كثافة الطاقة (IKE)، والتنبؤ؛ اكتُشفت 3 من 3 حالات شاذة مُدرجة دون أي إنذار كاذب على بيانات اصطناعية لمدة 30 يومًا."),
-    T("Acquisition unit (ESP32 with a PZEM energy meter over RS485/Modbus) designed and firmware written; hardware validation planned for December 2026.", "صُمّمت وحدة الاقتناء (ESP32 مع عدّاد PZEM عبر RS485/Modbus) وكُتبت برمجياتها الثابتة؛ والتحقق من العتاد مخطط له في ديسمبر 2026."),
-  ]],
-  ["panel-protection", [
-    T("Three-state (Normal, Warning, Emergency) protection system on an Arduino Nano that monitors temperature, smoke/gas and flame, and disconnects the load through a relay.", "نظام حماية بثلاث حالات (طبيعي، تحذير، طوارئ) على Arduino Nano يراقب الحرارة والدخان/الغاز واللهب، ويفصل الحمل عبر مرحّل."),
-    T("Taken from breadboard to soldered PCB; passed all six structured test scenarios, with load disconnection within one 2-second polling cycle and SMS alerts via a SIM800L GSM module.", "نُقل من لوحة التجارب إلى لوحة PCB ملحومة، واجتاز سيناريوهات الاختبار الستة كلها، مع فصل الحمل خلال دورة قراءة واحدة مدتها ثانيتان وإرسال تنبيهات SMS عبر وحدة SIM800L."),
-    T("Traced false flame alarms to relay switching noise and SIM800L brown-outs to ~2 A transmit bursts; fixed by separating sensor and actuator power domains and adding a 1000 µF buffer capacitor.", "تتبّعتُ إنذارات اللهب الكاذبة إلى ضجيج تبديل المرحّل، وانهيار جهد SIM800L إلى نبضات إرسال تبلغ نحو 2 أمبير؛ وعالجتُ ذلك بفصل مجالَي طاقة الحساسات والمشغّلات وإضافة مكثف تخزين بسعة 1000 ميكروفاراد."),
-  ]],
-  ["dryer-8086", [
-    T("Temperature control and over-pressure alarm written in 8086 assembly, with analog inputs digitised by an ADC0804.", "تحكم في الحرارة وإنذار للضغط الزائد مكتوبان بلغة تجميع 8086، مع تحويل المداخل التماثلية رقميًا بـ ADC0804."),
-    T("Configured an 8255 PPI in Mode 0 (control word 8AH) with bit-masked Port C writes; behaved as specified in all 15 simulated test cases at 30 °C and 100 kPa.", "ضبطتُ واجهة 8255 في الوضع 0 (كلمة التحكم 8AH) مع كتابة مقنّعة على المنفذ C؛ وعمل النظام كما هو محدد في حالات المحاكاة الخمس عشرة كلها عند 30 °م و100 كيلوباسكال."),
-  ]],
-  ["mpu6050-speed", [
-    T("Benchmarked two methods against 15 reference trials each: step counting achieved an RMSE of 0.161 m/s against 1.106 m/s for acceleration integration, explained by integration drift.", "قارنتُ طريقتين بـ 15 تجربة مرجعية لكل منهما: بلغ جذر متوسط مربع الخطأ لعدّ الخطوات 0.161 م/ث مقابل 1.106 م/ث لتكامل التسارع، ويفسّر الفرقَ انجرافُ التكامل."),
-  ]],
-  ["ee-studio", [
-    T("37 interactive labs across 7 modules, including power systems, control systems and renewable energy; every model verified numerically and covered by 485 automated backend tests.", "37 مختبرًا تفاعليًا في 7 وحدات، منها أنظمة القدرة وأنظمة التحكم والطاقة المتجددة؛ وكل نموذج متحقق منه عدديًا وتغطيه 485 اختبارًا آليًا."),
-  ]],
-  ["flood-warning", [
-    T("ESP32 breadboard prototype with three alert levels, publishing readings over MQTT to a Mosquitto broker and a Node-RED dashboard.", "نموذج ESP32 على لوحة تجارب بثلاثة مستويات تنبيه، ينشر القراءات عبر MQTT إلى وسيط Mosquitto ولوحة Node-RED."),
-  ]],
-  ["mq135-gas", [
-    T("Calibrated MQ135 with a Python live display; measured CO₂ at 15 campus locations, from about 376 to 2,172 ppm.", "حساس MQ135 معاير مع واجهة عرض حية بلغة Python؛ وقِيس ثاني أكسيد الكربون في 15 موقعًا بالحرم الجامعي، من نحو 376 إلى 2,172 جزءًا في المليون."),
-  ]],
-];
-
-const SKILLS: [string, string][] = [
-  [T("Programming and firmware", "البرمجة والبرمجيات الثابتة"), "C, C++, Python, Intel 8086 assembly, Arduino IDE"],
-  [T("Microcontrollers and digital hardware", "المتحكمات الدقيقة والعتاد الرقمي"), T("ESP32, Arduino (Nano), Intel 8086, 8255 PPI, ADC0804, digital logic design in Quartus Prime (FPGA tools), PCB assembly and soldering", "ESP32، Arduino (Nano)، Intel 8086، 8255 PPI، ADC0804، تصميم المنطق الرقمي في Quartus Prime (أدوات FPGA)، تجميع ولحام PCB")],
-  [T("Electronics, instrumentation and interfaces", "الإلكترونيات والقياس والواجهات"), T("Sensor interfacing, analog-to-digital conversion, I2C, UART, RS485/Modbus, MQTT, GSM (AT commands), relay and transistor switching, isolated power-domain design", "ربط الحساسات، التحويل التماثلي الرقمي، I2C، UART، RS485/Modbus، MQTT، GSM (أوامر AT)، التبديل بالمرحّل والترانزستور، تصميم مجالات طاقة معزولة")],
-  [T("Engineering software and simulation", "البرمجيات الهندسية والمحاكاة"), "MATLAB, Simulink, Proteus, Quartus Prime, Node-RED"],
-  [T("Testing and engineering analysis", "الاختبار والتحليل الهندسي"), T("Structured test scenarios, sensor calibration, digital filtering, error analysis (RMSE), simulation-based verification, numerical verification of models", "سيناريوهات اختبار منظمة، معايرة الحساسات، الترشيح الرقمي، تحليل الخطأ (RMSE)، التحقق بالمحاكاة، التحقق العددي من النماذج")],
-];
+// Every word of the CV comes from src/data/cv.json, the same file the PDF is built from,
+// so the page and the PDF always match. Project order follows the `order` field.
+const L = (o: { en: string; ar: string }) => o[lang];
+const rank = new Map(projects.map((p, i) => [p.slug, i]));
+const PROJ = [...CV.projects].sort((a, b) => rank.get(a.id)! - rank.get(b.id)!);
 ---
 <Base lang={lang} path="/cv/" section="cv" title={T("CV", "السيرة الذاتية")}>
   <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("Curriculum vitae", "السيرة الذاتية")}</div><h1 class="h-page">CV</h1>
-    <p class="lede">{T("Electrical Engineering Student | Embedded Hardware for Control & Energy Systems", "طالب هندسة كهربائية | عتاد مدمج لأنظمة التحكم والطاقة")}</p></header>
+    <p class="lede">{L(CV.headline)}</p></header>
   <div class="cv"><div style="min-width:0">
-    <section class="cv-sec"><h2>{T("Profile", "نبذة")}</h2><div class="cv-entry"><span class="w" style="font-size:1rem;line-height:1.65">{T(
-      "Third-year Electrical Engineering student at Universitas Islam Indonesia (CGPA 3.75/4.00, FGLS scholar) who builds and tests electronic hardware for control and energy applications. Currently leading a four-person team building an industrial energy monitoring platform (ESP32, RS485/Modbus, MQTT, anomaly detection) for the ANGEL Innovation Hackathon 2026. Hands-on experience taking designs from simulation to soldered PCB, with structured testing and root-cause debugging. Seeking internship or research opportunities in hardware design, embedded systems and control.",
-      "طالب في السنة الثالثة في الهندسة الكهربائية بالجامعة الإسلامية الإندونيسية (المعدل 3.75 من 4.00، وحاصل على منحة FGLS)، يبني عتادًا إلكترونيًا ويختبره لتطبيقات التحكم والطاقة. يقود حاليًا فريقًا من أربعة أشخاص يبني منصة لمراقبة الطاقة الصناعية (ESP32 وRS485/Modbus وMQTT وكشف الشذوذ) لهاكاثون ANGEL للابتكار 2026. لديه خبرة عملية في نقل التصاميم من المحاكاة إلى لوحة PCB ملحومة، مع اختبار منظم وتتبّع الأعطال إلى جذورها. يبحث عن تدريب أو فرصة بحثية في تصميم العتاد والأنظمة المدمجة والتحكم.")}</span></div></section>
+    <section class="cv-sec"><h2>{T("Profile", "نبذة")}</h2><div class="cv-entry"><span class="w" style="font-size:1rem;line-height:1.65">{L(CV.profile)}</span></div></section>
     <section class="cv-sec"><h2>{T("Education", "التعليم")}</h2><div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("B.Sc. Electrical Engineering", "بكالوريوس الهندسة الكهربائية")}</span><span class="d mono">{T("Expected 2028", "متوقع 2028")}</span></div><span class="w">{T("Universitas Islam Indonesia, Yogyakarta", "الجامعة الإسلامية الإندونيسية، يوجياكارتا")}</span>
-        <ul><li>{T("CGPA 3.75 / 4.00 · Future Global Leaders Scholarship (FGLS), 2024 – present", "المعدل التراكمي 3.75 من 4.00 · منحة Future Global Leaders (FGLS)، من 2024 حتى الآن")}</li>
-        <li>{T("Relevant coursework: Computer Systems and Microprocessors, Digital Logic Circuits (FPGA), Embedded Systems, Measurement and Instrumentation, Control Systems, Machine Learning, Artificial Intelligence", "مقررات ذات صلة: أنظمة الحاسوب والمعالجات الدقيقة، الدوائر المنطقية الرقمية (FPGA)، الأنظمة المدمجة، القياس والأجهزة، أنظمة التحكم، تعلم الآلة، الذكاء الاصطناعي")}</li></ul></div></div></section>
+      <div class="cv-entry"><div class="top"><span class="t">{L(CV.education.degree)}</span><span class="d mono">{L(CV.education.date)}</span></div><span class="w">{L(CV.education.school)}</span>
+        <ul>{CV.education.bullets.map((b) => <li>{L(b)}</li>)}</ul></div></div></section>
     <section class="cv-sec"><h2>{T("Engineering projects", "المشاريع الهندسية")}</h2><div>
-      {PROJ.map(([id, lines]) => (
-        <div class="cv-entry"><div class="top"><span class="t"><a href={url(lang, `/work/${id}/`)}>{P(id).data.title}</a></span><span class="d mono ltr">{P(id).data.year}</span></div><span class="w">{P(id).data.facts[0].value}</span><ul>{lines.map((l) => <li>{l}</li>)}</ul></div>
+      {PROJ.map((x) => (
+        <div class="cv-entry"><div class="top"><span class="t"><a href={url(lang, `/work/${x.id}/`)}>{lang === "en" ? x.title : P(x.id).data.title}</a></span><span class="d mono">{L(x.date)}</span></div><span class="w">{L(x.ctx)}</span>
+          <ul>{x.bullets.map((b) => <li>{L(b)}</li>)}</ul>{x.tools && <span class="w cv-tools">{T("Tools", "الأدوات")}: <span class="ltr">{x.tools}</span></span>}</div>
       ))}
     </div></section>
     <section class="cv-sec"><h2>{T("Leadership", "القيادة")}</h2><div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("President, UII Global", "الرئيس، UII Global")}</span><span class="d mono ltr">2026 –</span></div>
-        <ul><li>{T("Lead the executive board and cross-functional teams that run cultural, educational and networking programmes for international students, coordinating with the university administration, academic departments and international partners.", "أقود المجلس التنفيذي وفرق العمل المشتركة التي تنظم البرامج الثقافية والتعليمية والتواصلية للطلاب الدوليين، بالتنسيق مع إدارة الجامعة والأقسام الأكاديمية والشركاء الدوليين.")}</li></ul></div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("Team Leader, Team PowerTech · ANGEL Innovation Hackathon 2026", "قائد فريق PowerTech · هاكاثون ANGEL للابتكار 2026")}</span><span class="d mono ltr">Oct 2026 –</span></div>
-        <ul><li>{T("Run weekly progress reviews, a shared task board, Git-based peer review and a risk register.", "أدير مراجعات أسبوعية للتقدم، ولوحة مهام مشتركة، ومراجعة الأقران عبر Git، وسجلًا للمخاطر.")}</li></ul></div>
-      <div class="cv-entry"><div class="top"><span class="t">{T("Marketing Team Member, UII Global", "عضو فريق التسويق، UII Global")}</span><span class="d mono ltr">2024 – 2026</span></div>
-        <ul><li>{T("Event promotion, digital communications, social media marketing and international student engagement.", "الترويج للفعاليات، والتواصل الرقمي، والتسويق عبر وسائل التواصل الاجتماعي، وإشراك الطلاب الدوليين.")}</li></ul></div>
+      {CV.leadership.map((x) => (
+        <div class="cv-entry"><div class="top"><span class="t">{L(x.title)}</span><span class="d mono">{L(x.date)}</span></div>{x.ctx && <span class="w">{L(x.ctx)}</span>}
+          <ul>{x.bullets.map((b) => <li>{L(b)}</li>)}</ul></div>
+      ))}
     </div></section>
     <section class="cv-sec"><h2>{T("Technical skills", "المهارات التقنية")}</h2><div class="cv-entry"><ul>
-      {SKILLS.map(([k, v]) => <li><strong>{k}:</strong> {v}</li>)}
+      {CV.skills.map((x) => <li><strong>{L(x.k)}:</strong> {L(x.v)}</li>)}
     </ul></div></section>
     <section class="cv-sec"><h2>{T("Honours, memberships and languages", "التكريمات والعضويات واللغات")}</h2><div class="cv-entry"><ul>
-      <li>{T("First Medal, Faris Al-Ilqaa Public Speaking Competition, Riyadh (2020)", "الميدالية الأولى، مسابقة فارس الإلقاء، الرياض (2020)")}</li>
-      <li>{T("Founding Member, Jogja SWUG (SolidWorks User Group) · Member, Google Developer Group (GDG) · Student Representative, Almawirdy Board", "عضو مؤسس، مجموعة مستخدمي SolidWorks في جوغجا (Jogja SWUG) · عضو، مجموعة مطوري Google ‏(GDG) · ممثل الطلاب، مجلس الماوردي")}</li>
-      <li>{T("Languages: Arabic (native), English (professional working proficiency), Indonesian (intermediate)", "اللغات: العربية (اللغة الأم)، الإنجليزية (كفاءة مهنية)، الإندونيسية (متوسط)")}</li></ul></div></section>
+      {CV.honours.map((h) => <li>{L(h)}</li>)}</ul></div></section>
   </div>
   <aside class="cv-side">
     <div class="box"><h4>{T("PDF version", "نسخة PDF")}</h4><p style="margin:0;color:var(--ink-2);font-size:.92rem">{T("The same CV as a PDF for applications.", "السيرة الذاتية نفسها بصيغة PDF للتقديم.")}</p>

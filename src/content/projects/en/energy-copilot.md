@@ -1,12 +1,12 @@
 ---
 title: Industrial Energy Efficiency Copilot
 number: AAQ-P07
+order: 2
 domain: energy
 year: 2026
 status: simulated
 hardwareStatus: designed
 featured: true
-inProgress: true
 cover: /img/en-dashboard.webp
 summary: >-
   Multi-site energy monitoring platform that turns electrical measurements into a ranked list of what to
@@ -23,7 +23,7 @@ facts:
   - label: Context
     value: ANGEL Innovation Hackathon 2026 · Sustainable Energy track
   - label: Period
-    value: Oct 2026 – ongoing (programme ends Dec 2026)
+    value: Oct – Nov 2026
   - label: Role
     value: Team leader · system integration
   - label: Team
@@ -39,13 +39,10 @@ verification:
   - label: Hardware
     status: designed
     text: >-
-      Acquisition-unit schematic and ESP32 firmware are complete. The unit has not yet been assembled or
-      bench-validated.
-  - label: Programme target
-    status: planned
-    text: 'By Demo Day (Dec 2026): bench-validated meter readings and a live ESP32 → MQTT → dashboard data flow.'
+      Acquisition unit (ESP32 with a PZEM energy meter over RS485/Modbus) designed and firmware written;
+      hardware not yet validated.
 shown:
-  - Software meets the challenge's Prototype Alpha requirement
+  - Software met the challenge's Prototype Alpha requirement
   - 'Synthetic test: 3 of 3 inserted anomalies detected, 0 false alarms'
   - Live MQTT path tested with a simulated meter
 limits:
@@ -55,7 +52,7 @@ limits:
   - The assistant follows fixed rules; it does not learn
 resources:
   - type: PDF
-    label: Project report · 10 pages
+    label: Project report · 9 pages
     host: AAQ-P07_Energy-Efficiency-Copilot_Project-Report.pdf
     url: /reports/AAQ-P07_Energy-Efficiency-Copilot_Project-Report.pdf
 ---
@@ -116,5 +113,4 @@ I led the team and was responsible for system integration: the dashboard, the da
 
 <div class="pfigs">
 <figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" alt="Readiness of each part of the system." loading="lazy" decoding="async"><figcaption>Readiness of each part of the system.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/energy-roadmap.svg" alt="Development roadmap aligned with the programme stages." loading="lazy" decoding="async"><figcaption>Development roadmap aligned with the programme stages.</figcaption></figure>
 </div>

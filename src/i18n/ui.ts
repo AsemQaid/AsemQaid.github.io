@@ -10,7 +10,7 @@ export const PROFILE = {
   github: "https://github.com/AsemQaid",
   githubShort: "github.com/AsemQaid",
   cv: "/cv/Asem-Ameen-Qaid_CV.pdf",
-  revision: "Rev 1.2 · 2026-11-11",
+  revision: "Rev 1.3 · 2026-11-11",
 };
 
 /** Pick the English or Arabic string. */
@@ -42,7 +42,7 @@ export const areasOf = (p: { data: { domain: string; alsoIn?: string[] } }) => [
 export type Project = CollectionEntry<"projects"> & { slug: string; lang: Lang; fallback: boolean };
 
 /**
- * All projects for a language, newest first. If an Arabic file is missing,
+ * All projects for a language, ordered by strength (the `order` field, 1 first). If an Arabic file is missing,
  * the English one is used and marked as a fallback.
  */
 export async function getProjects(lang: Lang): Promise<Project[]> {
@@ -57,5 +57,5 @@ export async function getProjects(lang: Lang): Promise<Project[]> {
     const local = lang === "ar" ? all.find((x) => split(x).l === "ar" && split(x).slug === slug) : e;
     return { ...(local ?? e), slug, lang, fallback: !local } as Project;
   });
-  return out.sort((a, b) => b.data.number.localeCompare(a.data.number));
+  return out.sort((a, b) => a.data.order - b.data.order);
 }

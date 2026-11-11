@@ -1,12 +1,12 @@
 ---
 title: مساعد كفاءة الطاقة الصناعية
 number: AAQ-P07
+order: 2
 domain: energy
 year: 2026
 status: simulated
 hardwareStatus: designed
 featured: true
-inProgress: true
 cover: /img/en-dashboard.webp
 summary: >-
   منصة لمراقبة الطاقة في عدة مواقع تحوّل القياسات الكهربائية إلى قائمة مرتبة بما يجب فحصه أولًا. قائد الفريق؛
@@ -21,7 +21,7 @@ facts:
   - label: السياق
     value: هاكاثون ANGEL للابتكار 2026 · مسار الطاقة المستدامة
   - label: الفترة
-    value: أكتوبر 2026 – مستمر (ينتهي البرنامج في ديسمبر 2026)
+    value: أكتوبر – نوفمبر 2026
   - label: الدور
     value: قائد الفريق · تكامل النظام
   - label: الفريق
@@ -36,14 +36,11 @@ verification:
       الحالات الشاذة الثلاث المُدرجة دون إنذارات كاذبة.
   - label: العتاد
     status: designed
-    text: مخطط وحدة الاقتناء والبرمجيات الثابتة لـ ESP32 مكتملة. لم تُجمَّع الوحدة أو يُتحقق منها مخبريًا بعد.
-  - label: هدف البرنامج
-    status: planned
     text: >-
-      بحلول يوم العرض (ديسمبر 2026): قراءات عدّاد متحقق منها مخبريًا وتدفق بيانات حي من ESP32 عبر MQTT إلى
-      لوحة المتابعة.
+      صُمّمت وحدة الاقتناء (ESP32 مع عدّاد طاقة PZEM عبر RS485/Modbus) وكُتبت برمجياتها الثابتة؛ ولم يُتحقق
+      من العتاد بعد.
 shown:
-  - البرمجيات تستوفي متطلب النموذج الأولي Alpha للتحدي
+  - استوفت البرمجيات متطلب النموذج الأولي Alpha للتحدي
   - 'اختبار اصطناعي: اكتُشفت 3 من 3 حالات شاذة، دون إنذارات كاذبة'
   - مسار MQTT الحي مختبر بعدّاد محاكى
 limits:
@@ -53,7 +50,7 @@ limits:
   - المساعد يتبع قواعد ثابتة ولا يتعلم
 resources:
   - type: PDF
-    label: تقرير المشروع · 10 صفحات
+    label: تقرير المشروع · 9 صفحات
     host: AAQ-P07_Energy-Efficiency-Copilot_Project-Report.pdf
     url: /reports/AAQ-P07_Energy-Efficiency-Copilot_Project-Report.pdf
 ---
@@ -114,5 +111,4 @@ resources:
 
 <div class="pfigs">
 <figure class="pfig wide"><img src="/diagrams/energy-readiness.svg" alt="جاهزية كل جزء من النظام." loading="lazy" decoding="async"><figcaption>جاهزية كل جزء من النظام.</figcaption></figure>
-<figure class="pfig wide"><img src="/diagrams/energy-roadmap.svg" alt="خارطة التطوير وفق مراحل البرنامج." loading="lazy" decoding="async"><figcaption>خارطة التطوير وفق مراحل البرنامج.</figcaption></figure>
 </div>

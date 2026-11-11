@@ -1,6 +1,7 @@
 ---
 title: "نظام إنذار مبكر للفيضانات قائم على إنترنت الأشياء"
 number: AAQ-P04
+order: 6
 domain: control
 year: 2026
 status: prototyped

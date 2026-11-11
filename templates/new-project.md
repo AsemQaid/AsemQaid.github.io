@@ -2,7 +2,8 @@
 # Copy this file to src/content/projects/en/<short-name>.md and fill it in.
 # <short-name> becomes the web address: asemqaid.github.io/work/<short-name>/
 title: Project title
-number: AAQ-P08            # next free number; the highest number is listed first
+number: AAQ-P08            # next free number; a permanent ID, never renumber
+order: 8                   # rank by strength: 1 = shown first; renumber the others to fit
 domain: energy             # hardware | control | energy  (main area of work)
 # alsoIn: [hardware]       # optional: other areas this project also counts toward
 year: 2027

@@ -1,6 +1,7 @@
 ---
 title: "Speed Estimation Using the MPU6050 Accelerometer and Gyroscope"
 number: AAQ-P03
+order: 3
 domain: control
 year: 2026
 status: tested

@@ -584,6 +584,7 @@ ul.plain{margin:0 0 1em;padding-inline-start:20px;display:grid;gap:6px}
 .now p .link-arrow{font-size:.88rem;font-family:var(--f-ui);display:inline-flex;white-space:nowrap}
 .cv-entry .t a{text-decoration:none}
 .cv-entry .t a:hover{color:var(--accent)}
+.cv-entry .cv-tools{font-family:var(--f-mono);font-size:.82rem;color:var(--ink-3)}
 #lightbox{position:fixed;inset:0;z-index:90;background:rgba(8,12,14,.9);display:grid;place-items:center;
   padding:calc(56px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));cursor:zoom-out}
 #lightbox[hidden]{display:none!important}

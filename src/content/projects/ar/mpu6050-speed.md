@@ -1,6 +1,7 @@
 ---
 title: "تقدير السرعة باستخدام مقياس التسارع والجيروسكوب MPU6050"
 number: AAQ-P03
+order: 3
 domain: control
 year: 2026
 status: tested

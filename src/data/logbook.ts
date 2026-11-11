@@ -5,6 +5,7 @@ const leadership = { en: "Leadership", ar: "قيادة" };
 const site = { en: "Site", ar: "الموقع" };
 
 export const LOGBOOK = [
+  { date: "2026-11", tag: project, link: "/work/energy-copilot/", en: "ANGEL Innovation Hackathon 2026 entry completed with Team PowerTech.", ar: "اكتملت مشاركة فريق PowerTech في هاكاثون ANGEL للابتكار 2026." },
   { date: "2026-10", tag: site, en: "Portfolio website launched, with seven projects and their reports.", ar: "إطلاق موقع الأعمال مع سبعة مشاريع وتقاريرها." },
   { date: "2026-10", tag: project, link: "/work/ee-studio/", en: "EE Studio reaches its first complete milestone: 37 labs, 485 tests, deployed.", ar: "EE Studio يصل إلى أول إصدار مكتمل: 37 مختبرًا و485 اختبارًا، منشور." },
   { date: "2026-10", tag: project, link: "/work/energy-copilot/", en: "Team PowerTech proposal submitted to ANGEL Innovation Hackathon 2026, Sustainable Energy track.", ar: "تقديم مقترح فريق PowerTech لهاكاثون ANGEL للابتكار 2026، مسار الطاقة المستدامة." },

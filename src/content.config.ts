@@ -9,13 +9,14 @@ const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
-    number: z.string(),                       // e.g. AAQ-P08 — sets the order (newest first)
+    number: z.string(),                       // e.g. AAQ-P08 — permanent ID; never renumber
     domain: z.enum(["hardware", "control", "energy"]),   // main area of work
     alsoIn: z.array(z.enum(["hardware", "control", "energy"])).default([]),  // other areas it also counts toward
     year: z.number(),
     status: level,                            // overall validation level (software, if hardware is listed separately)
     hardwareStatus: level.optional(),
     featured: z.boolean().default(false),     // show on the homepage
+    order: z.number().int().positive(),          // rank by strength: 1 = strongest; sets display order everywhere
     inProgress: z.boolean().default(false),
     draft: z.boolean().default(false),        // true = hidden from the site
     cover: z.string(),

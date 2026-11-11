@@ -1,0 +1,136 @@
+{
+  "_note": "Single source for the CV page (src/views/CV.astro) and the CV PDF (cv_master.py). Edit here only. Projects are listed in rank order and must match the `order` field of the project files.",
+  "headline": {
+    "en": "Electrical Engineering Student | Embedded Hardware for Control & Energy Systems",
+    "ar": "طالب هندسة كهربائية | عتاد مدمج لأنظمة التحكم والطاقة"
+  },
+  "profile": {
+    "en": "Third-year Electrical Engineering student at Universitas Islam Indonesia (CGPA 3.75/4.00, FGLS scholar) who builds and tests electronic hardware for control and energy applications. Led a four-person team at the ANGEL Innovation Hackathon 2026 that developed an industrial energy monitoring platform (ESP32, RS485/Modbus, MQTT, anomaly detection). Hands-on experience taking designs from simulation to soldered PCB, with structured testing and root-cause debugging. Seeking internship or research opportunities in hardware design, embedded systems and control.",
+    "ar": "طالب في السنة الثالثة في الهندسة الكهربائية بالجامعة الإسلامية الإندونيسية (المعدل 3.75 من 4.00، وحاصل على منحة FGLS)، يبني عتادًا إلكترونيًا ويختبره لتطبيقات التحكم والطاقة. قاد فريقًا من أربعة أشخاص في هاكاثون ANGEL للابتكار 2026 طوّر منصة لمراقبة الطاقة الصناعية (ESP32 وRS485/Modbus وMQTT وكشف الشذوذ). لديه خبرة عملية في نقل التصاميم من المحاكاة إلى لوحة PCB ملحومة، مع اختبار منظم وتتبّع الأعطال إلى جذورها. يبحث عن تدريب أو فرصة بحثية في تصميم العتاد والأنظمة المدمجة والتحكم."
+  },
+  "education": {
+    "degree": { "en": "B.Sc. Electrical Engineering", "ar": "بكالوريوس الهندسة الكهربائية" },
+    "school": { "en": "Universitas Islam Indonesia, Yogyakarta", "ar": "الجامعة الإسلامية الإندونيسية، يوجياكارتا" },
+    "date": { "en": "Expected 2028", "ar": "متوقع 2028" },
+    "bullets": [
+      { "en": "CGPA 3.75 / 4.00 · Future Global Leaders Scholarship (FGLS), 2024 – present", "ar": "المعدل التراكمي 3.75 من 4.00 · منحة Future Global Leaders ‏(FGLS)، من 2024 حتى الآن" },
+      { "en": "Relevant coursework: Computer Systems and Microprocessors, Digital Logic Circuits (FPGA), Embedded Systems, Measurement and Instrumentation, Control Systems, Machine Learning, Artificial Intelligence", "ar": "مقررات ذات صلة: أنظمة الحاسوب والمعالجات الدقيقة، الدوائر المنطقية الرقمية (FPGA)، الأنظمة المدمجة، القياس والأجهزة، أنظمة التحكم، تعلم الآلة، الذكاء الاصطناعي" }
+    ]
+  },
+  "projects": [
+    {
+      "id": "panel-protection",
+      "title": "Smart Electrical Panel Protection and Emergency Alert System",
+      "ctx": { "en": "Embedded Systems · final project", "ar": "الأنظمة المدمجة · مشروع نهائي" },
+      "date": { "en": "2026", "ar": "2026" },
+      "bullets": [
+        { "en": "Three-state (Normal, Warning, Emergency) protection system on an Arduino Nano that monitors temperature (DHT11), smoke/gas (MQ-2) and flame, and disconnects the load through a relay.", "ar": "نظام حماية بثلاث حالات (طبيعي، تحذير، طوارئ) على Arduino Nano يراقب الحرارة (DHT11) والدخان/الغاز (MQ-2) واللهب، ويفصل الحمل عبر مرحّل." },
+        { "en": "Taken from breadboard to soldered PCB; passed all six structured test scenarios, with load disconnection within one 2-second polling cycle and SMS alerts via a SIM800L GSM module.", "ar": "نُقل من لوحة التجارب إلى لوحة PCB ملحومة، واجتاز سيناريوهات الاختبار الستة كلها، مع فصل الحمل خلال دورة قراءة واحدة مدتها ثانيتان وإرسال تنبيهات SMS عبر وحدة SIM800L." },
+        { "en": "Traced false flame alarms to relay switching noise and SIM800L brown-outs to ~2 A transmit bursts; fixed by separating sensor and actuator power domains and adding a 1000 µF buffer capacitor.", "ar": "تتبّعتُ إنذارات اللهب الكاذبة إلى ضجيج تبديل المرحّل، وانهيار جهد SIM800L إلى نبضات إرسال تبلغ نحو 2 أمبير؛ وعالجتُ ذلك بفصل مجالَي طاقة الحساسات والمشغّلات وإضافة مكثف تخزين بسعة 1000 ميكروفاراد." }
+      ],
+      "tools": "Arduino Nano, DHT11, MQ-2, IR flame sensor, SIM800L, relay, 2N2222"
+    },
+    {
+      "id": "energy-copilot",
+      "title": "Industrial Energy Efficiency Copilot",
+      "ctx": { "en": "ANGEL Innovation Hackathon 2026 · Sustainable Energy track", "ar": "هاكاثون ANGEL للابتكار 2026 · مسار الطاقة المستدامة" },
+      "date": { "en": "Oct – Nov 2026", "ar": "أكتوبر – نوفمبر 2026" },
+      "bullets": [
+        { "en": "Led Team PowerTech (four students, with a faculty supervisor) and was responsible for system integration, the dashboard and the MQTT data pipeline of a multi-site industrial energy monitoring platform.", "ar": "قُدتُ فريق PowerTech (أربعة طلاب مع مشرف من هيئة التدريس)، وكنت مسؤولًا عن تكامل النظام ولوحة المتابعة ومسار بيانات MQTT لمنصة تراقب الطاقة الصناعية في عدة مواقع." },
+        { "en": "Software prototype with baseline-based anomaly detection, energy-intensity (IKE) analysis and forecasting; detected 3 of 3 inserted anomalies with no false alarms on a synthetic 30-day dataset.", "ar": "نموذج برمجي يكشف الشذوذ بالمقارنة مع خط الأساس، ويحلل كثافة الطاقة (IKE)، ويتنبأ بالاستهلاك؛ اكتشف 3 من 3 حالات شاذة مُدرجة دون أي إنذار كاذب على بيانات اصطناعية لمدة 30 يومًا." },
+        { "en": "Acquisition unit (ESP32 with a PZEM energy meter over RS485/Modbus) designed and firmware written; hardware not yet validated.", "ar": "صُمّمت وحدة الاقتناء (ESP32 مع عدّاد طاقة PZEM عبر RS485/Modbus) وكُتبت برمجياتها الثابتة؛ ولم يُتحقق من العتاد بعد." }
+      ],
+      "tools": "ESP32, RS485/Modbus, MQTT, Python"
+    },
+    {
+      "id": "mpu6050-speed",
+      "title": "Speed Estimation Using the MPU6050 Accelerometer and Gyroscope",
+      "ctx": { "en": "Measurement and Instrumentation · final project part 2 (pair project)", "ar": "القياس والأجهزة · المشروع النهائي، الجزء 2 (مشروع ثنائي)" },
+      "date": { "en": "2026", "ar": "2026" },
+      "bullets": [
+        { "en": "MPU6050 over I2C with a 21 Hz on-chip low-pass filter, a complementary filter (α = 0.98) and automatic start-up calibration of all six axes.", "ar": "حساس MPU6050 عبر I2C مع مرشح تمرير منخفض داخلي عند 21 هرتز، ومرشح تكميلي (α = 0.98)، ومعايرة تلقائية للمحاور الستة عند التشغيل." },
+        { "en": "Benchmarked two methods against 15 reference trials each: step counting achieved an RMSE of 0.161 m/s against 1.106 m/s for acceleration integration, explained by integration drift.", "ar": "قارنتُ طريقتين بـ 15 تجربة مرجعية لكل منهما: بلغ جذر متوسط مربع الخطأ لعدّ الخطوات 0.161 م/ث مقابل 1.106 م/ث لتكامل التسارع، ويفسّر الفرقَ انجرافُ التكامل." }
+      ],
+      "tools": null
+    },
+    {
+      "id": "dryer-8086",
+      "title": "Dryer Control System Using the 8086 Microprocessor",
+      "ctx": { "en": "Computer System and Microprocessor · final project", "ar": "نظام الحاسوب والمعالج الدقيق · مشروع نهائي" },
+      "date": { "en": "Jan 2026", "ar": "يناير 2026" },
+      "bullets": [
+        { "en": "Temperature control (LM35) and over-pressure alarm (MPX4115A) written in 8086 assembly, with analog inputs digitised by an ADC0804.", "ar": "تحكم في الحرارة (LM35) وإنذار للضغط الزائد (MPX4115A) مكتوبان بلغة تجميع 8086، مع تحويل المداخل التماثلية رقميًا بـ ADC0804." },
+        { "en": "Configured an 8255 PPI in Mode 0 (control word 8AH) and used bit-masked writes so inputs and outputs could share Port C; behaved as specified in all 15 simulated test cases at 30 °C and 100 kPa (Proteus).", "ar": "ضبطتُ واجهة 8255 في الوضع 0 (كلمة التحكم 8AH) واستخدمت كتابة مقنّعة بالبتات ليتشارك المنفذ C المداخل والمخارج؛ وعمل النظام كما هو محدد في حالات المحاكاة الخمس عشرة كلها عند 30 °م و100 كيلوباسكال (Proteus)." }
+      ],
+      "tools": "Intel 8086 assembly, 8255 PPI, ADC0804, Proteus"
+    },
+    {
+      "id": "ee-studio",
+      "title": "EE Studio: Interactive Virtual Engineering Laboratory",
+      "ctx": { "en": "Personal project · ee-studio-red.vercel.app", "ar": "مشروع شخصي · ee-studio-red.vercel.app" },
+      "date": { "en": "2026", "ar": "2026" },
+      "bullets": [
+        { "en": "37 interactive labs across 7 modules, including power systems, control systems and renewable energy; every model verified numerically before implementation and covered by 485 automated backend tests (AI-assisted development under my direction and review).", "ar": "37 مختبرًا تفاعليًا في 7 وحدات، منها أنظمة القدرة وأنظمة التحكم والطاقة المتجددة؛ وكل نموذج متحقق منه عدديًا قبل تنفيذه وتغطيه 485 اختبارًا آليًا للواجهة الخلفية (تطوير بمساعدة الذكاء الاصطناعي بتوجيهي ومراجعتي)." }
+      ],
+      "tools": null
+    },
+    {
+      "id": "flood-warning",
+      "title": "IoT-Based Flood Early Warning System",
+      "ctx": { "en": "Disaster Mitigation · project", "ar": "التخفيف من الكوارث · مشروع" },
+      "date": { "en": "2026", "ar": "2026" },
+      "bullets": [
+        { "en": "ESP32 breadboard prototype that classifies flood risk into three levels with LED and buzzer alerts and publishes readings over MQTT to a Mosquitto broker and a Node-RED dashboard.", "ar": "نموذج ESP32 على لوحة تجارب يصنّف خطر الفيضان في ثلاثة مستويات مع تنبيهات بالمصابيح والجرس، وينشر القراءات عبر MQTT إلى وسيط Mosquitto ولوحة Node-RED." }
+      ],
+      "tools": null
+    },
+    {
+      "id": "mq135-gas",
+      "title": "MQ135 Gas Sensor for CO₂ and Ethanol Concentration Measurement",
+      "ctx": { "en": "Measurement and Instrumentation · final project part 1", "ar": "القياس والأجهزة · المشروع النهائي، الجزء 1" },
+      "date": { "en": "2025", "ar": "2025" },
+      "bullets": [
+        { "en": "Calibrated MQ135 (24-hour preheat, 20 kΩ load, averaged R₀) with a Python live display; measured CO₂ at 15 campus locations, from about 376 to 2,172 ppm.", "ar": "حساس MQ135 معاير (تسخين مسبق 24 ساعة، حمل 20 كيلو أوم، R₀ بالمتوسط) مع واجهة عرض حية بلغة Python؛ وقِيس ثاني أكسيد الكربون في 15 موقعًا بالحرم الجامعي، من نحو 376 إلى 2,172 جزءًا في المليون." }
+      ],
+      "tools": null
+    }
+  ],
+  "leadership": [
+    {
+      "title": { "en": "President, UII Global", "ar": "الرئيس، UII Global" },
+      "date": { "en": "2026 – present", "ar": "2026 – الآن" },
+      "ctx": { "en": "International student organisation, Universitas Islam Indonesia", "ar": "منظمة الطلاب الدوليين، الجامعة الإسلامية الإندونيسية" },
+      "bullets": [
+        { "en": "Lead the executive board and cross-functional teams that run cultural, educational and networking programmes for international students across multiple faculties, coordinating with the university administration, academic departments and international partners.", "ar": "أقود المجلس التنفيذي وفرق العمل المشتركة التي تنظم البرامج الثقافية والتعليمية والتواصلية للطلاب الدوليين في كليات متعددة، بالتنسيق مع إدارة الجامعة والأقسام الأكاديمية والشركاء الدوليين." }
+      ]
+    },
+    {
+      "title": { "en": "Team Leader, Team PowerTech · ANGEL Innovation Hackathon 2026", "ar": "قائد فريق PowerTech · هاكاثون ANGEL للابتكار 2026" },
+      "date": { "en": "Oct – Nov 2026", "ar": "أكتوبر – نوفمبر 2026" },
+      "ctx": null,
+      "bullets": [
+        { "en": "Ran weekly progress reviews, a shared task board, Git-based peer review and a risk register.", "ar": "أدرتُ مراجعات أسبوعية للتقدم، ولوحة مهام مشتركة، ومراجعة الأقران عبر Git، وسجلًا للمخاطر." }
+      ]
+    },
+    {
+      "title": { "en": "Marketing Team Member, UII Global", "ar": "عضو فريق التسويق، UII Global" },
+      "date": { "en": "2024 – 2026", "ar": "2024 – 2026" },
+      "ctx": null,
+      "bullets": [
+        { "en": "Event promotion, digital communications, social media marketing and international student engagement.", "ar": "الترويج للفعاليات، والتواصل الرقمي، والتسويق عبر وسائل التواصل الاجتماعي، وإشراك الطلاب الدوليين." }
+      ]
+    }
+  ],
+  "skills": [
+    { "k": { "en": "Programming and Firmware", "ar": "البرمجة والبرمجيات الثابتة" }, "v": { "en": "C, C++, Python, Intel 8086 assembly, Arduino IDE", "ar": "C, C++, Python, Intel 8086 assembly, Arduino IDE" } },
+    { "k": { "en": "Microcontrollers and Digital Hardware", "ar": "المتحكمات الدقيقة والعتاد الرقمي" }, "v": { "en": "ESP32, Arduino (Nano), Intel 8086, 8255 PPI, ADC0804, digital logic design in Quartus Prime (FPGA tools), PCB assembly and soldering", "ar": "ESP32، Arduino (Nano)، Intel 8086، 8255 PPI، ADC0804، تصميم المنطق الرقمي في Quartus Prime (أدوات FPGA)، تجميع ولحام PCB" } },
+    { "k": { "en": "Electronics, Instrumentation and Interfaces", "ar": "الإلكترونيات والقياس والواجهات" }, "v": { "en": "Sensor interfacing, analog-to-digital conversion, I2C, UART, RS485/Modbus, MQTT, GSM (AT commands), relay and transistor switching, isolated power-domain design", "ar": "ربط الحساسات، التحويل التماثلي الرقمي، I2C، UART، RS485/Modbus، MQTT، GSM (أوامر AT)، التبديل بالمرحّل والترانزستور، تصميم مجالات طاقة معزولة" } },
+    { "k": { "en": "Engineering Software and Simulation", "ar": "البرمجيات الهندسية والمحاكاة" }, "v": { "en": "MATLAB, Simulink, Proteus, Quartus Prime, Node-RED", "ar": "MATLAB, Simulink, Proteus, Quartus Prime, Node-RED" } },
+    { "k": { "en": "Testing and Engineering Analysis", "ar": "الاختبار والتحليل الهندسي" }, "v": { "en": "Structured test scenarios, sensor calibration, digital filtering, error analysis (RMSE), simulation-based verification, numerical verification of models", "ar": "سيناريوهات اختبار منظمة، معايرة الحساسات، الترشيح الرقمي، تحليل الخطأ (RMSE)، التحقق بالمحاكاة، التحقق العددي من النماذج" } }
+  ],
+  "honours": [
+    { "en": "First Medal, Faris Al-Ilqaa Public Speaking Competition, Riyadh (2020)", "ar": "الميدالية الأولى، مسابقة فارس الإلقاء، الرياض (2020)" },
+    { "en": "Founding Member, Jogja SWUG (SolidWorks User Group) · Member, Google Developer Group (GDG)", "ar": "عضو مؤسس، مجموعة مستخدمي SolidWorks في جوغجا (Jogja SWUG) · عضو، مجموعة مطوري Google ‏(GDG)" },
+    { "en": "Languages: Arabic (native), English (professional working proficiency), Indonesian (intermediate)", "ar": "اللغات: العربية (اللغة الأم)، الإنجليزية (كفاءة مهنية)، الإندونيسية (متوسط)" }
+  ]
+}

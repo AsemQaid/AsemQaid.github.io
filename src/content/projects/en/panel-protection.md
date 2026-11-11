@@ -1,10 +1,11 @@
 ---
 title: "Smart Electrical Panel Protection and Emergency Alert System"
 number: AAQ-P05
+order: 1
 domain: control
 year: 2026
 status: tested
-featured: false
+featured: true
 cover: /img/pn-photo.webp
 summary: >-
   Arduino Nano system that detects heat, smoke, gas and flame in an electrical panel, disconnects the load and

@@ -22,7 +22,7 @@ You never need to touch the design. Almost everything you will change lives in f
 1. **Prepare the files.** Export images as `.webp` or `.jpg` (about 1600 px wide is plenty). Name the report `AAQ-P08_Short-Name_Project-Report.pdf`.
 2. **Upload them on GitHub.** Open `public/img/`, choose **Add file → Upload files**, drop the images and click **Commit changes**. Do the same for the report in `public/reports/`.
 3. **Create the project page.** Open `templates/new-project.md`, copy everything, then go to `src/content/projects/en/`, choose **Add file → Create new file**, name it after the project (for example `solar-mppt.md`) and paste.
-4. **Fill in the fields** at the top (title, number, status, summary…) and write the sections below. Keep `draft: true` while you are writing.
+4. **Fill in the fields** at the top (title, number, order, status, summary…). `order` ranks projects by strength (1 is shown first on the Work page, homepage and CV); `number` is a permanent ID. Then write the sections below. Keep `draft: true` while you are writing.
 5. **Publish.** Change `draft: true` to `draft: false` and commit. The project appears on the Work page and gets its own page at `/work/solar-mppt/`.
 6. **Arabic (optional).** Copy the English file into `src/content/projects/ar/` with the **same file name** and translate the text. If there is no Arabic file, the Arabic site shows the English version with a short note.
 7. **Logbook (optional).** Add one line at the top of `src/data/logbook.ts`.

@@ -1,12 +1,11 @@
 ---
 title: نظام تحكم في مجفف باستخدام المعالج 8086
 number: AAQ-P02
-domain: control
-alsoIn:
-  - hardware
+order: 4
+domain: hardware
 year: 2026
 status: simulated
-featured: true
+featured: false
 cover: /img/dr-circuit.webp
 summary: >-
   تحكم في الحرارة وإنذار للضغط في مجفف، مكتوب بلغة تجميع 8086 مع واجهة 8255 ومحوّل ADC0804، ومتحقق منه في

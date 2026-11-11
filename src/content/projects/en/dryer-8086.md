@@ -1,12 +1,11 @@
 ---
 title: "Dryer Control System Using the 8086 Microprocessor"
 number: AAQ-P02
-domain: control
-alsoIn:
-  - hardware
+order: 4
+domain: hardware
 year: 2026
 status: simulated
-featured: true
+featured: false
 cover: /img/dr-circuit.webp
 summary: >-
   Temperature control and pressure alarm for a dryer, written in 8086 assembly with an 8255 PPI and ADC0804,

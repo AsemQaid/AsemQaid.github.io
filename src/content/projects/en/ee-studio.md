@@ -1,6 +1,7 @@
 ---
 title: 'EE Studio: Interactive Virtual Engineering Laboratory'
 number: AAQ-P06
+order: 5
 domain: energy
 year: 2026
 status: deployed
