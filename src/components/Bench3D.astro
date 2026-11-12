@@ -39,6 +39,7 @@ const STATES = [
           <h2 id="bench-title">{T("Built, soldered and tested", "بُني ولُحم واختُبر")}</h2>
           <p>{T("My panel protection system, modelled from the real board. It runs the same three-state logic: sensors are polled every 2 s and the controller decides. Scroll to take it apart; drag to turn it.",
             "نظام حماية اللوحة الكهربائية، منمذج من اللوحة الحقيقية. يعمل بنفس منطق الحالات الثلاث: تُقرأ الحساسات كل ثانيتين ويقرر المتحكم. مرّر لتفكيكه، واسحب لتدويره.")}</p>
+          <button class="bench-toggle mono" id="benchToggle" type="button" aria-pressed="false"><span class="a">{T("Take it apart", "فكّكه")}</span><span class="b">{T("Put it together", "ركّبه")}</span></button>
           <a class="link-arrow" href={url(lang, "/work/panel-protection/")}><span class="ltr">AAQ-P05</span> · {T("Open the project", "افتح المشروع")} →</a>
         </div>
         <div class="bench-state" role="status" aria-live="off">
@@ -68,7 +69,7 @@ const STATES = [
       if (!e.isIntersecting) return; io.disconnect();
       try {
         const { initBench } = await import("../scripts/bench3d");
-        initBench({ root: stage, section, canvas, labels: section.querySelector(".bench-labels")!, onState: setState as never, reduced });
+        initBench({ root: stage, section, canvas, labels: section.querySelector(".bench-labels")!, onState: setState as never, reduced, toggle: document.getElementById("benchToggle") });
         section.classList.add("ready");
       } catch { section.classList.add("no-gl"); }
     }, { rootMargin: "600px" });

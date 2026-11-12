@@ -638,12 +638,12 @@ html[lang="ar"] .pfig figcaption::before{content:"شكل " counter(fig);font-fam
 
 /* ===== Bench: interactive 3D model on the homepage ===== */
 .bench{--b-bg:#0B1113;--b-ink:#E4E9EA;--b-ink2:#9AA7AD;--b-rule:rgba(228,233,234,.14);--b-sig:#EDB23A;
-  position:relative;height:240vh;margin-top:24px;background:var(--b-bg);color:var(--b-ink);
+  position:relative;height:clamp(540px,82vh,760px);width:min(100% - 32px,var(--maxw) - 32px);margin:32px auto 8px;overflow:hidden;background:var(--b-bg);color:var(--b-ink);
   background-image:linear-gradient(var(--b-rule) 1px,transparent 1px),linear-gradient(90deg,var(--b-rule) 1px,transparent 1px);
   background-size:48px 48px;background-position:center top;border-block:1px solid #000}
 .bench::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(11,17,19,0) 0%,rgba(11,17,19,.55) 70%,var(--b-bg) 100%)}
-.bench-stick{position:sticky;top:64px;height:calc(100vh - 64px);height:calc(100svh - 64px);overflow:hidden}
+.bench-stick{position:absolute;inset:0;overflow:hidden}
 .bench-stage{position:absolute;inset:0;cursor:grab;touch-action:pan-y}
 .bench-stage.grabbing{cursor:grabbing}
 .bench-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s ease}
@@ -685,7 +685,7 @@ html[lang="ar"] .bench-title h2{letter-spacing:0;line-height:1.25}
 .bench-desc.on{display:block}
 .bench-note{font-size:.6rem;color:var(--b-ink2);opacity:.8}
 @media (max-width:760px){
-  .bench{height:200vh}
+  .bench{height:clamp(560px,88vh,720px);width:calc(100% - 24px)}
   .bench-hud-in{padding-block:18px 18px}
   .bench-title p{font-size:.86rem}
   .bench-title p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -693,7 +693,7 @@ html[lang="ar"] .bench-title h2{letter-spacing:0;line-height:1.25}
   .bench-label{font-size:.6rem;padding:2px 5px}
   .bench-label[data-k="cap"],.bench-label[data-k="buzzer"],.bench-label[data-k="fan"],.bench-label[data-k="flame"]{display:none}
 }
-@media (prefers-reduced-motion:reduce){.bench{height:auto}.bench-stick{position:relative;top:0;height:min(88vh,760px)}}
+
 
 /* ===== Reveal on scroll (only when scripts run and motion is allowed) ===== */
 @media (prefers-reduced-motion:no-preference){
@@ -759,3 +759,14 @@ html[lang="en"] .hero-name{font-size:min(6.1rem,12.6cqw);white-space:nowrap}
 .ftr-grid a{overflow-wrap:anywhere}
 @media (max-width:760px){.ftr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:379px){.brand-name{font-size:.8rem}.lang a{padding:6px 6px}.brand{gap:8px}}
+
+/* Bench is a self-contained card: the page scrolls past it normally */
+.bench{border:1px solid var(--rule)}
+.bench-hud-in.wrap{padding-inline:28px}
+.bench-toggle{justify-self:start;background:none;border:1px solid var(--b-rule);color:var(--b-ink);padding:8px 12px;cursor:pointer;transition:border-color .2s,color .2s,background-color .2s}
+.bench-toggle:hover{border-color:var(--b-sig);color:var(--b-sig)}
+.bench-toggle .b,.bench-toggle[aria-pressed="true"] .a{display:none}
+.bench-toggle[aria-pressed="true"] .b{display:inline}
+.bench.no-gl .bench-stick{position:relative;inset:auto}
+.bench.no-gl .bench-toggle{display:none}
+@media (max-width:760px){.bench-hud-in.wrap{padding-inline:16px}}

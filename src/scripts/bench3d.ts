@@ -13,6 +13,7 @@ export interface BenchOpts {
   labels: HTMLElement;        // container with [data-k] label elements
   onState: (s: "normal" | "warning" | "emergency") => void;
   reduced: boolean;
+  toggle?: HTMLElement | null;
 }
 
 export function initBench(o: BenchOpts) {
@@ -339,7 +340,7 @@ export function initBench(o: BenchOpts) {
     camera.fov = W / H < 0.9 ? 40 : 30;
     // on wide screens, move the model out from under the heading (towards the reading end)
     const rtl = document.documentElement.dir === "rtl";
-    const shift = W > 980 ? W * 0.15 : 0;
+    const shift = W > 980 ? W * 0.12 : 0;
     if (shift) camera.setViewOffset(W, H, rtl ? shift : -shift, 0, W, H); else camera.clearViewOffset();
     camera.updateProjectionMatrix();
   };
@@ -348,10 +349,17 @@ export function initBench(o: BenchOpts) {
   // scroll-driven explode (0 → 1 across the section)
   let explode = 0, explodeTarget = 0;
   const readScroll = () => {
-    const r = o.section.getBoundingClientRect(); const span = r.height - window.innerHeight;
-    const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
-    explodeTarget = Math.min(1, Math.max(0, (p - 0.12) / 0.6));
+    // the card scrolls like any other section; it comes apart as it rises through the screen
+    const r = o.section.getBoundingClientRect(), vh = window.innerHeight;
+    if (r.bottom < 0 || r.top > vh) manual = null;           // off screen: back to automatic
+    const auto = Math.min(1, Math.max(0, (vh * 0.62 - r.top) / (vh * 0.5)));
+    explodeTarget = manual ?? auto;
   };
+  let manual: number | null = null;
+  o.toggle?.addEventListener("click", () => {
+    manual = explodeTarget > 0.5 ? 0 : 1; explodeTarget = manual;
+    if (o.reduced) { explode = manual; requestAnimationFrame(() => { frame(); cancelAnimationFrame(raf); }); }
+  });
   window.addEventListener("scroll", readScroll, { passive: true }); readScroll();
   if (o.reduced) { explodeTarget = explode = 0.75; }
 
@@ -384,7 +392,7 @@ export function initBench(o: BenchOpts) {
     const elev = 0.84 - e * 0.3 - smy * 0.08;
     // fit the scene width (~26 units) for any aspect ratio
     const vf = THREE.MathUtils.degToRad(camera.fov), hf = 2 * Math.atan(Math.tan(vf / 2) * camera.aspect);
-    const wide = W > 980 ? 1.12 : 1;
+    const wide = W > 980 ? 1.24 : 1;
     const narrow = W / H < 0.9;
     const dist = (narrow ? Math.max(24, 9.6 / Math.tan(hf / 2)) : Math.max(30 * wide, 13.8 / Math.tan(hf / 2))) + e * (narrow ? 4 : 2);
     camera.position.set(target.x + Math.sin(yaw) * Math.cos(elev) * dist, target.y + Math.sin(elev) * dist, target.z + Math.cos(yaw) * Math.cos(elev) * dist);
@@ -432,6 +440,7 @@ export function initBench(o: BenchOpts) {
     traceMat.emissiveIntensity = 0.12 + Math.min(1.2, pulses.length * 0.08);
 
     renderer.render(scene, camera);
+    if (o.toggle) o.toggle.setAttribute("aria-pressed", String(explodeTarget > 0.5));
 
     // labels: shown once the model starts to come apart
     const la = Math.min(1, Math.max(0, (e - 0.35) / 0.35));
