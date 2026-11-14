@@ -49,10 +49,6 @@ resources:
     label: Live platform
     host: ee-studio-red.vercel.app
     url: https://ee-studio-red.vercel.app
-  - type: CODE
-    label: Source code
-    host: github.com/AsemQaid/ee-studio
-    url: https://github.com/AsemQaid/ee-studio
   - type: PDF
     label: Project report · 12 pages
     host: AAQ-P06_EE-Studio_Project-Report.pdf

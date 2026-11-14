@@ -45,10 +45,6 @@ resources:
     label: المنصة المنشورة
     host: ee-studio-red.vercel.app
     url: https://ee-studio-red.vercel.app
-  - type: CODE
-    label: الشيفرة المصدرية
-    host: github.com/AsemQaid/ee-studio
-    url: https://github.com/AsemQaid/ee-studio
   - type: PDF
     label: تقرير المشروع · 12 صفحات
     host: AAQ-P06_EE-Studio_Project-Report.pdf
