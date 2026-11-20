@@ -6,6 +6,7 @@ import Arrow from "../components/Arrow.astro";
 import Bench3D from "../components/Bench3D.astro";
 import { DOMAINS, areasOf, getProjects, tr, url, type Lang } from "../i18n/ui";
 import { LOGBOOK } from "../data/logbook";
+import { seg7 } from "../lib/seg7";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -13,15 +14,27 @@ const T = tr(lang), u = (p: string) => url(lang, p);
 const projects = await getProjects(lang);
 const featured = projects.filter((p) => p.data.featured);
 const count = (d: string) => projects.filter((p) => areasOf(p).includes(d)).length;
+const roles = lang === "ar"
+  ? ["العتاد المدمج", "أنظمة التحكم", "مراقبة الطاقة", "القياس المعايَر", "التقنيات الصناعية"]
+  : ["Embedded hardware", "Control systems", "Energy monitoring", "Calibrated measurement", "Industrial technology"];
+const logTags = [...new Map(LOGBOOK.map((e) => [e.tag.en, e.tag])).values()];
+const pad2 = (n: number) => String(n).padStart(2, "0");
 const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 ? "مشروع واحد" : n === 2 ? "مشروعان" : `${n} مشاريع`);
 ---
 <Base lang={lang} path="/">
   <div class="wrap">
     <section class="hero" aria-labelledby="hname">
       <div class="hero-text">
+        <p class="avail mono"><span class="led" aria-hidden="true"></span>{T("Open to internships and research roles", "متاح للتدريب والأدوار البحثية")}</p>
         <div class="eyebrow mono"><span class="dot"></span><span>{T("Electrical Engineering", "الهندسة الكهربائية")}</span><span>·</span><span>{T("Universitas Islam Indonesia", "الجامعة الإسلامية الإندونيسية")}</span></div>
         <h1 class="hero-name" id="hname">{lang === "ar" ? <>عاصم أمين<span class="l2">قائد</span></> : <>Asem Ameen<span class="l2">Qaid</span></>}</h1>
         <p class="hero-role">{T("Electrical Engineering Student | Embedded Hardware for Control & Energy Systems", "طالب هندسة كهربائية | عتاد مدمج لأنظمة التحكم والطاقة")}</p>
+        <div class="readout" data-readout={JSON.stringify(roles)}>
+          <span class="sr-only">{T("Focus areas", "مجالات التركيز")}: {roles.join(", ")}</span>
+          <div class="ro-ch" aria-hidden="true"><span class="mono">CH</span><span class="s7 ltr" data-ro-ch set:html={seg7("01")}></span></div>
+          <div class="ro-screen" aria-hidden="true"><span class="ro-k mono">{T("Focus", "التركيز")}</span><span class="ro-txt" data-ro-txt>{roles[0]}</span></div>
+          <div class="ro-dots" aria-hidden="true">{roles.map((_, i) => <i class={i === 0 ? "on" : ""}></i>)}</div>
+        </div>
         <p class="lede">{T("I build electronic hardware and test it properly: microprocessor controllers, embedded protection systems and calibrated sensor measurements, mostly applied to control and energy systems.",
           "أبني عتادًا إلكترونيًا وأختبره كما ينبغي: متحكمات تعمل بالمعالجات الدقيقة، وأنظمة حماية مدمجة، وقياسات حساسات معايَرة، ومعظم ذلك في تطبيقات التحكم والطاقة.")}</p>
         <div class="bus">
@@ -38,8 +51,13 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
         </div>
       </div>
       <div class="plate">
-        <div class="plate-top mono"><span>{T("Plate 01 · Portrait", "لوحة 01 · صورة شخصية")}</span><span>{T("Yogyakarta, ID", "يوجياكارتا")}</span></div>
-        <figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")} width="720" height="900" fetchpriority="high"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></figure>
+        <div class="plate-top mono"><span>{T("Plate 01 · Portrait", "لوحة 01 · صورة شخصية")}</span><span>{T("Yogyakarta, ID", "يوجياكارتا")} · <time class="ltr" data-clock>--:--</time> WIB</span></div>
+        <div class="fig-wrap"><figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")} width="720" height="900" fetchpriority="high"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></figure>
+          <a class="dmm" href={u("/work/mpu6050-speed/")} data-dmm="0.161" aria-label={T("Measured result: RMSE 0.161 metres per second, step-counting speed estimation, 15 trials. Open project AAQ-P03.", "نتيجة مقيسة: خطأ RMSE يبلغ 0.161 م/ث في تقدير السرعة بعدّ الخطوات، 15 تجربة. افتح المشروع AAQ-P03.")}>
+            <span class="dmm-top mono"><span class="ltr">AAQ-P03</span><span>{T("Measured", "مقيس")}</span></span>
+            <span class="dmm-val ltr"><span class="s7" data-dmm-digits set:html={seg7("0.161")}></span><span class="u">m/s</span></span>
+            <span class="dmm-cap mono">{T("RMSE · step counting · 15 trials", "RMSE · عدّ الخطوات · 15 تجربة")}</span>
+          </a></div>
         <div class="tblock">
           <div><span class="k mono">{T("Discipline", "التخصص")}</span><span class="v">{T("Electrical Engineering", "الهندسة الكهربائية")}</span></div>
           <div class="hide-sm"><span class="k mono">{T("Institution", "الجامعة")}</span><span class="v">UII</span></div>
@@ -65,7 +83,7 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
       <div class="plates">
         {featured.map((p) => (
           <a class="wplate" href={u(`/work/${p.slug}/`)}>
-            <Cover src={p.data.cover} />
+            <Cover src={p.data.cover} reveal={p.data.reveal} />
             <div class="body">
               <div class="meta mono"><span class="ltr">{p.data.number}</span><span>{DOMAINS[p.data.domain][lang]}</span></div>
               <h3>{p.data.title}</h3>
@@ -90,10 +108,15 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h2 class="h-sec">{T("Logbook", "السجل")}</h2><span class="mono" style="color:var(--ink-3)">{T("Latest entries", "أحدث الإدخالات")}</span></div>
-      <ul class="log">
-        {LOGBOOK.slice(0, 6).map((e) => (
-          <li><span class="d mono ltr">{e.date}</span><span class="e">{e.link ? <a href={u(e.link)}>{e[lang]}</a> : e[lang]}</span><span class="tag">{e.tag[lang]}</span></li>
+      <div class="sec-head"><h2 class="h-sec">{T("Logbook", "السجل")}</h2>
+        <div class="counter" aria-hidden="true"><span class="mono">{T("Entries", "الإدخالات")}</span><span class="s7 ltr" data-log-count set:html={seg7(pad2(LOGBOOK.length))}></span></div></div>
+      <div class="log-filter chips" role="group" aria-label={T("Filter the logbook", "تصفية السجل")}>
+        <button class="chip" type="button" data-lf="all" aria-pressed="true"><span class="led" aria-hidden="true"></span>{T("All", "الكل")}</button>
+        {logTags.map((t) => <button class="chip" type="button" data-lf={t.en} aria-pressed="false"><span class="led" aria-hidden="true"></span>{t[lang]}</button>)}
+      </div>
+      <ul class="log" id="logbook">
+        {LOGBOOK.map((e) => (
+          <li data-tag={e.tag.en}><span class="d mono ltr">{e.date}</span><span class="e">{e.link ? <a href={u(e.link)}>{e[lang]}</a> : e[lang]}</span><span class="tag">{e.tag[lang]}</span></li>
         ))}
       </ul>
     </section>

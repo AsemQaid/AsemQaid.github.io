@@ -7,6 +7,9 @@ year: 2026
 status: tested
 featured: true
 cover: /img/pn-photo.webp
+reveal:
+  src: /diagrams/panel-arch.svg
+  kind: schematic
 summary: >-
   نظام Arduino Nano يكشف الحرارة والدخان والغاز واللهب في اللوحة الكهربائية، ويفصل الحمل ويرسل تنبيهات SMS.
   مبني على لوحة PCB ملحومة ومختبر على المنضدة.

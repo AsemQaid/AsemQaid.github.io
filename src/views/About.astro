@@ -1,16 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
-import { tr, url, type Lang } from "../i18n/ui";
+import { getProjects, tr, url, type Lang } from "../i18n/ui";
+import { USED, LEARNING } from "../data/skills";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const T = tr(lang);
-const rows: [string, [string, string][]][] = [
-  [T("Programming and firmware", "البرمجة والبرمجيات الثابتة"), [["C / C++", "P01–P05"], ["Python", "P01 · P06 · P07"], ["Intel 8086 assembly", "P02"], ["Arduino IDE", "P01 · P03–P05"]]],
-  [T("Microcontrollers and digital hardware", "المتحكمات الدقيقة والعتاد الرقمي"), [["ESP32", "P04 · P07"], ["Arduino Nano", "P01 · P03 · P05"], ["Intel 8086 · 8255 PPI · ADC0804", "P02"], [T("Digital logic in Quartus Prime (FPGA)", "المنطق الرقمي في Quartus Prime (FPGA)"), T("Coursework", "مقرر")], [T("PCB assembly and soldering", "تجميع ولحام PCB"), "P05"]]],
-  [T("Electronics, instrumentation and interfaces", "الإلكترونيات والقياس والواجهات"), [[T("Sensor interfacing", "ربط الحساسات"), "P01–P05"], [T("Analog-to-digital conversion", "التحويل التماثلي الرقمي"), "P01 · P02"], ["I2C · UART", "P03 · P05"], ["RS485 / Modbus", "P07"], ["MQTT", "P04 · P07"], ["GSM (AT commands)", "P05"], [T("Isolated power-domain design", "تصميم مجالات طاقة معزولة"), "P05"]]],
-  [T("Engineering software and simulation", "البرمجيات الهندسية والمحاكاة"), [["Proteus", "P02"], ["MATLAB · Simulink", T("Coursework", "مقررات")], ["Quartus Prime", T("Coursework", "مقرر")], ["Node-RED", "P04"]]],
-  [T("Testing and engineering analysis", "الاختبار والتحليل الهندسي"), [[T("Structured test scenarios", "سيناريوهات اختبار منظمة"), "P05"], [T("Sensor calibration", "معايرة الحساسات"), "P01 · P03"], [T("Digital filtering", "الترشيح الرقمي"), "P03"], [T("Error analysis (RMSE)", "تحليل الخطأ (RMSE)"), "P03"], [T("Simulation-based verification", "التحقق بالمحاكاة"), "P02"], [T("Numerical model verification", "التحقق العددي من النماذج"), "P06"]]],
-];
+const projects = await getProjects(lang);
+const slugOf = (code: string) => projects.find((p) => p.data.number === `AAQ-${code}`)?.slug;
+const L = (x: string | { en: string; ar: string }) => (typeof x === "string" ? x : x[lang]);
 ---
 <Base lang={lang} path="/about/" section="about" title={T("About", "نبذة")}>
   <div class="wrap"><header class="page-head"><div class="eyebrow mono"><span class="dot"></span>{T("About", "نبذة")}</div><h1 class="h-page">{T("Engineer first, organiser by practice", "مهندس أولًا، ومنظِّم بالممارسة")}</h1></header>
@@ -24,9 +21,23 @@ const rows: [string, [string, string][]][] = [
         <p>{T("I build electronic hardware and test it properly. Most of my projects are applied to control and energy systems, from a microprocessor-based controller to an industrial energy monitoring platform. I am looking for an internship or research role where I can design, build and test electronic hardware.", "أبني عتادًا إلكترونيًا وأختبره كما ينبغي. ومعظم مشاريعي موجّهة إلى أنظمة التحكم والطاقة، من متحكم يعمل بمعالج دقيق إلى منصة لمراقبة الطاقة الصناعية. أبحث عن تدريب أو دور بحثي أصمّم فيه عتادًا إلكترونيًا وأبنيه وأختبره.")}</p>
         <p>{T("Alongside engineering, I lead UII Global, the university's international student organisation.", "إلى جانب الهندسة، أقود UII Global، منظمة الطلاب الدوليين في الجامعة.")} <a href={url(lang, "/leadership/")}>{T("Leadership", "القيادة")}</a></p>
       </div>
-      <div><h2 class="h-sec" style="margin-bottom:16px">{T("Tools, by where I used them", "الأدوات، حسب مكان استخدامها")}</h2>
-        <div class="skills">{rows.map(([k, items]) => <div class="skill-row"><span class="k">{k}</span><div class="items">{items.map(([n, s]) => <span class="skill"><span>{n}</span><span class="src ltr">{s}</span></span>)}</div></div>)}</div>
-        <p class="mono" style="color:var(--ink-3);margin-top:12px">{T("Codes link each tool to the project where it was used.", "الرموز تربط كل أداة بالمشروع الذي استُخدمت فيه.")}</p>
+      <div class="skillset" data-skillset>
+        <div class="skill-head"><h2 class="h-sec">{T("Skills, with evidence", "المهارات مع الدليل")}</h2>
+          <div class="slide-sw" role="group" aria-label={T("Show skills", "عرض المهارات")}>
+            <button type="button" data-sv="used" aria-pressed="true">{T("Used in projects", "مُستخدمة في مشاريع")}</button>
+            <button type="button" data-sv="learning" aria-pressed="false">{T("Learning now", "أتعلّمها الآن")}</button>
+            <span class="knob" aria-hidden="true"></span>
+          </div></div>
+        <div data-sp="used">
+          <div class="skills">{USED.map((r) => <div class="skill-row"><span class="k">{r.k[lang]}</span><div class="items">{r.items.map((it) => (
+            <span class="skill"><span>{L(it.n)}</span><span class="src ltr">{it.p ? it.p.map((c) => { const sl = slugOf(c); return sl ? <a href={url(lang, `/work/${sl}/`)}>{c}</a> : <span>{c}</span>; }) : <span>{it.note?.[lang]}</span>}</span></span>
+          ))}</div></div>)}</div>
+          <p class="mono" style="color:var(--ink-3);margin-top:12px">{T("Each code links to the project where the skill was used.", "كل رمز يفتح المشروع الذي استُخدمت فيه المهارة.")}</p>
+        </div>
+        <div data-sp="learning" hidden>
+          <ul class="learning">{LEARNING.map((x) => <li><span class="skill learn"><span>{x.n[lang]}</span></span><span class="where">{x.where[lang]}</span></li>)}</ul>
+          <p class="mono" style="color:var(--ink-3);margin-top:12px">{T("Not yet shown in a project. Each one moves to the other list once a project proves it.", "لم تظهر بعد في مشروع. تنتقل كل واحدة إلى القائمة الأخرى عندما يثبتها مشروع.")}</p>
+        </div>
       </div>
       <div><h2 class="h-sec" style="margin-bottom:16px">{T("Languages", "اللغات")}</h2>
         <div class="skills">{[[T("Arabic", "العربية"), T("Native", "اللغة الأم")], [T("English", "الإنجليزية"), T("Professional working proficiency", "كفاءة مهنية")], [T("Indonesian", "الإندونيسية"), T("Intermediate", "متوسط")]].map(([a, b]) => <div class="skill-row"><span class="k">{a}</span><span>{b}</span></div>)}</div></div>

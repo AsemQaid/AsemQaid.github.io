@@ -1,6 +1,13 @@
 ---
-interface Props { src: string; cls?: string }
-const { src, cls = "" } = Astro.props;
-const contain = src.endsWith(".svg") || src.includes("dr-circuit");
+// Project picture. With `reveal`, hovering the card wipes across to a second view of the same project
+// (its schematic, or the built hardware), with a scan line like a probe sweeping the board. Touch screens show the cover only.
+interface Props { src: string; cls?: string; reveal?: { src: string; kind: "schematic" | "hardware" } }
+const { src, cls = "", reveal } = Astro.props;
+const isContain = (s: string) => s.endsWith(".svg") || s.includes("dr-circuit");
+const tag = { schematic: "SCH", hardware: "HW" };
 ---
-<div class={`cover ${contain ? "contain" : ""} ${cls}`}><img src={src} alt="" loading="lazy" decoding="async"></div>
+<div class={`cover ${isContain(src) ? "contain" : ""} ${reveal ? "dual" : ""} ${cls}`}>
+  <img src={src} alt="" loading="lazy" decoding="async">
+  {reveal && <div class={`rev ${isContain(reveal.src) ? "contain" : ""}`} aria-hidden="true"><img src={reveal.src} alt="" loading="lazy" decoding="async"></div>}
+  {reveal && <span class="rev-tag mono" aria-hidden="true"><i></i>{tag[reveal.kind]}</span>}
+</div>

@@ -13,6 +13,8 @@ You never need to touch the design. Almost everything you will change lives in f
 | Photos, screenshots and diagrams | `public/img/`, `public/diagrams/` |
 | Homepage logbook | `src/data/logbook.ts` |
 | Publications | `src/data/publications.ts` |
+| Honours and certificates | `src/data/honours.ts` and `public/certificates/` |
+| Skills (used / learning now) | `src/data/skills.ts` |
 | CV PDF | `public/cv/Asem-Ameen-Qaid_CV.pdf` |
 
 ---
@@ -59,7 +61,27 @@ Open `src/data/publications.ts`, copy the example block, remove the `//` marks a
 
 ## Add a certificate or achievement
 
-Add a line to the honours list in `src/views/Leadership.astro` and to the CV page in `src/views/CV.astro`, and upload the updated CV PDF.
+1. Export the certificate as `.webp` (about 1600 px wide) and upload it to `public/certificates/`, for example `angel-2026.webp`.
+2. Open `src/data/honours.ts` and add a line at the top of the list (copy one of the examples). Set `image: "/certificates/angel-2026.webp"`. A **View certificate** button appears on the Leadership page automatically.
+3. If it belongs on the CV too, add it to `honours` in `src/data/cv.json` and upload the updated CV PDF.
+
+## Update skills
+
+Open `src/data/skills.ts`. **USED** lists skills with the project numbers that prove them (they become links). **LEARNING** lists what you are studying now. When a project proves a "learning" skill, move it to USED and add the project number.
+
+## Hover picture on project cards (optional)
+
+Each project can have a second picture that wipes in when someone hovers its card: add to the top of the project file
+
+```yaml
+reveal:
+  src: /diagrams/my-project-arch.svg
+  kind: schematic        # schematic | hardware
+```
+
+## Homepage measurement badge
+
+The reading on the portrait (RMSE 0.161 m/s, AAQ-P03) is in `src/views/Home.astro`; search for `data-dmm`. Change the value, label and link there if a stronger result comes along.
 
 ## Preview on your own computer (optional)
 

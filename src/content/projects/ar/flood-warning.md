@@ -7,6 +7,9 @@ year: 2026
 status: prototyped
 featured: false
 cover: /img/fl-photo.webp
+reveal:
+  src: /diagrams/flood-arch.svg
+  kind: schematic
 summary: وحدة ESP32 تقرأ هطول الأمطار ومستوى المياه، وتنذر محليًا بالأضواء والجرس، وترسل عبر MQTT إلى لوحة Node-RED.
 lede: >-
   وحدة إنترنت أشياء منخفضة التكلفة تراقب الأمطار ومستوى المياه، وتصنّف مستوى الخطر، وتنذر في الموقع وعلى لوحة

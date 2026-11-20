@@ -7,6 +7,9 @@ year: 2025
 status: prototyped
 featured: false
 cover: /diagrams/mq-co2.svg
+reveal:
+  src: /img/mq-circuit.webp
+  kind: hardware
 summary: >-
   Calibrated MQ135 and Arduino Nano used to compare CO₂ across 15 campus locations, with a custom Python live
   display.

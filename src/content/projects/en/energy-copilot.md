@@ -8,6 +8,9 @@ status: simulated
 hardwareStatus: designed
 featured: true
 cover: /img/en-dashboard.webp
+reveal:
+  src: /diagrams/energy-arch.svg
+  kind: schematic
 summary: >-
   Multi-site energy monitoring platform that turns electrical measurements into a ranked list of what to
   inspect first. Team leader; software tested on simulated data.
