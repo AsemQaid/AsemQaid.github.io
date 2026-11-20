@@ -6,10 +6,7 @@ domain: energy
 year: 2026
 status: deployed
 featured: false
-cover: /img/ees-landing.webp
-reveal:
-  src: /diagrams/ees-arch.svg
-  kind: schematic
+cover: /img/covers/ee-studio.webp
 summary: منصة ويب منشورة تضم 37 مختبرًا تفاعليًا في سبعة مجالات للهندسة الكهربائية، مدعومة بـ 485 اختبارًا آليًا.
 lede: >-
   مختبر افتراضي في المتصفح يغيّر فيه الطالب معاملًا ويشاهد استجابة النظام: كتلة تستقر على نابض، أو هبوط جهد

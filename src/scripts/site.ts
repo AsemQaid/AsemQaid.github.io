@@ -140,43 +140,22 @@ if (ro) {
   }, reduced ? 5000 : 2900);
 }
 
-// Measurement badge: the reading settles like a multimeter when it comes into view
-const dmm = $<HTMLElement>("[data-dmm]");
-if (dmm && !reduced && "IntersectionObserver" in window) {
-  const target = parseFloat(dmm.dataset.dmm || "0");
-  const digits = $<HTMLElement>("[data-dmm-digits]", dmm)!;
-  const places = (dmm.dataset.dmm || "").split(".")[1]?.length ?? 0;
-  const io = new IntersectionObserver((es) => {
-    if (!es[0].isIntersecting) return; io.disconnect();
-    const t0 = performance.now(), dur = 1300;
-    const step = (now: number) => {
-      const k = Math.min(1, (now - t0) / dur);
-      const ease = 1 - Math.pow(1 - k, 3);
-      const noise = k < 1 ? (Math.random() - 0.5) * target * 0.5 * (1 - k) : 0;
-      digits.innerHTML = seg7(Math.max(0, target * ease + noise).toFixed(places));
-      if (k < 1) requestAnimationFrame(step); else dmm.classList.add("locked");
-    };
-    requestAnimationFrame(step);
-  }, { threshold: 0.6 });
-  io.observe(dmm);
-}
-
-// Portrait drifts slightly with the pointer (desktop only)
-const hero = $<HTMLElement>(".hero"), fig = $<HTMLElement>(".hero .plate figure");
-if (hero && fig && !reduced && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+// Identity card tilts in 3D toward the pointer (desktop only). The photo itself is never moved or altered.
+const card = $<HTMLElement>("[data-tilt]");
+if (card && !reduced && matchMedia("(hover: hover) and (pointer: fine)").matches) {
   let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
   const loop = () => {
-    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-    fig.style.setProperty("--px", cx.toFixed(3)); fig.style.setProperty("--py", cy.toFixed(3));
-    raf = Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002 ? requestAnimationFrame(loop) : 0;
+    cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
+    card.style.setProperty("--rx", `${(-cy * 7).toFixed(2)}deg`); card.style.setProperty("--ry", `${(cx * 9).toFixed(2)}deg`);
+    card.style.setProperty("--gx", `${((cx + 1) * 50).toFixed(1)}%`); card.style.setProperty("--gy", `${((cy + 1) * 50).toFixed(1)}%`);
+    raf = Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(loop) : 0;
   };
-  hero.addEventListener("pointermove", (e) => {
-    const r = fig.getBoundingClientRect();
-    tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / r.width));
-    ty = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / r.height));
-    if (!raf) raf = requestAnimationFrame(loop);
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width) * 2 - 1; ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+    card.classList.add("tilting"); if (!raf) raf = requestAnimationFrame(loop);
   });
-  hero.addEventListener("pointerleave", () => { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(loop); });
+  card.addEventListener("pointerleave", () => { tx = 0; ty = 0; card.classList.remove("tilting"); if (!raf) raf = requestAnimationFrame(loop); });
 }
 
 // Logbook filter with a seven-segment entry counter

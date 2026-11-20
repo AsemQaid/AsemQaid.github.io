@@ -39,7 +39,7 @@ const sw: Record<string, string> = { designed: "--st-designed", simulated: "--st
               {p.data.hardwareStatus && <><span class="k mono" style="margin-top:6px">{T("Hardware", "العتاد")}</span><Status s={p.data.hardwareStatus} lang={lang} /></>}
               <span class="k mono" style="margin-top:6px">{T("Domain · Year", "المجال · السنة")}</span><span style="font-size:.9rem">{DOMAINS[p.data.domain][lang]} · <span class="ltr">{p.data.year}</span></span>
             </div>
-            <div class="col thumbcol"><Cover src={p.data.cover} cls="thumb" reveal={p.data.reveal} /></div>
+            <div class="col thumbcol"><Cover src={p.data.cover} cls="thumb" /></div>
           </a>
         </li>
       ))}

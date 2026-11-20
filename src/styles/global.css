@@ -768,7 +768,7 @@ html[lang="en"] .hero-name{font-size:min(6.1rem,12.6cqw);white-space:nowrap}
 
 /* ===================================================================================
    Instrument pass (Rev 1.6): breaker switch, seven-segment displays, measurement badge,
-   status LEDs, schematic reveal, slide switch. Everything works without scripts and
+   status LEDs, 3D identity card, slide switch. Everything works without scripts and
    respects reduced motion.
    =================================================================================== */
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -825,31 +825,6 @@ html[lang="ar"] .ro-txt{font-family:var(--f-ar);letter-spacing:0}
 .ro-dots i.on{background:var(--led);box-shadow:0 0 5px var(--led)}
 @media (max-width:420px){.ro-ch{padding:10px}.ro-ch .mono{display:none}.ro-ch .s7{font-size:1.3rem}}
 
-/* --- Measurement badge on the portrait --- */
-.fig-wrap{position:relative}
-.dmm{position:absolute;inset-inline-start:14px;bottom:14px;z-index:2;display:grid;gap:4px;padding:10px 12px 9px;text-decoration:none;color:#E4E9EA;
-  background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid #2C363A;box-shadow:0 10px 30px rgba(0,0,0,.28);
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:transform .25s cubic-bezier(.2,.7,.2,1),border-color .2s}
-.dmm::before{content:"";position:absolute;top:-1px;inset-inline-start:-1px;width:28px;height:3px;background:var(--vfd)}
-.dmm:hover{transform:translateY(-3px);border-color:var(--vfd)}
-.dmm-top{display:flex;justify-content:space-between;gap:16px;color:#9AA7AD;font-size:.6rem}
-.dmm-val{display:flex;align-items:flex-end;gap:6px}
-.dmm-val .s7{font-size:2.1rem}
-.dmm-val .u{font-family:var(--f-mono);font-size:.8rem;color:var(--vfd);padding-bottom:3px}
-.dmm-cap{color:#9AA7AD;font-size:.58rem}
-html[lang="ar"] .dmm-top,html[lang="ar"] .dmm-cap{font-size:.7rem}
-.dmm.locked .dmm-top span:last-child{color:var(--led)}
-@media (max-width:860px){
-  .fig-wrap{display:contents}
-  .dmm{position:static;grid-column:1/-1;order:3;grid-template-columns:auto 1fr;grid-template-areas:"v t" "v c";column-gap:16px;align-items:center;box-shadow:none;backdrop-filter:none}
-  .dmm-val{grid-area:v}.dmm-top{grid-area:t;justify-content:flex-start}.dmm-cap{grid-area:c}
-  .dmm-val .s7{font-size:1.7rem}
-}
-
-/* Portrait drift (set by script on fine pointers) */
-.plate figure img{transform:translate(calc(var(--px,0) * -7px),calc(var(--py,0) * -7px)) scale(1.045);transition:transform .1s linear}
-@media (prefers-reduced-motion:reduce){.plate figure img{transform:none}}
-
 /* --- Logbook filter and counter --- */
 .counter{display:inline-flex;align-items:center;gap:10px;padding:6px 10px;background:var(--panel);color:#73808A;border:1px solid var(--ink)}
 .counter .s7{font-size:1.25rem}
@@ -857,30 +832,6 @@ html[lang="ar"] .dmm-top,html[lang="ar"] .dmm-cap{font-size:.7rem}
 .log-filter{margin-bottom:16px}
 .chip .led{width:6px;height:6px;background:var(--rule);box-shadow:none;transition:background .2s,box-shadow .2s}
 .chip[aria-pressed="true"] .led{background:var(--led);box-shadow:0 0 6px var(--led)}
-
-/* --- Schematic reveal on project cards --- */
-.cover.dual{position:relative}
-.cover .rev{position:absolute;inset:0;display:none;background:var(--paper-2)}
-.cover .rev.contain{background:#fff}
-.cover .rev img{width:100%;height:100%;object-fit:cover;display:block}
-.cover .rev.contain img{object-fit:contain;padding:8px}
-.rev-tag{display:none}
-@media (hover:hover) and (pointer:fine){
-  .cover .rev{display:block;clip-path:inset(0 100% 0 0);transition:clip-path .55s cubic-bezier(.65,0,.35,1)}
-  .cover.dual::after{content:"";position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--vfd);box-shadow:0 0 10px var(--vfd),0 0 2px var(--vfd);
-    opacity:0;transition:left .55s cubic-bezier(.65,0,.35,1),opacity .2s .4s;pointer-events:none;z-index:2}
-  :is(.wplate,.reg):hover .cover .rev,:is(.wplate,.reg):focus-visible .cover .rev{clip-path:inset(0 0 0 0)}
-  :is(.wplate,.reg):hover .cover.dual::after,:is(.wplate,.reg):focus-visible .cover.dual::after{left:calc(100% - 2px);opacity:1;transition:left .55s cubic-bezier(.65,0,.35,1),opacity .05s}
-  .rev-tag{display:inline-flex;align-items:center;gap:6px;position:absolute;top:8px;inset-inline-end:8px;z-index:3;padding:3px 7px;font-size:.58rem;
-    background:var(--panel);color:#9AA7AD;border:1px solid #2C363A;transition:color .2s,border-color .2s}
-  .rev-tag i{width:5px;height:5px;border-radius:50%;background:#2C363A;transition:background .2s,box-shadow .2s}
-  :is(.wplate,.reg):hover .rev-tag{color:var(--vfd);border-color:var(--vfd)}
-  :is(.wplate,.reg):hover .rev-tag i{background:var(--vfd);box-shadow:0 0 5px var(--vfd)}
-  :is(.wplate,.reg):hover .cover.dual > img{transform:none}
-}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:reduce){
-  .cover .rev{transition:none}.cover.dual::after{display:none}
-}
 
 /* --- Skills: slide switch --- */
 .skill-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
@@ -912,3 +863,22 @@ html[dir="rtl"] .cert-btn{padding:4px 4px 4px 10px}
 .cert-btn:hover{border-color:var(--accent)}
 .cert-thumb{width:46px;height:34px;overflow:hidden;background:#fff;border:1px solid var(--rule-2);display:block}
 .cert-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* --- Identity card: 3D tilt on hover (desktop) --- */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .hero{perspective:1400px}
+  .plate[data-tilt]{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .4s;will-change:transform}
+  .plate[data-tilt].tilting{transition:box-shadow .4s;box-shadow:0 28px 60px -24px rgba(0,0,0,.35),0 2px 0 var(--rule)}
+  .plate[data-tilt] .plate-top,.plate[data-tilt] .tblock{transform:translateZ(18px)}
+  .plate[data-tilt] figure{transform:translateZ(30px)}
+  .plate .glare{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;
+    background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.22),transparent 55%);mix-blend-mode:soft-light}
+  .plate[data-tilt].tilting .glare{opacity:1}
+}
+.plate .glare{display:none}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.plate .glare{display:block}}
+
+/* Project covers designed as instrument panels: shown whole, never cropped */
+.cover.panel{background:#0B1113}
+.cover.panel img{object-fit:contain}

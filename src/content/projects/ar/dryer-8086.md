@@ -6,10 +6,7 @@ domain: hardware
 year: 2026
 status: simulated
 featured: false
-cover: /img/dr-circuit.webp
-reveal:
-  src: /diagrams/dryer-block.svg
-  kind: schematic
+cover: /img/covers/dryer-8086.webp
 summary: >-
   تحكم في الحرارة وإنذار للضغط في مجفف، مكتوب بلغة تجميع 8086 مع واجهة 8255 ومحوّل ADC0804، ومتحقق منه في
   Proteus.

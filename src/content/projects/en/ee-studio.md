@@ -6,10 +6,7 @@ domain: energy
 year: 2026
 status: deployed
 featured: false
-cover: /img/ees-landing.webp
-reveal:
-  src: /diagrams/ees-arch.svg
-  kind: schematic
+cover: /img/covers/ee-studio.webp
 summary: >-
   Live web platform with 37 interactive labs across seven electrical engineering subjects, backed by 485
   automated tests.

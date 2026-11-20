@@ -69,19 +69,12 @@ Open `src/data/publications.ts`, copy the example block, remove the `//` marks a
 
 Open `src/data/skills.ts`. **USED** lists skills with the project numbers that prove them (they become links). **LEARNING** lists what you are studying now. When a project proves a "learning" skill, move it to USED and add the project number.
 
-## Hover picture on project cards (optional)
+## Project cover images
 
-Each project can have a second picture that wipes in when someone hovers its card: add to the top of the project file
+Each project card shows a designed cover from `public/img/covers/` (hardware next to its dashboard, on a dark panel, never cropped).
+To make a cover for a new project, add a line for it at the bottom of `tools/make-covers.py` and run
+`python3 tools/make-covers.py public public/img/covers`, then set `cover: /img/covers/<short-name>.webp` in the project file.
 
-```yaml
-reveal:
-  src: /diagrams/my-project-arch.svg
-  kind: schematic        # schematic | hardware
-```
-
-## Homepage measurement badge
-
-The reading on the portrait (RMSE 0.161 m/s, AAQ-P03) is in `src/views/Home.astro`; search for `data-dmm`. Change the value, label and link there if a stronger result comes along.
 
 ## Preview on your own computer (optional)
 

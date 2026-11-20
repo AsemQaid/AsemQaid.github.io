@@ -6,10 +6,7 @@ domain: control
 year: 2026
 status: tested
 featured: true
-cover: /img/pn-photo.webp
-reveal:
-  src: /diagrams/panel-arch.svg
-  kind: schematic
+cover: /img/covers/panel-protection.webp
 summary: >-
   Arduino Nano system that detects heat, smoke, gas and flame in an electrical panel, disconnects the load and
   sends SMS alerts. Built on a soldered PCB and bench-tested.

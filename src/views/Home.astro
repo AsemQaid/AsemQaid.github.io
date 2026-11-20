@@ -50,14 +50,9 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
           <a class="btn btn-ghost" href={u("/cv/")}>{T("Read the CV", "اقرأ السيرة الذاتية")}</a>
         </div>
       </div>
-      <div class="plate">
+      <div class="plate" data-tilt><span class="glare" aria-hidden="true"></span>
         <div class="plate-top mono"><span>{T("Plate 01 · Portrait", "لوحة 01 · صورة شخصية")}</span><span>{T("Yogyakarta, ID", "يوجياكارتا")} · <time class="ltr" data-clock>--:--</time> WIB</span></div>
-        <div class="fig-wrap"><figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")} width="720" height="900" fetchpriority="high"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></figure>
-          <a class="dmm" href={u("/work/mpu6050-speed/")} data-dmm="0.161" aria-label={T("Measured result: RMSE 0.161 metres per second, step-counting speed estimation, 15 trials. Open project AAQ-P03.", "نتيجة مقيسة: خطأ RMSE يبلغ 0.161 م/ث في تقدير السرعة بعدّ الخطوات، 15 تجربة. افتح المشروع AAQ-P03.")}>
-            <span class="dmm-top mono"><span class="ltr">AAQ-P03</span><span>{T("Measured", "مقيس")}</span></span>
-            <span class="dmm-val ltr"><span class="s7" data-dmm-digits set:html={seg7("0.161")}></span><span class="u">m/s</span></span>
-            <span class="dmm-cap mono">{T("RMSE · step counting · 15 trials", "RMSE · عدّ الخطوات · 15 تجربة")}</span>
-          </a></div>
+        <figure><img src="/img/portrait.jpg" alt={T("Portrait of Asem Ameen Qaid", "صورة عاصم أمين قائد")} width="720" height="900" fetchpriority="high"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></figure>
         <div class="tblock">
           <div><span class="k mono">{T("Discipline", "التخصص")}</span><span class="v">{T("Electrical Engineering", "الهندسة الكهربائية")}</span></div>
           <div class="hide-sm"><span class="k mono">{T("Institution", "الجامعة")}</span><span class="v">UII</span></div>
@@ -83,7 +78,7 @@ const nProj = (n: number) => T(n === 1 ? "1 project" : `${n} projects`, n === 1 
       <div class="plates">
         {featured.map((p) => (
           <a class="wplate" href={u(`/work/${p.slug}/`)}>
-            <Cover src={p.data.cover} reveal={p.data.reveal} />
+            <Cover src={p.data.cover} />
             <div class="body">
               <div class="meta mono"><span class="ltr">{p.data.number}</span><span>{DOMAINS[p.data.domain][lang]}</span></div>
               <h3>{p.data.title}</h3>

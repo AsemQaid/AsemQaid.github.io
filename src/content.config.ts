@@ -20,7 +20,6 @@ const projects = defineCollection({
     inProgress: z.boolean().default(false),
     draft: z.boolean().default(false),        // true = hidden from the site
     cover: z.string(),
-    reveal: z.object({ src: z.string(), kind: z.enum(["schematic", "hardware"]) }).optional(),  // second picture shown on hover
     summary: z.string(),
     lede: z.string(),
     tags: z.array(z.string()).default([]),

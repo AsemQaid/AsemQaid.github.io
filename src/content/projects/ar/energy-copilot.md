@@ -7,10 +7,7 @@ year: 2026
 status: simulated
 hardwareStatus: designed
 featured: true
-cover: /img/en-dashboard.webp
-reveal:
-  src: /diagrams/energy-arch.svg
-  kind: schematic
+cover: /img/covers/energy-copilot.webp
 summary: >-
   منصة لمراقبة الطاقة في عدة مواقع تحوّل القياسات الكهربائية إلى قائمة مرتبة بما يجب فحصه أولًا. قائد الفريق؛
   البرمجيات مختبرة على بيانات محاكاة.

@@ -6,10 +6,7 @@ domain: hardware
 year: 2026
 status: simulated
 featured: false
-cover: /img/dr-circuit.webp
-reveal:
-  src: /diagrams/dryer-block.svg
-  kind: schematic
+cover: /img/covers/dryer-8086.webp
 summary: >-
   Temperature control and pressure alarm for a dryer, written in 8086 assembly with an 8255 PPI and ADC0804,
   verified in Proteus.

@@ -6,10 +6,7 @@ domain: control
 year: 2026
 status: tested
 featured: true
-cover: /diagrams/mpu-rmse.svg
-reveal:
-  src: /img/mp-hw.webp
-  kind: hardware
+cover: /img/covers/mpu6050-speed.webp
 summary: >-
   Two speed-estimation methods benchmarked against measured ground truth: step counting reached an RMSE of
   0.161 m/s, integration 1.106 m/s.

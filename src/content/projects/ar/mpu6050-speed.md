@@ -6,10 +6,7 @@ domain: control
 year: 2026
 status: tested
 featured: true
-cover: /diagrams/mpu-rmse.svg
-reveal:
-  src: /img/mp-hw.webp
-  kind: hardware
+cover: /img/covers/mpu6050-speed.webp
 summary: >-
   مقارنة طريقتين لتقدير السرعة بقياسات مرجعية: بلغ جذر متوسط مربع الخطأ 0.161 م/ث لعدّ الخطوات و1.106 م/ث
   للتكامل.

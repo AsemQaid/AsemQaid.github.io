@@ -6,10 +6,7 @@ domain: control
 year: 2026
 status: prototyped
 featured: false
-cover: /img/fl-photo.webp
-reveal:
-  src: /diagrams/flood-arch.svg
-  kind: schematic
+cover: /img/covers/flood-warning.webp
 summary: >-
   ESP32 node that reads rainfall and water level, warns locally with lights and a buzzer, and reports over
   MQTT to a Node-RED dashboard.

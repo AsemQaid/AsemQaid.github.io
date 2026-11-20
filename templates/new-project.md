@@ -13,9 +13,6 @@ featured: false            # true = show on the homepage (keep it to three)
 inProgress: false
 draft: true                # true = hidden from the site until you are ready
 cover: /img/my-project-cover.webp
-# reveal:                  # optional: a second picture that wipes in when the card is hovered
-#   src: /diagrams/my-project-arch.svg
-#   kind: schematic        # schematic | hardware
 summary: One or two sentences for the project list.
 lede: One sentence that opens the project page.
 tags:

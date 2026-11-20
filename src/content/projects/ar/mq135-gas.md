@@ -6,10 +6,7 @@ domain: control
 year: 2025
 status: prototyped
 featured: false
-cover: /diagrams/mq-co2.svg
-reveal:
-  src: /img/mq-circuit.webp
-  kind: hardware
+cover: /img/covers/mq135-gas.webp
 summary: >-
   حساس MQ135 معاير مع Arduino Nano لمقارنة ثاني أكسيد الكربون في 15 موقعًا في الحرم الجامعي، مع واجهة عرض حية
   بلغة Python.
