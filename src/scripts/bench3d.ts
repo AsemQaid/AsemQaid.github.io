@@ -365,6 +365,8 @@ export function initBench(o: BenchOpts) {
 
   // labels
   const labelEls = [...o.labels.querySelectorAll<HTMLElement>("[data-k]")];
+  const benchEl = o.root.closest(".bench") || o.root;
+  const avoidEls = [...benchEl.querySelectorAll<HTMLElement>(".bench-title > *, .bench-state")];
   const tmp = new THREE.Vector3();
 
   const clock = new THREE.Clock();
@@ -444,12 +446,18 @@ export function initBench(o: BenchOpts) {
 
     // labels: shown once the model starts to come apart
     const la = Math.min(1, Math.max(0, (e - 0.35) / 0.35));
+    // keep labels off the title text and the state card: a label that would cover them is hidden
+    const base = o.labels.getBoundingClientRect();
+    const avoid = la > 0 ? avoidEls.map((a) => { const r = a.getBoundingClientRect(); return [r.left - base.left - 8, r.top - base.top - 8, r.right - base.left + 8, r.bottom - base.top + 8]; }) : [];
     labelEls.forEach((el) => {
       const p = parts[el.dataset.k!]; if (!p) return;
       tmp.copy(p.anchor).applyMatrix4(p.g.matrixWorld).project(camera);
       const pad = Math.min(90, el.offsetWidth / 2 + 6);
       const x = Math.min(W - pad, Math.max(pad, (tmp.x * 0.5 + 0.5) * W)), y = (-tmp.y * 0.5 + 0.5) * H;
-      const vis = la > 0 && tmp.z < 1 && y > 8 && y < H - 8;
+      const w = el.offsetWidth, h = el.offsetHeight;
+      const box = [x - w / 2, y - 1.3 * h, x + w / 2, y - 0.3 * h];
+      const covers = avoid.some((r) => box[0] < r[2] && box[2] > r[0] && box[1] < r[3] && box[3] > r[1]);
+      const vis = la > 0 && tmp.z < 1 && y > 8 && y < H - 8 && !covers;
       el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
       el.style.opacity = vis ? String(la) : "0";
     });
