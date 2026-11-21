@@ -774,8 +774,8 @@ html[lang="en"] .hero-name{font-size:min(6.1rem,12.6cqw);white-space:nowrap}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 :root{--led:#2FBF71;
   /* Instrument panels follow the theme: reflective LCD in light mode, glowing VFD in dark mode */
-  --panel:#C9D2C2;--panel-2:#BFC9B7;--panel-rule:rgba(27,38,32,.2);--vfd:#1B2620;--vfd-glow:transparent;
-  --p-ink:#1B2620;--p-ink2:#3F4C44;--p-ink3:#5D6A61;--p-off:#AEB9A6;--p-edge:var(--ink);
+  --panel:var(--paper);--panel-2:var(--paper-2);--panel-rule:var(--rule);--vfd:var(--ink);--vfd-glow:transparent;
+  --p-ink:var(--ink);--p-ink2:var(--ink-2);--p-ink3:var(--ink-3);--p-off:var(--rule);--p-edge:var(--ink);
   --b-bg:#E8ECEA;--b-ink:#111820;--b-ink2:#46525C;--b-rule:rgba(17,24,32,.08);--b-sig:#A86A12;--b-card:rgba(255,255,255,.82);--b-edge:var(--ink);--b-ok:#1E8A45;--b-warn:#9A6B00;--b-emg:#C8342B}
 :root[data-theme="dark"]{--panel:#0B1113;--panel-2:#121A1D;--panel-rule:rgba(228,233,234,.14);--vfd:#EDB23A;--vfd-glow:color-mix(in srgb,#EDB23A 55%,transparent);
   --p-ink:#E4E9EA;--p-ink2:#9AA7AD;--p-ink3:#73808A;--p-off:#2C363A;--p-edge:var(--ink);
