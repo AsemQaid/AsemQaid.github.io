@@ -1,5 +1,6 @@
 # Builds project cover panels: hardware + dashboard side by side on a dark instrument panel.
-# Run from the repository root:  python3 tools/make-covers.py public public/img/covers
+# Run from the repository root:  python3 tools/make-covers.py public public/img/covers [dryer-block.png]
+# (the optional third argument is public/diagrams/dryer-block.svg exported to PNG, e.g. with rsvg-convert)
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC = sys.argv[1]; OUT = sys.argv[2]
@@ -59,16 +60,26 @@ def pip(main, inset, out, inset_w=0.42):
     side, top = 64, 100
     mw = W - 2*side - 260; mh = int(mw / (a.width/a.height))
     if mh > H - top - 150: mh = H - top - 150; mw = int(mh * a.width/a.height)
-    frame(im, d, a, side, top, mw, mh, la)
     iw = int(W*inset_w); ih = int(iw / (b.width/b.height))
     if ih > 560: ih = 560; iw = int(ih * b.width/b.height)
-    frame(im, d, b, W - side - iw, H - 64 - ih, iw, ih, lb, lab_above=False if (H-64) > H else True)
+    mx = max(side, W - side - int(iw*0.6) - mw)            # main always runs under the inset's left part
+    frame(im, d, a, mx, top, mw, mh, la)
+    iy = min(H - 64 - ih, top + mh - int(ih*0.55))         # inset always overlaps the main's lower corner
+    frame(im, d, b, W - side - iw, max(top + 60, iy), iw, ih, lb)
     im.save(f"{OUT}/{out}.webp", "WEBP", quality=84, method=6)
 
-compose([(load("pn-photo.webp", (0.08,0.06,0.92,0.94)), "HARDWARE · SOLDERED PCB"), (load("pn-dash.webp"), "DASHBOARD · LIVE STATES")], "panel-protection")
-pip((load("en-dashboard.webp"), "DASHBOARD · ENERGY COMMAND CENTER"), (load("en-schematic.webp"), "WIRING · DESIGNED"), "energy-copilot", 0.30)
-pip((load("mp-hw.webp", (0.04,0.04,0.96,0.96)), "HARDWARE · BREADBOARD"), (load("mp-dash.webp"), "CONSOLE · TWO METHODS"), "mpu6050-speed", 0.40)
-compose([(load("fl-photo.webp"), "HARDWARE · BREADBOARD"), (load("fl-nodered.webp"), "DASHBOARD · NODE-RED")], "flood-warning")
-compose([(load("mq-eth2.webp", (0.22,0.0,1.0,1.0)), "HARDWARE · BREADBOARD"), (load("mq-ui.webp"), "CONSOLE · AIR QUALITY")], "mq135-gas")
-compose([(load("dr-circuit.webp"), "PROTEUS · FULL SYSTEM SIMULATION")], "dryer-8086")
-pip((load("ees-landing.webp", (0,0,1,0.62)), "WEB APP · DEPLOYED"), (load("ees-api.webp", (0,0,1,0.8)), "API · TESTED"), "ee-studio", 0.40)
+# Every card uses the same layout: the circuit or hardware large on top, the dashboard small in the corner.
+def loadp(path, crop=None):
+    im = Image.open(path).convert("RGB")
+    if crop:
+        w, h = im.size; l, t, r, b = crop
+        im = im.crop((int(l*w), int(t*h), int(r*w), int(b*h)))
+    return im
+
+pip((load("pn-board.webp"), "HARDWARE · SOLDERED PCB"), (load("pn-dash.webp"), "DASHBOARD · LIVE STATES"), "panel-protection", 0.26)
+pip((load("en-schematic.webp"), "CIRCUIT · WIRING DESIGN"), (load("en-dashboard.webp"), "DASHBOARD · ENERGY COMMAND CENTER"), "energy-copilot", 0.36)
+pip((load("mp-hw.webp", (0.04,0.04,0.96,0.96)), "HARDWARE · BREADBOARD"), (load("mp-dash.webp"), "CONSOLE · TWO METHODS"), "mpu6050-speed", 0.32)
+pip((load("fl-photo.webp"), "HARDWARE · BREADBOARD"), (load("fl-nodered.webp"), "DASHBOARD · NODE-RED"), "flood-warning", 0.22)
+pip((load("mq-circuit.webp"), "CIRCUIT · WIRING DIAGRAM"), (load("mq-ui.webp"), "CONSOLE · AIR QUALITY"), "mq135-gas", 0.36)
+pip((load("dr-circuit.webp"), "CIRCUIT · PROTEUS SIMULATION"), (loadp(sys.argv[3] if len(sys.argv) > 3 else f"{SRC}/../public/img/dr-circuit.webp"), "BLOCK DIAGRAM"), "dryer-8086", 0.34)
+pip((load("ees-landing.webp", (0,0,1,0.62)), "WEB APP · DEPLOYED"), (load("ees-api.webp", (0,0,1,0.8)), "API · TESTED"), "ee-studio", 0.32)
