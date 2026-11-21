@@ -1,6 +1,5 @@
 # Builds project cover panels: hardware + dashboard side by side on a dark instrument panel.
-# Run from the repository root:  python3 tools/make-covers.py public public/img/covers [dryer-block.png]
-# (the optional third argument is public/diagrams/dryer-block.svg exported to PNG, e.g. with rsvg-convert)
+# Run from the repository root:  python3 tools/make-covers.py public public/img/covers
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC = sys.argv[1]; OUT = sys.argv[2]
@@ -77,9 +76,9 @@ def loadp(path, crop=None):
     return im
 
 pip((load("pn-board.webp"), "HARDWARE · SOLDERED PCB"), (load("pn-dash.webp"), "DASHBOARD · LIVE STATES"), "panel-protection", 0.26)
-pip((load("en-schematic.webp"), "CIRCUIT · WIRING DESIGN"), (load("en-dashboard.webp"), "DASHBOARD · ENERGY COMMAND CENTER"), "energy-copilot", 0.36)
+pip((load("en-dashboard.webp"), "DASHBOARD · ENERGY COMMAND CENTER"), (load("en-schematic.webp"), "CIRCUIT · WIRING DESIGN"), "energy-copilot", 0.28)
 pip((load("mp-hw.webp", (0.04,0.04,0.96,0.96)), "HARDWARE · BREADBOARD"), (load("mp-dash.webp"), "CONSOLE · TWO METHODS"), "mpu6050-speed", 0.32)
 pip((load("fl-photo.webp"), "HARDWARE · BREADBOARD"), (load("fl-nodered.webp"), "DASHBOARD · NODE-RED"), "flood-warning", 0.22)
 pip((load("mq-circuit.webp"), "CIRCUIT · WIRING DIAGRAM"), (load("mq-ui.webp"), "CONSOLE · AIR QUALITY"), "mq135-gas", 0.36)
-pip((load("dr-circuit.webp"), "CIRCUIT · PROTEUS SIMULATION"), (loadp(sys.argv[3] if len(sys.argv) > 3 else f"{SRC}/../public/img/dr-circuit.webp"), "BLOCK DIAGRAM"), "dryer-8086", 0.34)
-pip((load("ees-landing.webp", (0,0,1,0.62)), "WEB APP · DEPLOYED"), (load("ees-api.webp", (0,0,1,0.8)), "API · TESTED"), "ee-studio", 0.32)
+compose([(load("dr-circuit.webp"), "CIRCUIT · PROTEUS SIMULATION")], "dryer-8086")
+compose([(load("ees-landing.webp", (0,0,1,0.62)), "WEB APP · DEPLOYED")], "ee-studio")
